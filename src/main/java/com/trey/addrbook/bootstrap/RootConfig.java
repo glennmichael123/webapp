@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
  * @author Trey
  */
 @Configuration
-@Import(DatabaseConfig.class)
+@Import(DatabaseConfigMySQL.class)
 @ComponentScan(basePackages = { "com.trey.addrbook.service", "com.trey.addrbook.dao", "com.trey.addrbook.util" })
 public class RootConfig {
 
