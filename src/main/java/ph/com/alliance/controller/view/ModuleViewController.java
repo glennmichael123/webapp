@@ -1,4 +1,4 @@
-package ph.com.alliance.controller;
+package ph.com.alliance.controller.view;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

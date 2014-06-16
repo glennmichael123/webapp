@@ -67,8 +67,15 @@ $(document).ready(function(){
 			url: ROOT_URL + 'api/searchUser/'+ $("#fname").val(),
 			type: "get"
 		}).done(function(data) {
-			$('#search_result').empty();
-			$('#search_result').append("<li class='list-group-item'>" + data.fname + " " + data.lname + "</li>");
+			if (data.fname) {
+				$('#search_result').empty();
+				$('#search_result').append("<li class='list-group-item'>" + data.fname + " " + data.lname + "</li>");
+			} else {
+				$('#alert-area').removeClass('alert-success');
+				$('#alert-area').removeClass('alert-danger');
+				$('#alert-area').addClass('alert-danger');
+				$('#alert-area').html("Cannot find user.");
+			}
 		});
 	});
 	

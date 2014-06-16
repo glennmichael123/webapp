@@ -1,4 +1,4 @@
-package ph.com.alliance.controller;
+package ph.com.alliance.controller.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
