@@ -1,4 +1,4 @@
-package ph.com.alliance.dao;
+package ph.com.alliance.dao.impl;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;

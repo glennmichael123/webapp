@@ -7,16 +7,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import ph.com.alliance.service.PersonService;
+//import ph.com.alliance.service.PersonService;
 
 @Configuration
 @ComponentScan(basePackages = { "com.trey.addrbook.util" })
 public class ControllerTestConfig {
 
-	@Bean
+	/*@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public PersonService mockPersonService() {
 		return Mockito.mock(PersonService.class);
-	}
+	}*/
 	
 }

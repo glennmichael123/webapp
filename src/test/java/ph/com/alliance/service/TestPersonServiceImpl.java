@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ph.com.alliance.dao.PersonDao;
+/*import ph.com.alliance.dao.PersonDao;
 import ph.com.alliance.domain.Person;
-import ph.com.alliance.service.PersonService;
+import ph.com.alliance.service.PersonService;*/
 import ph.com.alliance.service.fixture.ServiceTestFixture;
 import ph.com.alliance.springconfig.ServiceTestConfig;
 
@@ -21,7 +21,7 @@ import ph.com.alliance.springconfig.ServiceTestConfig;
 @ContextConfiguration(classes = { ServiceTestConfig.class })
 public class TestPersonServiceImpl {
 
-	@Autowired private PersonService personService;
+/*	@Autowired private PersonService personService;
 	@Autowired private PersonDao mockPersonDao;
 
 	@Test
@@ -58,6 +58,6 @@ public class TestPersonServiceImpl {
 
 	private class Holder {
 		public int value = 0;
-	}
+	}*/
 
 }

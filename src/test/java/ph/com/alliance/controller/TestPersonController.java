@@ -22,7 +22,7 @@ import ph.com.alliance.domain.Person;
 import ph.com.alliance.dto.save.SavePersonRequest;
 import ph.com.alliance.exception.PersonNotFoundException;
 import ph.com.alliance.fixture.ControllerTestFixture;
-import ph.com.alliance.service.PersonService;
+//import ph.com.alliance.service.PersonService;
 import ph.com.alliance.springconfig.ControllerTestConfig;
 import ph.com.alliance.util.DtoFactory;
 
@@ -35,7 +35,7 @@ import ph.com.alliance.util.DtoFactory;
 @ContextConfiguration(classes = { ControllerTestConfig.class })
 public class TestPersonController {
 
-	@Autowired private PersonService mockPersonService;
+	/*@Autowired private PersonService mockPersonService;
 	@Autowired private DtoFactory dtoFactory;
 
 	private MockMvc mockMvc;
@@ -121,7 +121,7 @@ public class TestPersonController {
 				.andExpect(status().isOk())
 				.andExpect(content().string(newId.toString()))
 				.andReturn();
-	}
+	}*/
 	
 }
 

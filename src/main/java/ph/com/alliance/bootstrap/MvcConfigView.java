@@ -18,8 +18,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"ph.com.alliance.controller", "ph.com.alliance.controller.api", "ph.com.alliance.controller.view"})
-public class MvcConfig extends WebMvcConfigurerAdapter {
+@ComponentScan(basePackages = {"ph.com.alliance.controller.view"})
+public class MvcConfigView extends WebMvcConfigurerAdapter {
 
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -24,6 +24,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	private static final Logger logger = LoggerFactory.getLogger(WebApplicationInitializer.class);
 	private static final String DISPATCHER_MAPPING_ROOT = "/";
 	private static final String DISPATCHER_MAPPING_API = "/api/*";
+	private static final short STARTUP_PRIORITY = 1;
 
 	public void onStartup(ServletContext servletContext) throws ServletException {
 
@@ -39,12 +40,13 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		// now the config for the Dispatcher servlet
 		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
-		mvcContext.register(MvcConfig.class);
+		mvcContext.register(MvcConfigView.class);
+		mvcContext.register(MvcConfigAPI.class);
 
 		// The main Spring MVC servlet.
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(
 				mvcContext));
-		dispatcher.setLoadOnStartup(1);
+		dispatcher.setLoadOnStartup(STARTUP_PRIORITY);
 		dispatcher.addMapping(DISPATCHER_MAPPING_API);
 		Set<String> mappingConflicts = dispatcher.addMapping(DISPATCHER_MAPPING_ROOT);
 		

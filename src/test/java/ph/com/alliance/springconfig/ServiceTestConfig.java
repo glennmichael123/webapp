@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import ph.com.alliance.dao.PersonDao;
+//import ph.com.alliance.dao.PersonDao;
 
 /**
  * Bootstrap for service layer.
@@ -16,9 +16,9 @@ import ph.com.alliance.dao.PersonDao;
 @ComponentScan(basePackages = { "com.trey.addrbook.service" })
 public class ServiceTestConfig {
 
-	@Bean
+	/*@Bean
 	public PersonDao mockPersonDao() {
 		return Mockito.mock(PersonDao.class);
-	}
+	}*/
 	
 }

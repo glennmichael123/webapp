@@ -15,19 +15,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ph.com.alliance.bootstrap.RootConfig;
-import ph.com.alliance.controller.PersonController;
+//import ph.com.alliance.controller.PersonController;
 import ph.com.alliance.controller.TestUtil;
 import ph.com.alliance.domain.Person;
 import ph.com.alliance.dto.save.SavePersonRequest;
 import ph.com.alliance.fixture.ControllerTestFixture;
-import ph.com.alliance.service.PersonService;
+//import ph.com.alliance.service.PersonService;
 import ph.com.alliance.util.DtoFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RootConfig.class })
 public class TestEndToEnd {
 
-	@Autowired private PersonService personService;
+	/*@Autowired private PersonService personService;
 	@Autowired private DtoFactory dtoFactory;
 	
 	private MockMvc mockMvc;
@@ -96,6 +96,6 @@ public class TestEndToEnd {
 				.andExpect(status().isOk())
 				.andExpect(content().string("4")) // init script creates 3 records
 				.andReturn();
-	}
+	}*/
 
 }

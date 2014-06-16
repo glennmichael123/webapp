@@ -1,4 +1,4 @@
-package ph.com.alliance.service;
+package ph.com.alliance.service.impl;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import ph.com.alliance.dao.ProductDao;
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.entity.Product;
 import ph.com.alliance.entity.User;
+import ph.com.alliance.service.DBTransactionTestService;
 
 
 /**

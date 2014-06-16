@@ -1,4 +1,4 @@
-package ph.com.alliance.dao;
+package ph.com.alliance.dao.impl;
 
 import java.util.List;
 
