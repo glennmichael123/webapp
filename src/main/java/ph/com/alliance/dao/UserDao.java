@@ -51,4 +51,11 @@ public interface UserDao {
 	 */
 	public List<User> selectUsers(EntityManager pEM, String pKey);
 	
+	/**
+	 * 
+	 * @param pEM
+	 * @return
+	 */
+	public List<User> selectAllUsers(EntityManager pEM);
+	
 }

@@ -65,6 +65,12 @@ public interface DBTransactionTestService {
 	 * 
 	 * @return
 	 */
+	public List<User> selectAllUsers();
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Product> selectProducts(String pKey);
 	
 	/*-------------------- MULTI TABLE TRANSASCTION TESTS -----------------------*/

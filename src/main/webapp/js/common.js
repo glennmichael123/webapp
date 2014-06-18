@@ -39,15 +39,23 @@ $(document).ready(function(){
 	
 	$('#save-btn').click(function(){
 
-		if($("#fname").val() === '' || $("#lname").val() === '') {
+		if($("#fname").val() === '' || $("#lname").val() === '' || $('#uid').val() === '') {
 			$('#alert-area').removeClass('alert-success');
 			$('#alert-area').addClass('alert-danger');
-			$('#alert-area').html("First name and last name required!");
+			$('#alert-area').html("Missing required fields.");
 		} else {
+			var gender = 'female';
+			
+			if($('#btn-male').hasClass('active')){ gender = 'male';}
+			
 			$.ajax({
 				url: ROOT_URL + 'api/saveUser',
 				type: "post",
-				data: {fname: $("#fname").val(), lname: $("#lname").val()}
+				data: {fname: $("#fname").val()
+						, lname: $("#lname").val()
+						, uid: $('#uid').val()
+						, gender: gender
+						, age: $('#age').val()}
 			}).done(function(data) {
 				if(data.fname) {
 					$('#alert-area').removeClass('alert-danger');
@@ -56,27 +64,29 @@ $(document).ready(function(){
 				} else {
 					$('#alert-area').removeClass('alert-success');
 					$('#alert-area').addClass('alert-danger');
-					$('#alert-area').html("There is already an existing user.");
+					$('#alert-area').html("There is already an existing user.");	
 				}
 			});
 		}
 	});
 	
 	$('#search-btn').click(function(){
-		$.ajax({
-			url: ROOT_URL + 'api/searchUser/'+ $("#fname").val(),
-			type: "get"
-		}).done(function(data) {
-			if (data.fname) {
-				$('#search_result').empty();
-				$('#search_result').append("<li class='list-group-item'>" + data.fname + " " + data.lname + "</li>");
-			} else {
-				$('#alert-area').removeClass('alert-success');
-				$('#alert-area').removeClass('alert-danger');
-				$('#alert-area').addClass('alert-danger');
-				$('#alert-area').html("Cannot find user.");
-			}
-		});
+		if($("#uid").val().trim() != '') {
+			$.ajax({
+				url: ROOT_URL + 'api/searchUser/'+ $("#uid").val(),
+				type: "get"
+			}).done(function(data) {
+				if (data.fname) {
+					$('#search_result').empty();
+					$('#search_result').append("<li class='list-group-item'>" + data.fname + " " + data.lname + "</li>");
+				} else {
+					$('#alert-area').removeClass('alert-success');
+					$('#alert-area').removeClass('alert-danger');
+					$('#alert-area').addClass('alert-danger');
+					$('#alert-area').html("Cannot find user.");
+				}
+			});
+		}
 	});
 	
 	$('#search-all-btn').click(function(){
@@ -89,6 +99,22 @@ $(document).ready(function(){
 				$('#search_result').append("<li class='list-group-item'>" + user.fname + " " + user.lname + "</li>");
 			});
 		});
+	});
+	
+	$('#btn-male').click(function(){
+		$('#btn-female').removeClass('active');
+	});
+	
+	$('#btn-female').click(function(){
+		$('#btn-male').removeClass('active');
+	});
+	
+	$("#age").keypress(function (e) {
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			//display error message
+			$("#age-err-msg").html("Numbers only.").show().fadeOut(1800);
+			return false;
+		}
 	});
 	
 	// FOR JAVA BASE CODE --- END

@@ -5,7 +5,12 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.TransactionRequiredException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
+import org.hibernate.metamodel.relational.PrimaryKey;
 import org.springframework.stereotype.Repository;
 
 import ph.com.alliance.dao.UserDao;
@@ -96,15 +101,15 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User selectUser(EntityManager pEM, String pUid) {
 		User user = null;
-		
+				
 		try {
 			
 			user = pEM.find(User.class, pUid);
-			
+						
 		} catch (IllegalArgumentException iae) {
 			iae.getMessage();
 		}
-		
+			
 		return user;
 	}
 
@@ -114,8 +119,29 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public List<User> selectUsers(EntityManager pEM, String pKey) {
-		// TODO Auto-generated method stub
+
 		return null;
+	}
+	
+
+	/*
+	 * 
+	 */
+	@Override
+	public List<User> selectAllUsers(EntityManager pEM) {
+		CriteriaBuilder cb = pEM.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> userRoot = cq.from(User.class);
+		cq.select(userRoot);
+		
+		// generates equivalent "SELECT u FROM User u"
+		try {
+			return pEM.createQuery(cq).getResultList();
+		} catch (Exception e) {
+			System.err.println("ERROR ----------------- ");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

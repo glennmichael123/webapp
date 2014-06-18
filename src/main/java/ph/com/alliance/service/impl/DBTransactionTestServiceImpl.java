@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import ph.com.alliance.dao.ProductDao;
 import ph.com.alliance.dao.UserDao;
+import ph.com.alliance.dao.impl.UserDaoImpl;
 import ph.com.alliance.entity.Product;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.service.DBTransactionTestService;
@@ -230,4 +231,25 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ph.com.alliance.service.DBTransactionTestService#selectAllUsers()
+	 */
+	@Override
+	public List<User> selectAllUsers() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<User> userList = null;
+		
+		try {
+			userList = userDao.selectAllUsers(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return userList;
+	}
 }
