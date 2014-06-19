@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.faces.mvc.JsfView;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 
@@ -45,9 +45,10 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 	@Bean
     public UrlBasedViewResolver getInternalResourceViewResolver() {
 		UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-		resolver.setViewClass(JsfView.class);
+		resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/pages/");
-        resolver.setSuffix(".xhtml");
+        //resolver.setSuffix(".xhtml");
+        resolver.setSuffix(".jsp");
         
         return resolver;
     }
@@ -65,7 +66,7 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 		final ReloadableResourceBundleMessageSource resourceBundleMsgSource = new ReloadableResourceBundleMessageSource();
 		resourceBundleMsgSource.setBasename("classpath:messages");
 		resourceBundleMsgSource.setDefaultEncoding("UTF-8");
-		
+				
 		return resourceBundleMsgSource;
 	}
 	
