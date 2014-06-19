@@ -13,6 +13,8 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import ph.com.alliance.listeners.CustomHttpListener;
+
 /**
  * This is the main bootstrap. Note the special interface, which is called on startup.
  * This declares the Spring contexts (root and mvc) and binds the dispatcher servlet.
@@ -33,10 +35,14 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		rootContext.register(RootConfig.class);
 		// since we registered RootConfig instead of passing it to the constructor
 		rootContext.refresh();
+		
 
 		// Manage the lifecycle of the root appcontext
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 		servletContext.setInitParameter("defaultHtmlEscape", "true");
+		
+		// Adds a new HttpListener
+		servletContext.addListener(new CustomHttpListener());
 
 		// now the config for the Dispatcher servlet
 		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();

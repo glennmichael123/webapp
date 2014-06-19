@@ -18,6 +18,9 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import ph.com.alliance.interceptors.ModuleInterceptor;
+import ph.com.alliance.interceptors.UserModuleInterceptor;
+
 
 /**
  * Bootstrap for REST layer. It's important to isolate this for testability.
@@ -52,7 +55,7 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
         
         return resolver;
     }
-	
+
 	@Bean (name = "localeResolver")
 	public LocaleResolver localeResolver(){
 		final CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
@@ -72,6 +75,8 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 	
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
+		registry.addInterceptor(new ModuleInterceptor());
+	    registry.addInterceptor(new UserModuleInterceptor()).addPathPatterns("/user/*");
 	}
 	
 	@Bean
@@ -81,5 +86,4 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 		
 		return localeChangeInterceptor;
 	}
-	
 }
