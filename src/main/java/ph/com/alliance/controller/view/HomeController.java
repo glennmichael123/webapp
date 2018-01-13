@@ -8,7 +8,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+/**
+ * Example controller class that handles request for the application root.
+ * 
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class HomeController {

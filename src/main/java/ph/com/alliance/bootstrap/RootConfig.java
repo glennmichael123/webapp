@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Import;
 /**
  * Bootstrap for service layer.
  * 
- * @author Trey
  */
 @Configuration
 @Import(DatabaseConfigMySQL.class)

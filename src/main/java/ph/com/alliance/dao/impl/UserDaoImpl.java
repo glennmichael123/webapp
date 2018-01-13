@@ -5,20 +5,18 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.TransactionRequiredException;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.metamodel.relational.PrimaryKey;
 import org.springframework.stereotype.Repository;
 
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.entity.User;
 
 /**
+ * Sample data access object implementation using Java Persistence API.
  * 
- * @author Ed Austin
  *
  */
 @Repository("userDao")
@@ -125,7 +123,8 @@ public class UserDaoImpl implements UserDao {
 	
 
 	/*
-	 * 
+	 * (non-Javadoc)
+	 * @see ph.com.alliance.dao.UserDao#selectAllUsers(javax.persistence.EntityManager)
 	 */
 	@Override
 	public List<User> selectAllUsers(EntityManager pEM) {

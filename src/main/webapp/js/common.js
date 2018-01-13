@@ -1,7 +1,21 @@
-var ROOT_URL = "http://localhost:8080/SoaBaseCode/";
+var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
 
-$(document).ready(function(){
-	// FOR JAVA BASE CODE --- BEGIN
+$(document).ready(function() {
+	loadUserForm();
+});
+
+function loadUserForm() {
+	$.ajax({
+		url: ROOT_URL + 'modulename/userform',
+		type: "get",
+		dataType: "text"
+	}).done(function(data) {
+		$('#main-container').html(data);
+	});
+}
+
+function bindUserFormEvents() {
+	
 	$('#lnk_home').click(function(){
 		$('#lnk_home').addClass("active");
 		$('#lnk_profile').removeClass("active");
@@ -116,6 +130,4 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	
-	// FOR JAVA BASE CODE --- END
-});
+}

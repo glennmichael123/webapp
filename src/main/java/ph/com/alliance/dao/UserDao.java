@@ -8,8 +8,7 @@ import ph.com.alliance.entity.User;
 
 /**
  * 
- * @author Ed Austin
- *
+ * 
  */
 public interface UserDao {
 	/**

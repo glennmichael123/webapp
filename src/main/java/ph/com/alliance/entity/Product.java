@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the user database table.
+ * The persistent class for the product database table.
  * 
  */
 @Entity

@@ -1,24 +1,12 @@
 package ph.com.alliance.model;
 
-import ph.com.alliance.entity.User;
-
 public class UserModel {
 	
-	private String userid;
+	private String uid;
 	private String fname;
 	private String lname;
 	private String gender;
 	private int age;
-	
-	public UserModel(){}
-	
-	public UserModel(User pUser) {
-		this.fname = pUser.getFname();
-		this.lname = pUser.getLname();
-		this.gender = pUser.getGender();
-		this.age = pUser.getAge();
-		this.userid = pUser.getUid();
-	}
 	
 	public int getAge() {
 		return age;
@@ -44,17 +32,15 @@ public class UserModel {
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUid() {
+		return uid;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
-
 
 	@Override
     public String toString() {
-        return "User {" + ", fname=" + fname + ", lname=" + lname + '}';
-
+		return "User {" + "userID=" + uid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
     } 
 }

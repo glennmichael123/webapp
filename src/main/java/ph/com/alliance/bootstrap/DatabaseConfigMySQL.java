@@ -13,14 +13,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Database configuration. Note the 'Import' annotation in RootConfig that activates this. PropertySource and
  * Environment pair allows externalized settings.
  * 
- * @author Trey
  */
 @Configuration
 @EnableTransactionManagement
@@ -30,12 +28,10 @@ public class DatabaseConfigMySQL{
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
       em.setDataSource(dataSource());
-      em.setPackagesToScan(new String[] { "ph.com.alliance.domain", "ph.com.alliance.entity" });
- 
+      em.setPackagesToScan(new String[] {"ph.com.alliance.entity"}); 
       JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
       em.setJpaVendorAdapter(vendorAdapter);
-      em.setJpaProperties(additionalProperties());
- 
+      em.setJpaProperties(additionalProperties()); 
       return em;
    }
  
@@ -43,17 +39,16 @@ public class DatabaseConfigMySQL{
    public DataSource dataSource(){
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-      dataSource.setUrl("jdbc:mysql://192.36.252.149:3306/javabase");
-      dataSource.setUsername( "root" );
-      dataSource.setPassword( "1qaz2wsx" );
+      dataSource.setUrl("jdbc:mysql://localhost:3306/mytestdb3");
+      dataSource.setUsername("root");
+      dataSource.setPassword("");
       return dataSource;
    }
  
    @Bean
    public JpaTransactionManager transactionManager(EntityManagerFactory emf){
       JpaTransactionManager transactionManager = new JpaTransactionManager();
-      transactionManager.setEntityManagerFactory(emf);
- 
+      transactionManager.setEntityManagerFactory(emf); 
       return transactionManager;
    }
  

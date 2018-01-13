@@ -25,7 +25,6 @@ import ph.com.alliance.interceptors.UserModuleInterceptor;
 /**
  * Bootstrap for REST layer. It's important to isolate this for testability.
  * 
- * @author Trey
  */
 @Configuration
 @EnableWebMvc
@@ -34,7 +33,6 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
 		registry.addResourceHandler("/pages/**").addResourceLocations("/pages/").setCachePeriod(31556926);
         registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
         registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
@@ -50,7 +48,6 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 		UrlBasedViewResolver resolver = new UrlBasedViewResolver();
 		resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/pages/");
-        //resolver.setSuffix(".xhtml");
         resolver.setSuffix(".jsp");
         
         return resolver;
@@ -59,8 +56,7 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 	@Bean (name = "localeResolver")
 	public LocaleResolver localeResolver(){
 		final CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-		cookieLocaleResolver.setDefaultLocale(new Locale("en"));
-		
+		cookieLocaleResolver.setDefaultLocale(new Locale("en"));		
 		return cookieLocaleResolver;
 	}
 		
@@ -68,8 +64,7 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 	public MessageSource messageSource() {
 		final ReloadableResourceBundleMessageSource resourceBundleMsgSource = new ReloadableResourceBundleMessageSource();
 		resourceBundleMsgSource.setBasename("classpath:messages");
-		resourceBundleMsgSource.setDefaultEncoding("UTF-8");
-				
+		resourceBundleMsgSource.setDefaultEncoding("UTF-8");				
 		return resourceBundleMsgSource;
 	}
 	
@@ -82,8 +77,7 @@ public class MvcConfigView extends WebMvcConfigurerAdapter {
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-		localeChangeInterceptor.setParamName("lang");
-		
+		localeChangeInterceptor.setParamName("lang");		
 		return localeChangeInterceptor;
 	}
 }

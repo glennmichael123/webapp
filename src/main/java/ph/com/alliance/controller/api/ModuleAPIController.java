@@ -1,14 +1,11 @@
 package ph.com.alliance.controller.api;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,12 +18,27 @@ import ph.com.alliance.entity.User;
 import ph.com.alliance.model.UserModel;
 import ph.com.alliance.service.DBTransactionTestService;
 
+/**
+ * Controller class used to hadle api requests.
+ * All requests that falls through /api/* servlet mapping goes through here.
+ * 
+ */
 @Controller
 public class ModuleAPIController {
 	
 	@Autowired
 	DBTransactionTestService dbSvc;
 	
+	@Autowired
+	DozerBeanMapper dozerBeanMapper;
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @param map
+	 * @return
+	 */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     @ResponseBody
     public UserModel saveUser(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
@@ -36,14 +48,23 @@ public class ModuleAPIController {
     	u.setFname(request.getParameter("fname"));
     	u.setLname(request.getParameter("lname"));
     	u.setAge(age);
-    	u.setUserid(request.getParameter("uid"));
+    	u.setUid(request.getParameter("uid"));
     	u.setGender(request.getParameter("gender"));
     	
-    	dbSvc.createUser(this.convertToEntity(u));
+    	/*if(!dbSvc.createUser(this.convertToEntity(u))) {
+    		u = null;
+    	}*/
     	
+    	System.out.println("MAPPED USER --- " + this.convertToEntity(u));
+    	    	
     	return u;
     }
     
+    /**
+     * 
+     * @param uid
+     * @return
+     */
     @RequestMapping(value = "/searchUser/{uid}", method = RequestMethod.GET)
     @ResponseBody
     public UserModel searchUser(@PathVariable("uid") String uid) {
@@ -54,6 +75,10 @@ public class ModuleAPIController {
     	return convertToModel(dbSvc.selectUser(u));
     }
     
+    /**
+     * 
+     * @return
+     */
     @RequestMapping(value = "/searchAllUsers", method = RequestMethod.GET)
     @ResponseBody
     public List<UserModel> searchAllUsers() {
@@ -79,7 +104,7 @@ public class ModuleAPIController {
     	UserModel userModel = null;
     	
     	if (pUser != null) {
-    		userModel = new UserModel(pUser);
+    		userModel = dozerBeanMapper.map(pUser, UserModel.class);
     	} 
     	
     	return userModel;
@@ -97,12 +122,7 @@ public class ModuleAPIController {
     	User u = null;
     	
     	if (pUserModel != null) {
-    		u = new User();
-	    	u.setAge(pUserModel.getAge());
-	    	u.setFname(pUserModel.getFname());
-	    	u.setGender(pUserModel.getGender());
-	    	u.setLname(pUserModel.getLname());
-	    	u.setUid(pUserModel.getUserid());
+    		u = dozerBeanMapper.map(pUserModel, User.class);
     	}
     	
     	return u;

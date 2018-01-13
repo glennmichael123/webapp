@@ -3,7 +3,6 @@ package ph.com.alliance.exception;
 /**
  * Thrown when performing an operatoin on a user that does not exist.
  * 
- * @author Trey
  */
 public class PersonNotFoundException extends RuntimeException {
 

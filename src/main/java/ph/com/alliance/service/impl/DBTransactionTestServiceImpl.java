@@ -18,8 +18,8 @@ import ph.com.alliance.service.DBTransactionTestService;
 
 
 /**
- * 
- * @author EAT
+ * Example service implementation that hadles database transaction.
+ * Database transaction starts in this layer of the application, and it also ends here. 
  *
  */
 @Service("dBTransactionService")
@@ -48,11 +48,8 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 			result = userDao.createUser(em, pUser);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			if (e instanceof ConstraintViolationException) {
-				System.out.println("ERROR! DUPLICATE KEY.");
-			} else {
-				e.getMessage();
-			}
+			e.printStackTrace();
+			result = false;
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}

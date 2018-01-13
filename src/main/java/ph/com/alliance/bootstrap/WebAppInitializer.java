@@ -19,7 +19,6 @@ import ph.com.alliance.listeners.CustomHttpListener;
  * This is the main bootstrap. Note the special interface, which is called on startup.
  * This declares the Spring contexts (root and mvc) and binds the dispatcher servlet.
  * 
- * @author Trey
  */
 public class WebAppInitializer implements WebApplicationInitializer {
 

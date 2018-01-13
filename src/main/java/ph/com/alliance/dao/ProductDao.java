@@ -6,8 +6,7 @@ import ph.com.alliance.entity.Product;
 
 /**
  * 
- * @author Ed Austin
- *
+ * 
  */
 public interface ProductDao {
 	

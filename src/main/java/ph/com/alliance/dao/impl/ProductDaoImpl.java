@@ -10,8 +10,7 @@ import ph.com.alliance.dao.ProductDao;
 import ph.com.alliance.entity.Product;
 
 /**
- * 
- * @author Ed Austin
+ * Sample data access object implementation using Java Persistence API. 
  *
  */
 @Repository("productDao")
