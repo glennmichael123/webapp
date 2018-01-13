@@ -25,7 +25,7 @@
                 
                     <!-- Dropdown Structure -->
                     <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="#" class="to-user">User</a></li>
+                        <li><a href="#" class="to-user">Userr</a></li>
                         <li><a href="#" class="to-admin">Admin</a></li>
                     </ul>
                     <nav>
