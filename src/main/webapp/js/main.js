@@ -38,4 +38,9 @@ $(document).ready(function() {
 
         });
     });
+    $(document).on('click','#login',function(e){
+    	e.preventDefault();
+    	
+    	location.href= ROOT_URL+ "dashboard/"
+    })
 });

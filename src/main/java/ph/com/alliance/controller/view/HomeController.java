@@ -22,5 +22,10 @@ public class HomeController {
     	 	
 		return "/index";
     }
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public String viewDashboard(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+    	System.out.println("@/modulename/dashboard MODULE VIEW CONTROLLER CALLED.");
+        return "dashboard";
+    }
 
 }
