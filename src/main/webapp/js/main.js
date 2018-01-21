@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
     var loader = $('.progress');
-    
+//    window.pushState
     $.ajax({
         url: ROOT_URL + 'modulename/loginuser',
         type: "get",
@@ -9,7 +9,7 @@ $(document).ready(function() {
     }).done(function(data) {
         $('#main-container').html(data);
         loader.addClass('hide');
-
+        
     });
     
     
