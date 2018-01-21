@@ -68,4 +68,6 @@ public class ModuleViewController {
     	System.out.println("@/modulename/loginadmin MODULE VIEW CONTROLLER CALLED.");
         return "loginadmin";
     }
+    
+    
 }
