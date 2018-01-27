@@ -1,8 +1,6 @@
 package ph.com.alliance.controller.view;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +17,6 @@ public class HomeController {
 	
     @RequestMapping(method=RequestMethod.GET)
     public String loadMainMenuIndex(HttpServletRequest request, HttpServletResponse response, ModelMap map){
-    	 	
 		return "/index";
     }
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -27,5 +24,6 @@ public class HomeController {
     	System.out.println("@/modulename/dashboard MODULE VIEW CONTROLLER CALLED.");
         return "dashboard";
     }
+
 
 }
