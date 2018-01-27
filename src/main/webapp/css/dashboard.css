@@ -5,7 +5,7 @@
 	color:#fff;
 }
 .settings{
-	margin-top:-1px;
+	margin-top:5px;
 }
 .kanban-logo{
 	width:9%;
@@ -67,4 +67,17 @@
 .modal-footer{
 	position: relative;
 	bottom: 50px;
+}
+
+
+.badge{
+	font-size: 10px !important;
+	border-radius: 2px;
+}
+.dropdown-task{
+	width:200px!important;
+}
+.dropdown-settings{
+	width:250px!important;
+
 }

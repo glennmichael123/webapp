@@ -162,27 +162,22 @@
                     <a href="#" data-activates="slide-out" class="button-collapse brand-logo"><i class="material-icons">menu</i></a>
                         <img src="<% out.print(ROOT_URL);%>images/Kanban-logo2.png" class="kanban-logo"/>
                             <ul class="right hide-on-med-and-down settings">
-                                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Settings<i class="material-icons right">arrow_drop_down</i></a></li>
+                                <li><a class="dropdown-button" href="#!" data-activates="settings-dropdown">Settings</a></li>
                             </ul>
                     </div>   
                     <!-- side nav -->
                     <ul id="slide-out" class="side-nav">
                         <li><div class="user-view">
-                          <div class="background">
-                            <img src="images/office.jpg">
+                          <div class="background" style="text-align:center!important;">
+                            <img src="<% out.print(ROOT_URL);%>images/Kanban-colorbg.jpg" style="background-color:#00695c;">
                           </div>
-                          <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-                          <a href="#!name"><span class="white-text name">John Doe</span></a>
-                          <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                             <div style="margin-top:50px;">Filter Issues</div>
                         </div></li>
-                        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-                        <li><a href="#!">Second Link</a></li>
-                        <li><div class="divider"></div></li>
-                        <li><a class="subheader">Subheader</a></li>
-                        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+                        <li><a href="#!">Backlogs</a></li>
+                        <li><a href="#!">Releases</a></li>
                      </ul>
                       <!-- Dropdown Structure -->
-                        <ul id="dropdown1" class="dropdown-content">
+                        <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
                             <li><a href="#" class="to-user">Change Password</a></li>
                             <li><a href="#" class="to-admin">Logout</a></li>
                         </ul>   
@@ -196,14 +191,24 @@
                             </div>
                             <div class="row">
                                 <div id="sortable1" class="col l3 connectedSortable grey lighten-3">
-                                <%for(int i=0; i <  5; i++){ %>
+                                <%for(int i=0; i < 5; i++){ %>
                                     <div class="card white">
                                         <div class="card-content black-text">
-                                          
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options<%out.print(i);%>' class="dropdown-button"><i class="material-icons">more_horiz</i></a></div>
+                                                <ul id='dropdown-options<%out.print(i);%>' class="dropdown-content dropdown-task" >
+                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                        <li><a href="#!" class="flag-task">Mark flag</a></li>
+                                                 </ul>
                                           <p class="card-description">Create <%out.print(i);%>day plans</p>
+                                          
+                                            <div class="priority-task" style="float: left !important;position: absolute;top: 50px; left: 0px;"><span class="badge red white-text">High priority</span></div>
+                                         
+                                          
                                         </div>
                                       </div>
                                       <% } %>
+                                     
                                 </div>
                                 <div id="sortable2" class="col l3 connectedSortable grey lighten-3">
                                 </div>
@@ -236,6 +241,8 @@
 
             </html>
             <script type="text/javascript">
+
+                  
                 $(document).ready(function(){
                     $('.modal').modal();
                     $(".button-collapse").sideNav();
