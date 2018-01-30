@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -97,12 +98,14 @@ public class UserDaoImpl implements UserDao {
 	 * @see ph.com.alliance.dao.UserDao#selectUser(javax.persistence.EntityManager, java.lang.String)
 	 */
 	@Override
-	public User selectUser(EntityManager pEM, String pUid) {
+	public User selectUser(EntityManager pEM, String pUid, String password) {
 		User user = null;
 				
 		try {
 			
-			user = pEM.find(User.class, pUid);
+			Query q = pEM.createNativeQuery("SELECT * FROM user WHERE uid = '"+pUid+"' AND password = '"+password+"'", User.class);
+			user = (User) q.getSingleResult();
+			
 						
 		} catch (IllegalArgumentException iae) {
 			iae.getMessage();
@@ -143,4 +146,25 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ph.com.alliance.dao.UserDao#selectAllUsers(javax.persistence.EntityManager)
+	 */
+	/*@Override
+	public User selectUser(EntityManager pEM, String username) {
+		CriteriaBuilder cb = pEM.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> userRoot = cq.from(User.class);
+		cq.select(userRoot);
+		
+		// generates equivalent "SELECT u FROM User u"
+		try {
+			//return pEM.createQuery(cq).getResultList();
+			return pEM.createQuery("SELECT * FROM user WHERE uid LIKE '" +username+ "'", User.class);
+		} catch (Exception e) {
+			System.err.println("ERROR ----------------- ");
+			e.printStackTrace();
+			return null;
+		}
+	}*/
 }

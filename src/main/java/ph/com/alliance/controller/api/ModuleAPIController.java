@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,24 @@ public class ModuleAPIController {
     	return userModelList;
     }	
     
+    /**
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/loginuser", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean login(HttpServletRequest request) {
+    	String username = request.getParameter("username");
+    	String password = request.getParameter("password");
+    	HttpSession session = request.getSession();
+    	User user = dbSvc.selectUser(username, password);
+    	boolean exist = user != null ? true : false;
+    	if(exist){
+    		session.setAttribute("username", username);
+    	}
+    	return exist;
+    }	
+
     /**
      * This is a sample object mapper.
      * Entity to model mapping can be handled by the class constructor itself, or

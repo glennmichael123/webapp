@@ -37,4 +37,9 @@
 	$(document).on('click','.remove-subtask-development',function(e){
         $(this).closest('.input-field').fadeOut();
 	});
+	$(document).on('click','.delete-task',function(e){
+		$(this).closest('.card').remove();
+		 var $toastContent = $('<span>You deleted an issue</span>').add($('<button class="btn-flat toast-action">Undo</button>'));
+		  Materialize.toast($toastContent, 10000);
+	});
  });

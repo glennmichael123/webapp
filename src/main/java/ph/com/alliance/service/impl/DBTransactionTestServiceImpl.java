@@ -107,7 +107,7 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 	@Override
 	public User selectUser(User pUser) {
 		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
-		return userDao.selectUser(em, pUser.getUid());
+		return userDao.selectUser(em, pUser.getUid(), pUser.getPassword());
 	}
 
 	/*
@@ -248,5 +248,27 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		}
 		
 		return userList;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ph.com.alliance.service.DBTransactionTestService#selectAllUsers()
+	 */
+	@Override
+	public User selectUser(String username, String password) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		User user = null;
+		
+		try {
+			user = userDao.selectUser(em, username, password);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return user;
 	}
 }

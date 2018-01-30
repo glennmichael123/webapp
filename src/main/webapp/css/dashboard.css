@@ -73,11 +73,17 @@
 .badge{
 	font-size: 10px !important;
 	border-radius: 2px;
+	padding: 0px 2px !important;
 }
 .dropdown-task{
 	width:200px!important;
 }
 .dropdown-settings{
 	width:250px!important;
-
+}
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 10%;
+  left:4%;  
 }

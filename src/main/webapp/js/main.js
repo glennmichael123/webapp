@@ -40,7 +40,26 @@ $(document).ready(function() {
     });
     $(document).on('click','#login',function(e){
     	e.preventDefault();
-    	location.href= ROOT_URL+ "dashboard/"
+    	var email = $("#username").val();
+    	var password = $("#password").val();
+    	var error = $('#error');
+    	$.ajax({
+    		url: ROOT_URL + 'api/loginuser',
+    		type: "POST",
+    		data:{
+    			'username':email,
+    			'password': password,
+    		},
+    		success: function(data){
+    			if(data){
+    				location.href="dashboard/"
+    			}else{
+    				error.show();
+    				$('#username').val('');
+    				$('#password').val('');
+    			}
+    		}
+    	})
 
-    })
+});
 });

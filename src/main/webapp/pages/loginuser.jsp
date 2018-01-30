@@ -23,7 +23,7 @@
      			<h5 style="color:#00695c;"><b>LOGIN</b></h5>
               <div class='input-field col s12'>
               
-                <input class='validate' type='email' name='email' id='email' />
+                <input class='validate' type='text' name='username' id='username' />
                 <label for='email'>Enter your email</label>
               </div>
             </div>
@@ -37,7 +37,9 @@
                                 <a class='' style="color: #009688" href='#!'><b>Forgot Password?</b></a>
                             </label>
             </div>
-
+			<div class="row">
+				<span id="error" style="color:red; display:none;">Username or password incorrect</span>
+			</div>
             <br />
             <center>
               <div class='row'>

@@ -66,6 +66,8 @@ public interface DBTransactionTestService {
 	 */
 	public List<User> selectAllUsers();
 	
+	public User selectUser(String username, String password);
+	
 	/**
 	 * 
 	 * @return

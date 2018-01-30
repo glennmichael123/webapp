@@ -21,17 +21,25 @@ public class User implements Serializable {
 	@Id
 	@Column(name="uid")
 	private String uid;
-	
 	private String fname;
 	private String lname;
 	private String gender;
 	private int age;
+	private String password;
 	
 	public int getAge() {
 		return age;
 	}
+	
 	public void setAge(int age) {
 		this.age = age;
+	}
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
+	public String getPassword(){
+		return this.password;
 	}
 	public String getGender() {
 		return gender;
@@ -62,5 +70,7 @@ public class User implements Serializable {
     public String toString() {
         return "User {" + "userID=" + uid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
 
-    } 
+    }
+
+
 }
