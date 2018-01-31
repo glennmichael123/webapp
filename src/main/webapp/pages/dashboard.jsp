@@ -29,7 +29,7 @@
             </head>
 
             <body  class="teal lighten-3">
-             	<div id="modal1" class="modal">
+             	<div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
                         <p class="modal-title">CREATE ISSUE IN PROGRESS</p>
                         <div class="row">
@@ -73,13 +73,13 @@
                     </div>
                   </div>
 
-                  <div id="modal3" class="modal">
+                  <div id="modal3" class="modal modal-fixed-footer">
                     <div class="modal-content">
                       <p class="modal-title">CREATE ISSUE FOR BACKLOG</p>
                       <div class="row">
                             <div class="input-field">
                                 <label for="title-backlog">Title</label>
-                                <input type="text" name="title_backlog" id="title-backlog" class="validate">
+                                <input type="text" name="title_backlog" id="title-backlog" class="validate" data-length="50" maxlength="50">
                             </div>
                             <div class="row">
                             <div class="input-field">
@@ -117,13 +117,13 @@
                     </div>
                   </div>
 
-                  <div id="modal2" class="modal">
+                  <div id="modal2" class="modal modal-fixed-footer">
 				    <div class="modal-content">
 				      <p class="modal-title">CREATE ISSUE SELECTED FOR DEVELOPEMENT</p>
                       <div class="row">
                             <div class="input-field">
                                 <label for="title-development">Title</label>
-                                <input type="text" name="title_development" id="title-development" class="validate">
+                                <input type="text" name="title_development" id="title-development" class="validate" data-length="50" maxlength="50">
                             </div>
                             <div class="row">
                             <div class="input-field">
@@ -242,7 +242,6 @@
                 <!--Import jQuery before materialize.js-->
                
                 <script src="<% out.print(ROOT_URL);%>js/materialize.min.js"></script>
-                <script src="<% out.print(ROOT_URL);%>js/main.js"></script> 
                 <script src="<% out.print(ROOT_URL);%>js/dashboard.js"></script>	
                 
             </body>

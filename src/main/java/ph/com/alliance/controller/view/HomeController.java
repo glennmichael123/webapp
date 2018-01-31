@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Scope("session")
 @RequestMapping("/")
 public class HomeController {
+	private final String ROOT_URL = "http://localhost:8081/SoaBaseCode";
 	
     @RequestMapping(method=RequestMethod.GET)
     public String loadMainMenuIndex(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
@@ -28,6 +29,21 @@ public class HomeController {
     	return "/index";
 		
     }
+    
+    @RequestMapping(value= "/user", method = RequestMethod.GET)
+    public String loadUserLogin(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+    	session = request.getSession();
+    	return "/index";
+
+		
+    }
+    @RequestMapping(value= "/admin", method = RequestMethod.GET)
+    public String loaAdminLogin(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+    	session = request.getSession();
+    	return "/index";
+		
+    }
+    
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String viewDashboard(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException {
     	System.out.println("@/modulename/dashboard MODULE VIEW CONTROLLER CALLED.");
@@ -39,17 +55,14 @@ public class HomeController {
     	}else{
     		ret = "dashboard";
     		return ret;
-    	}
-    	
-    	
-    	
+    	}   	
         
     }
     
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public void logout(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException {
     	System.out.println("@/modulename/dashboard MODULE VIEW CONTROLLER CALLED."); 
-    	response.sendRedirect("");
+    	response.sendRedirect(ROOT_URL+"/admin");
     	session = request.getSession();
     	session.invalidate();
         

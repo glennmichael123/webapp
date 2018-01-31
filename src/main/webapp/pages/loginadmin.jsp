@@ -37,7 +37,9 @@
                                 <a class='' style="color: #009688" href='#!'><b>Forgot Password?</b></a>
                             </label>
             </div>
-
+			<div class="row">
+				<span id="error" style="color:red; display:none;">Username or password incorrect</span>
+			</div>
             <br />
             <center>
               <div class='row'>
