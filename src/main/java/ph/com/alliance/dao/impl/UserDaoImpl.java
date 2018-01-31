@@ -38,10 +38,8 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public boolean createUser(EntityManager pEM, User pUser) {	
-		boolean success = true;
-				
+		boolean success = true;			
 		try {
-			
 			pEM.persist(pUser);
 			
 		} catch (EntityExistsException ee) {
@@ -102,11 +100,8 @@ public class UserDaoImpl implements UserDao {
 		User user = null;
 				
 		try {
-			
 			Query q = pEM.createNativeQuery("SELECT * FROM user WHERE uid = '"+pUid+"' AND password = '"+password+"'", User.class);
-			user = (User) q.getSingleResult();
-			
-						
+			user = (User) q.getSingleResult();						
 		} catch (IllegalArgumentException iae) {
 			iae.getMessage();
 		}

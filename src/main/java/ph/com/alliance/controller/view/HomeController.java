@@ -25,15 +25,7 @@ public class HomeController {
     @RequestMapping(method=RequestMethod.GET)
     public String loadMainMenuIndex(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
     	session = request.getSession();
-    	String ret = "";
-    	if(session.getAttribute("username") == null || session.getAttribute("username").equals("")){
-    		ret = "/index";
-    		return ret;
-    	}else{
-    		response.sendRedirect("localhost:8081/SoaBaseCode/dashboard");
-    		return "/dashboard";
-    	}
-    	
+    	return "/index";
 		
     }
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -63,5 +55,9 @@ public class HomeController {
         
     }
 
-
+    @RequestMapping(value = "/user_dashboard", method = RequestMethod.GET)
+    public String viewUserDashboard(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+    	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
+        return "user_dashboard";
+    }
 }

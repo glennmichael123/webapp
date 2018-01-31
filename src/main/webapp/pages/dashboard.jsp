@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="input-field">
                                 <label for="title-progress">Title</label>
-                                <input type="text" name="title_progress" id="title-progress" class="validate">
+                                <input type="text" name="title_progress" id="title-progress" maxlength="50" class="validate" data-length="50">
                             </div>    
                         </div>
 
@@ -180,11 +180,13 @@
                         </div></li>
                         <li><a href="#!">Backlogs</a></li>
                         <li><a href="#!">Releases</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#!">Add user</a></li>
                      </ul>
                       <!-- Dropdown Structure -->
                         <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
                             <li><a href="#" class="to-user">Change Password</a></li>
-                            <li><a href="#">Add user</a></li>
+
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
             

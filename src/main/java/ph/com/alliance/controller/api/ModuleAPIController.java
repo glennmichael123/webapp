@@ -45,7 +45,6 @@ public class ModuleAPIController {
     public UserModel saveUser(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
     	UserModel u = new UserModel();
     	int age = (request.getParameter("age") == "" ? 0: Integer.parseInt(request.getParameter("age")));
-    	
     	u.setFname(request.getParameter("fname"));
     	u.setLname(request.getParameter("lname"));
     	u.setAge(age);

@@ -23,7 +23,7 @@
      			<h5 style="color:#00695c;"><b>ADMIN</b></h5>
               <div class='input-field col s12'>
               
-                <input class='validate' type='email' name='email' id='email' />
+                <input class='validate' type='text' name='email' id='username' />
                 <label for='email'>Enter your email</label>
               </div>
             </div>
@@ -41,7 +41,7 @@
             <br />
             <center>
               <div class='row'>
-                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect teal darken-1 '>Login</button>
+                <button type='submit' name='btn_login' id="login" class='col s12 btn btn-large waves-effect teal darken-1 '>Login</button>
               </div>
             </center>
           </form>

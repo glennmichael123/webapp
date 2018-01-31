@@ -42,6 +42,9 @@ $(document).ready(function() {
     	e.preventDefault();
     	var email = $("#username").val();
     	var password = $("#password").val();
+    	var element = $(this);
+    	element.html('Logging in');
+    	element.prop('disabled', true);
     	var error = $('#error');
     	$.ajax({
     		url: ROOT_URL + 'api/loginuser',
@@ -54,6 +57,8 @@ $(document).ready(function() {
     			if(data){
     				location.href="dashboard/"
     			}else{
+    				element.html('Login');
+    				element.prop('disabled', false);
     				error.show();
     				$('#username').val('');
     				$('#password').val('');
