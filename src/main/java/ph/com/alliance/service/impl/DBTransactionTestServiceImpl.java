@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Service;
 
+import ph.com.alliance.dao.AdminDao;
 import ph.com.alliance.dao.ProductDao;
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.dao.impl.UserDaoImpl;
+import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.Product;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.service.DBTransactionTestService;
@@ -27,6 +29,9 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private AdminDao adminDao;
 	
 	@Autowired
 	private ProductDao productDao;
@@ -270,5 +275,21 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		}
 		
 		return user;
+	}
+
+	@Override
+	public Admin selectAdmin(String username, String password) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		Admin admin = null;
+		try {
+			admin = adminDao.selectAdmin(em, username, password);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		return admin;
 	}
 }

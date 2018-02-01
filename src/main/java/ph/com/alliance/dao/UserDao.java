@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.User;
 
 /**
@@ -41,6 +42,9 @@ public interface UserDao {
 	 * @return
 	 */
 	public User selectUser(EntityManager pEM, String pUid, String password);
+	
+	
+	public Admin selectAdmin(EntityManager pEM, String pUid, String password);
 
 	/**
 	 * 

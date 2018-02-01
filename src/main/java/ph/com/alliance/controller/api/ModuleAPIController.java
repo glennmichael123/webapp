@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.model.UserModel;
 import ph.com.alliance.service.DBTransactionTestService;
@@ -109,6 +110,21 @@ public class ModuleAPIController {
     	}
     	return exist;
     }	
+    
+    @RequestMapping(value = "/loginadmin", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean loginadmin(HttpServletRequest request) {
+    	
+    	String username = request.getParameter("username");
+    	String password = request.getParameter("password");
+    	HttpSession session = request.getSession();
+    	Admin admin = dbSvc.selectAdmin(username, password);
+    	boolean exist = admin != null ? true : false;
+    	if(exist){
+    		session.setAttribute("username", username);
+    	}
+    	return exist;
+    }
 
     /**
      * This is a sample object mapper.

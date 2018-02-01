@@ -59,7 +59,6 @@ public class ModuleViewController {
     @RequestMapping(value = "/loginuser", method = RequestMethod.GET)
     public String viewLoginUser(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
     	System.out.println("@/modulename/loginuser MODULE VIEW CONTROLLER CALLED.");
-    	
         return "loginuser";
     }
     

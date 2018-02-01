@@ -2,6 +2,7 @@ package ph.com.alliance.service;
 
 import java.util.List;
 
+import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.Product;
 import ph.com.alliance.entity.User;
 
@@ -67,6 +68,8 @@ public interface DBTransactionTestService {
 	public List<User> selectAllUsers();
 	
 	public User selectUser(String username, String password);
+	
+	public Admin selectAdmin(String username, String password);
 	
 	/**
 	 * 

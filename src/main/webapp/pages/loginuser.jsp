@@ -20,7 +20,7 @@
             </div>
 
             <div class='row'>
-     			<h5 style="color:#00695c;"><b>LOGIN USER</b></h5>
+     			<h5 style="color:#00695c;"><b>LOGIN</b></h5>
               <div class='input-field col s12'>
               
                 <input class='validate' type='text' name='username' id='username' />

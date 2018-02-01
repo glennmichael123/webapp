@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.entity.User;
+import ph.com.alliance.entity.Admin;
 
 /**
  * Sample data access object implementation using Java Persistence API.
@@ -108,6 +109,21 @@ public class UserDaoImpl implements UserDao {
 			
 		return user;
 	}
+	
+	@Override
+	public Admin selectAdmin(EntityManager pEM, String pUid, String password) {
+		Admin admin = null;
+		try {
+			Query q = pEM.createNativeQuery("SELECT * FROM admin WHERE uid = '"+pUid+"' AND password = '"+password+"'", Admin.class);
+			admin = (Admin) q.getSingleResult();						
+		} catch (IllegalArgumentException iae) {
+			iae.getMessage();
+		}
+			
+		return admin;
+		
+	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -141,6 +157,7 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	
 	/*
 	 * (non-Javadoc)
 	 * @see ph.com.alliance.dao.UserDao#selectAllUsers(javax.persistence.EntityManager)
