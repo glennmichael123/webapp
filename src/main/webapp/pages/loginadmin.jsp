@@ -23,15 +23,15 @@
      			<h5 style="color:#00695c;"><b>ADMIN</b></h5>
               <div class='input-field col s12'>
               
-                <input class='validate' type='text' name='username' id='username' required />
-                <label for='email'>Enter your email</label>
+                <input class='validate' type='text' placeholder="Username" name='username' id='username' required />
+               
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s12'>
-                <input class='validate' type='password' name='password' id='password' required/>
-                <label for='password'>Enter your password</label>
+                <input class='validate' type='password' placeholder="Password" name='password' id='password' required/>
+                
               </div>
               <label style='float: right;'>
                                 <a class='' style="color: #009688" href='#!'><b>Forgot Password?</b></a>

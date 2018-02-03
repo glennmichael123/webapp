@@ -75,4 +75,13 @@ public class HomeController {
     	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
         return "dashboarduser";
     }
+    
+    @RequestMapping(value = "/headerdashboard", method = RequestMethod.GET)
+    public String viewHeaderDashboard(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+    	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
+        return "headerdashboard";
+    }
+    
+    
+    
 }

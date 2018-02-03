@@ -1,4 +1,5 @@
  $(document).ready(function(){
+	 var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
 	$(document).on('click','#progress-subtask',function(e){
          var html = '<div class="input-field">'+
                     '<input type="text" style="width:97%;" name="subtask_progress" placeholder="Subtask" class="validate subtasks-progress">'+
@@ -22,6 +23,7 @@
     });
 	
 	$(document).on('click','.remove-subtask-backlog',function(e){
+		e.preventDefault();
         $(this).closest('.input-field').remove();
 	});
 
@@ -47,4 +49,20 @@
 		 var $toastContent = $('<span>You deleted an issue</span>').add($('<button class="btn-flat toast-action">Undo</button>'));
 		  Materialize.toast($toastContent, 10000);
 	});
+	
+	$(document).on('click', '.view-releases',function(e){
+		
+		$('#content').html('');
+	});
+	
+	/*$(document).ready(function(e){
+		$.ajax({
+			url: ROOT_URL + 'headerdashboard',
+			type: 'GET',
+			dataType: 'text',
+			success:function(data){
+				$('#header').html(data);
+			}
+		});
+	})*/
  });

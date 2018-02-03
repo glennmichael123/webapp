@@ -69,7 +69,13 @@
                                         <div class="card-content black-text">
                                           <p class="card-description">Create <%out.print(i);%>day plans</p>
                                           
-                                            <div class="priority-task" style="float: left !important;position: absolute;top: 50px; left: 10px;"><i class="fa fa-circle red-text"></i></div>
+                                            <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+                                           	 <span class="badge red white-text">High</span>
+                                            </div>
+                                             <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+                                             
+                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                            </div>
                                         
                                           
                                         </div>

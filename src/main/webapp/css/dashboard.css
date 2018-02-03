@@ -87,3 +87,13 @@
   bottom: 10%;
   left:4%;  
 }
+
+.more-info{
+	height: 100% !important;
+}
+.progress{
+	margin: 0px !important;
+}
+.hide{
+	display: none;
+}

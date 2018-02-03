@@ -29,6 +29,74 @@
             </head>
 
             <body  class="teal lighten-3">
+             
+              <div id="modal-view-info" class="modal bottom-sheet modal-fixed-footer more-info">
+					    <div class="modal-content">
+					      <h5>Create plans	</h5>
+					      <div class="row">
+						       <span>Description:</span>
+						      <p>Lorem ipsum dolor</p>
+					      </div>
+					     
+					      <div class="row">
+					      	<span>Priority: </span>
+					      	 <span>High</span>
+					      </div>
+					      
+					     <div class="row">
+					     	 <span>Assigned to: </span>
+					      
+						      <div class="chip">
+							  
+							    Jane Doe
+							  </div>
+							  <div class="chip">
+							  
+							   Doe Jane
+							  </div>
+					     </div>
+					    </div>
+					    
+			<div class="modal-footer">
+     			 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close	</a>
+   			 </div>
+					   
+		</div>
+   <div id="modalAddUser" class="modal modal-fixed-footer" >
+    <div class="modal-content" >
+      <h4>Add user</h4>
+
+      <div class="row">
+        <form class="col s12">
+          <div class="row modal-form-row">
+            <div class="input-field col s12">
+              <input id="users_firstname" type="text" class="validate">
+              <label for="users_firstname">First Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="users_lastname" type="text" class="validate">
+              <label for="users_lastname">Last Name</label>
+            </div>
+          </div>       
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="users_age" type="text" class="validate">
+              <label for="users_age">Age</label>
+            </div>
+          
+            	<input type="radio" name="gender" value="Male" id="m"><label for="m">Male</label>
+         		<input type="radio" name="gender" value="Female" id="f"><label for="f">Female</label>
+          </div>
+                            
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+    </div>
+  </div>
              	<div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
                         <p class="modal-title">CREATE ISSUE IN PROGRESS</p>
@@ -169,7 +237,10 @@
                                 <li><a class="dropdown-button" href="#!" data-activates="settings-dropdown">Settings</a></li>
                             </ul>
                             <div style="float: right; margin-right: 20px; margin-top: 5px;" class="white-text">Hello, ${sessionScope.username}</div>
-                    </div>   
+                    </div>  
+                    <div class="progress hide">
+		     			 <div class="indeterminate"></div>
+		 		 	</div> 
                     <!-- side nav -->
                     <ul id="slide-out" class="side-nav">
                         <li><div class="user-view">
@@ -179,9 +250,9 @@
                              <div style="margin-top:50px;">Filter Issues</div>
                         </div></li>
                         <li><a href="#!">Backlogs</a></li>
-                        <li><a href="#!">Releases</a></li>
+                        <li><a href="#!" class="view-releases">Releases</a></li>
                         <li class="divider"></li>
-                        <li><a href="#!">Add user</a></li>
+                        <li><a href="#modalAddUser" class="modal-trigger">Add user</a></li>
                      </ul>
                       <!-- Dropdown Structure -->
                         <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
@@ -189,7 +260,10 @@
 
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
-            
+                        
+                        
+                        
+            			
                         <div id="content"> 
                             <div class="row white-text" style="position: relative;top:10px;">
                                     <div class="col l3 heading">Backlog</div>
@@ -200,9 +274,10 @@
                             <div class="row">
                                 <div id="sortable1" class="col l3 connectedSortable grey lighten-3">
                                 <%for(int i=0; i < 10; i++){ %>
-                                    <div class="card white">
+                                    <div class="card white view-info" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options<%out.print(i);%>' class="dropdown-button"><i class="fa fa-ellipsis-h" style="font-size: 15px;"></i></a></div>
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options<%out.print(i);%>' class="dropdown-button">
+                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options<%out.print(i);%>' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
@@ -210,7 +285,13 @@
                                                  </ul>
                                           <p class="card-description">Create <%out.print(i);%>day plans</p>
                                           
-                                            <div class="priority-task" style="float: left !important;position: absolute;top: 50px; left: 10px;"><i class="fa fa-circle red-text"></i></div>
+                                            <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+                                           	 <span class="badge green white-text">Low</span>
+                                            </div>
+                                             <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+                                             
+                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                            </div>
                                         
                                           
                                         </div>
@@ -227,8 +308,7 @@
                                 
                                 </div>
                             </div> 
-                        </div>
-                        <div class="fixed-action-btn">
+                             <div class="fixed-action-btn">
                             <a class="btn-floating btn-large teal darken-3">
                              <i class="material-icons">add</i>
                             </a>
@@ -238,7 +318,11 @@
                               <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="Backlog" data-subitem="1"><a href="#modal3" class="btn-floating green darken-3 modal-trigger"><i class="fa fa-file-text"></i></a></li>
                               
                             </ul>
+                       	 </div>	
                         </div>
+                       
+                      
+   
                 <!--Import jQuery before materialize.js-->
                
                 <script src="<% out.print(ROOT_URL);%>js/materialize.min.js"></script>
@@ -247,13 +331,16 @@
             </body>
 
             </html>
-            <script type="text/javascript">
-
-                  
+            <script type="text/javascript">   
+            $(document).on('dblclick','.view-info',function(e){
+           	 $('#modal-view-info').modal('open');
+           });
                 $(document).ready(function(){
                     $('.modal').modal();
                     $(".button-collapse").sideNav();
                     $('select').material_select();
+                    $('.chips').material_chip();
+                 
                 });
               
             </script>
