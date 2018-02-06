@@ -46,15 +46,26 @@
                              <div style="margin-top:50px;">Filter Issues</div>
                         </div></li>
                         <li><a href="#!">Backlogs</a></li>
-                        <li><a href="#!">My Issues</a></li>
+                        <li><a href="#!" class="my_issue">My Issues</a></li>
                      </ul>
                       <!-- Dropdown Structure -->
                         <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
-                            <li><a href="#" class="to-user">Change Password</a></li>
-
+                            <li><a href="#modal1" class="modal-trigger to-user">Change Password</a></li>
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
-            
+            <!-- modal for changing password -->
+            			  <div id="modal1" class="modal">
+						    <div class="modal-content">
+						      <h4>Change Password</h4>
+						       <input class='validate' type='password' placeholder="New Password" name='password' id='new_password' />
+						       <input class='validate' type='password' placeholder="Confirm Password" name='password' id='c_password' />
+								sad
+						    </div>
+						    <div class="modal-footer">
+						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+						    </div>
+						  </div>         
+            <!-- end of modal  -->
                         <div id="content"> 
                             <div class="row white-text" style="position: relative;top:10px;">
                                     <div class="col l3 heading">Backlog</div>

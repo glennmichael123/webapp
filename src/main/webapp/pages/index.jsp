@@ -2,6 +2,7 @@
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
         <%@ page contentType="text/html; charset=UTF-8" %>
         <%@ page session="true" %>
+
 			<% String ROOT_URL = "http://localhost:8081/SoaBaseCode/"; %>
             <!DOCTYPE html>
 	

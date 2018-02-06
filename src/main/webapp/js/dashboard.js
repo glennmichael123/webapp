@@ -52,7 +52,7 @@
 	
 	$(document).on('click', '.view-releases',function(e){
 		
-		$('#content').html('');
+		 location.href = ROOT_URL + 'dashboard/releases';
 	});
 	
 	/*$(document).ready(function(e){

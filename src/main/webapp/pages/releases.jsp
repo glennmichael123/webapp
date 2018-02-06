@@ -264,17 +264,12 @@
                         
                         
             			
-                        <div id="content"> 
-                            <div class="row white-text" style="position: relative;top:10px;">
-                                    <div class="col l3 heading">Backlog</div>
-                                    <div class="col l3 heading">Selected for Development</div>
-                                    <div class="col l3 heading">In Progress</div>
-                                    <div class="col l3 heading">Done</div>
-                            </div>
-                            <div class="row">
-                                <div id="sortable1" class="col l3 connectedSortable grey lighten-3">
-                                <%for(int i=0; i < 10; i++){ %>
-                                    <div class="card white view-info" style="cursor:pointer">
+                        <div id="content" class="releases-content" style="padding:5px"> 
+               				<div class="container-fluid">
+               						<div class="row">
+                                		<%for(int i=0;i<12; i++ ){ %>
+                                			<div class="col l3 grey lighten-3">
+                                				<div class="card white view-info" style="cursor:pointer">
                                         <div class="card-content black-text">
                                             <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options<%out.print(i);%>' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
@@ -283,7 +278,7 @@
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
                                                         <li><a href="#!" class="flag-task">Mark as flag</a></li>
                                                  </ul>
-                                          <p class="card-description">Create <%out.print(i);%>day plans</p>
+                                          <p class="card-description">Release <%out.print(i);%></p>
                                           
                                             <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
                                            	 <span class="badge green white-text">Low</span>
@@ -296,30 +291,23 @@
                                           
                                         </div>
                                       </div>
-                                      <% } %>
-                                     
-                                </div>
-                                <div id="sortable2" class="col l3 connectedSortable grey lighten-3">
-                                </div>
-                                <div id="sortable3" class="col l3 connectedSortable grey lighten-3">
-                                    
-                                </div>
-                                <div id="sortable4" class="col l3 connectedSortable grey lighten-3">
-                                
-                                </div>
-                            </div> 
-                             <div class="fixed-action-btn">
+                                			</div>
+                                		<%} %>               											            			                                                      	 
+               						</div>
+               				</div>
+               			</div>                    	                               	  
+                       
+                        <div class="fixed-action-btn">
                             <a class="btn-floating btn-large teal darken-3">
                              <i class="material-icons">add</i>
                             </a>
                             <ul>
                               <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="In Progress" data-subitem="1"><a href="#modal1" class="btn-floating red modal-trigger"><i class="fa fa-spinner"></i></a></li>
                               <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="For Development" data-subitem="1"><a href="#modal2" class="btn-floating yellow darken-3 modal-trigger"><i class="fa fa-tasks"></i></a></li>
-                              <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="Backlog" data-subitem="1"><a href="#modal3" class="btn-floating green darken-3 modal-trigger"><i class="fa fa-file-text"></i></a></li>
-                              
+                              <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="Backlog" data-subitem="1"><a href="#modal3" class="btn-floating green darken-3 modal-trigger"><i class="fa fa-file-text"></i></a></li>                              
                             </ul>
                        	 </div>	
-                        </div>
+                        
                        
                       
    

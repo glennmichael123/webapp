@@ -81,7 +81,10 @@ public class HomeController {
     	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
         return "headerdashboard";
     }
-    
-    
-    
+    @RequestMapping(value= "/dashboard/releases", method = RequestMethod.GET)
+    public String viewReleases(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+    	session = request.getSession();
+    	return "releases";	
+    }
+        
 }

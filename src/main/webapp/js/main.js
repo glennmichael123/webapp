@@ -63,9 +63,9 @@ $(document).ready(function() {
         }).done(function(data) {
             $('#main-container').html(data);
             loader.addClass('hide');
-
         });
     });
+    
     $(document).on('click','#login-user',function(e){
     	e.preventDefault();
     	var email = $("#username").val();
@@ -127,6 +127,10 @@ $(document).ready(function() {
     			}
     		}
     	})
-
-});
+    });
+    
+    $(document).ready(function(){
+        $('.modal').modal();
+     });
+    
 });
