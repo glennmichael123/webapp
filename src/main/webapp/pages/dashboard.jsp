@@ -32,28 +32,24 @@
              
               <div id="modal-view-info" class="modal bottom-sheet modal-fixed-footer more-info">
 					    <div class="modal-content">
-					      <h5>Create plans	</h5>
+					      <h5 id="issue-detail-title">Failed to fetch data</h5>
 					      <div class="row">
 						       <span>Description:</span>
-						      <p>Lorem ipsum dolor</p>
+						      <p id="issue-detail-desc">Failed to fetch data</p>
 					      </div>
 					     
 					      <div class="row">
 					      	<span>Priority: </span>
-					      	 <span>High</span>
+					      	 <span id="issue-detail-priority">Failed to fetch data</span>
 					      </div>
 					      
 					     <div class="row">
 					     	 <span>Assigned to: </span>
 					      
-						      <div class="chip">
-							  
+						      <div class="chip" id="assigned-to">
 							    Jane Doe
 							  </div>
-							  <div class="chip">
-							  
-							   Doe Jane
-							  </div>
+							
 					     </div>
 					    </div>
 					    
@@ -117,9 +113,9 @@
                             <div class="input-field">
                                <select class="icons" id="priority-progress">
                                   <option value="" disabled selected>Choose your option</option>
-                                  <option value="" data-icon="<% out.print(ROOT_URL);%>images/red.jpg" class="circle">HIGH</option>
-                                  <option value="" data-icon="<% out.print(ROOT_URL);%>images/orange.jpg" class="circle">MEDIUM</option>
-                                  <option value="" data-icon="<% out.print(ROOT_URL);%>images/green.jpg" class="circle">LOW</option>
+                                  <option value="high" data-icon="<% out.print(ROOT_URL);%>images/red.jpg" class="circle">HIGH</option>
+                                  <option value="medium" data-icon="<% out.print(ROOT_URL);%>images/orange.jpg" class="circle">MEDIUM</option>
+                                  <option value="low" data-icon="<% out.print(ROOT_URL);%>images/green.jpg" class="circle">LOW</option>
                                 </select>
                                <label for="priority-progress">Priority</label>
                             </div>
@@ -137,7 +133,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text progress-modal">ADD</a>
+                      <a href="#!" id="submit-progress" class="modal-action modal-close waves-effect waves-green btn-flat white-text progress-modal">ADD</a>
                     </div>
                   </div>
 
@@ -159,9 +155,9 @@
                                 <div class="input-field">
                                    <select class="icons" id="priority-backlog">
                                       <option value="" disabled selected>Choose your option</option>
-                                      <option value="" data-icon="<% out.print(ROOT_URL);%>images/red.jpg" class="circle">HIGH</option>
-                                      <option value="" data-icon="<% out.print(ROOT_URL);%>images/orange.jpg" class="circle">MEDIUM</option>
-                                      <option value="" data-icon="<% out.print(ROOT_URL);%>images/green.jpg" class="circle">LOW</option>
+                                      <option value="high" data-icon="<% out.print(ROOT_URL);%>images/red.jpg" class="circle">HIGH</option>
+                                      <option value="medium" data-icon="<% out.print(ROOT_URL);%>images/orange.jpg" class="circle">MEDIUM</option>
+                                      <option value="low" data-icon="<% out.print(ROOT_URL);%>images/green.jpg" class="circle">LOW</option>
                                     </select>
                                    <label for="priority-backlog">Priority</label>
                                 </div>
@@ -181,7 +177,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text backlog-modal">ADD</a>
+                      <a href="#!" id="submit-backlog" class="modal-action waves-effect waves-green btn-flat white-text backlog-modal">ADD</a>
                     </div>
                   </div>
 
@@ -203,9 +199,9 @@
                                 <div class="input-field">
                                    <select class="icons" id="priority-development">
                                       <option value="" disabled selected>Choose your option</option>
-                                      <option value="" data-icon="<% out.print(ROOT_URL);%>images/red.jpg" class="circle">HIGH</option>
-                                      <option value="" data-icon="<% out.print(ROOT_URL);%>images/orange.jpg" class="circle">MEDIUM</option>
-                                      <option value="" data-icon="<% out.print(ROOT_URL);%>images/green.jpg" class="circle">LOW</option>
+                                      <option value="high" data-icon="<% out.print(ROOT_URL);%>images/red.jpg" class="circle">HIGH</option>
+                                      <option value="medium" data-icon="<% out.print(ROOT_URL);%>images/orange.jpg" class="circle">MEDIUM</option>
+                                      <option value="low" data-icon="<% out.print(ROOT_URL);%>images/green.jpg" class="circle">LOW</option>
                                     </select>
                                    <label for="priority-development">Priority</label>
                                 </div>
@@ -225,7 +221,7 @@
                         </div>
 				    </div>
 				    <div class="modal-footer">
-				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text development-modal">ADD</a>
+				      <a href="#!" id="submit-development" class="modal-action modal-close waves-effect waves-green btn-flat white-text development-modal">ADD</a>
 				    </div>
 				  </div>
                
@@ -249,7 +245,7 @@
                           </div>
                              <div style="margin-top:50px;">Filter Issues</div>
                         </div></li>
-                        <li><a href="#!">Backlogs</a></li>
+                        <li><a href="<%out.print(ROOT_URL);%>dashboard">Backlogs</a></li>
                         <li><a href="#!" class="view-releases">Releases</a></li>
                         <li class="divider"></li>
                         <li><a href="#modalAddUser" class="modal-trigger">Add user</a></li>
@@ -272,40 +268,230 @@
                                     <div class="col l3 heading">Done</div>
                             </div>
                             <div class="row">
-                                <div id="sortable1" class="col l3 connectedSortable grey lighten-3">
-                                <%for(int i=0; i < 10; i++){ %>
-                                    <div class="card white view-info" style="cursor:pointer">
+                                <div id="sortable1" data-column-type="backlog" class="col l3 connectedSortable grey lighten-3">
+                                  <c:forEach items="${issues}" var="issues">  
+                                    <div class="card white view-info" data-card-id="${issues.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options<%out.print(i);%>' class="dropdown-button">
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issues.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
-                                                <ul id='dropdown-options<%out.print(i);%>' class="dropdown-content dropdown-task" >
+                                                <ul id='dropdown-options${issues.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
-                                                        <li><a href="#!" class="flag-task">Mark as flag</a></li>
+                                                       
                                                  </ul>
-                                          <p class="card-description">Create <%out.print(i);%>day plans</p>
-                                          
-                                            <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
-                                           	 <span class="badge green white-text">Low</span>
-                                            </div>
-                                             <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
-                                             
+                                          <p class="card-description">${issues.title}</p>
+
+                                       <c:choose>
+										   <c:when test="${issues.priority == 'low'}">
+											   <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge green white-text">Low</span>
+		                                            </div>
+										   </c:when> 
+										   
+										   <c:when test="${issues.priority == 'high'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge red white-text">High</span>
+		                                            </div>
+										   </c:when> 
+										   
+										 	<c:when test="${issues.priority == 'medium'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge orange white-text">Medium</span>
+		                                            </div>
+										   </c:when> 
+									</c:choose>
+                                            
+                                      
+                                      
+                                       <c:choose>
+										   <c:when test="${issues.flagged == 1}">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
                                            	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
-                                            </div>
+                                           	 </div>
+										   </c:when> 
+										   
+										   <c:when test="${issues.flagged == 0}">
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issues.id}" aria-hidden="true"></i>
+										   	 	</div>
+										   </c:when>
+									</c:choose>
+                                             
                                         
                                           
                                         </div>
                                       </div>
-                                      <% } %>
-                                     
+                                      
+                                     </c:forEach>                                       
                                 </div>
-                                <div id="sortable2" class="col l3 connectedSortable grey lighten-3">
-                                </div>
-                                <div id="sortable3" class="col l3 connectedSortable grey lighten-3">
-                                    
-                                </div>
-                                <div id="sortable4" class="col l3 connectedSortable grey lighten-3">
+                                <div id="sortable2" data-column-type="development" class="col l3 connectedSortable grey lighten-3">
                                 
+                                 <c:forEach items="${issuesDev}" var="issuesDev">  
+                                    <div class="card white view-info" data-card-id="${issuesDev.id}" style="cursor:pointer">
+                                        <div class="card-content black-text">
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDev.id}' class="dropdown-button">
+                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
+                                                <ul id='dropdown-options${issuesDev.id}' class="dropdown-content dropdown-task" >
+                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                      
+                                                 </ul>
+                                          <p class="card-description">${issuesDev.title}</p>
+                                          
+                                       <c:choose>
+										   <c:when test="${issuesDev.priority == 'low'}">
+											   <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge green white-text">Low</span>
+		                                            </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesDev.priority == 'high'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge red white-text">High</span>
+		                                            </div>
+										   </c:when> 
+										   
+										 	<c:when test="${issuesDev.priority == 'medium'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge orange white-text">Medium</span>
+		                                            </div>
+										   </c:when> 
+									</c:choose>
+                                            
+                                      
+                                      
+                                       <c:choose>
+										   <c:when test="${issuesDev.flagged == 1}">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesDev.flagged == 0}">
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issuesDev.id}" aria-hidden="true"></i>
+										   	 	</div>
+										   </c:when>
+									</c:choose>
+                                             
+                                        
+                                          
+                                        </div>
+                                      </div>
+                                      
+                                     </c:forEach>  
+                                </div>
+                                <div id="sortable3" data-column-type="progress" class="col l3 connectedSortable grey lighten-3">
+                                    <c:forEach items="${issuesProgress}" var="issuesProgress">  
+                                    <div class="card white view-info" data-card-id="${issuesProgress.id}" style="cursor:pointer">
+                                        <div class="card-content black-text">
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesProgress.id}' class="dropdown-button">
+                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
+                                                <ul id='dropdown-options${issuesProgress.id}' class="dropdown-content dropdown-task" >
+                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                        
+                                                 </ul>
+                                          <p class="card-description">${issuesProgress.title}</p>
+                                          
+                                       <c:choose>
+										   <c:when test="${issuesProgress.priority == 'low'}">
+											   <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge green white-text">Low</span>
+		                                            </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesProgress.priority == 'high'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge red white-text">High</span>
+		                                            </div>
+										   </c:when> 
+										   
+										 	<c:when test="${issuesProgress.priority == 'medium'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge orange white-text">Medium</span>
+		                                            </div>
+										   </c:when> 
+									</c:choose>
+                                            
+                                      
+                                      
+                                       <c:choose>
+										   <c:when test="${issuesProgress.flagged == 1}">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesProgress.flagged == 0}">
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issuesProgress.id}" aria-hidden="true"></i>
+										   	 	</div>
+										   </c:when>
+									</c:choose>
+                                             
+                                        
+                                          
+                                        </div>
+                                      </div>
+                                      
+                                     </c:forEach>           
+                                </div>
+                                <div id="sortable4" data-column-type="done" class="col l3 connectedSortable grey lighten-3">
+                                	<c:forEach items="${issuesDone}" var="issuesDone">  
+                                    <div class="card white view-info" data-card-id="${issuesDone.id}" style="cursor:pointer">
+                                        <div class="card-content black-text">
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDone.id}' class="dropdown-button">
+                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
+                                                <ul id='dropdown-options${issuesDone.id}' class="dropdown-content dropdown-task" >
+                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                       
+                                                 </ul>
+                                          <p class="card-description">${issuesDone.title}</p>
+                                          
+                                       <c:choose>
+										   <c:when test="${issuesDone.priority == 'low'}">
+											   <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge green white-text">Low</span>
+		                                            </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesDone.priority == 'high'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge red white-text">High</span>
+		                                            </div>
+										   </c:when> 
+										   
+										 	<c:when test="${issuesDone.priority == 'medium'}">
+										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
+		                                           	 <span class="badge orange white-text">Medium</span>
+		                                            </div>
+										   </c:when> 
+									</c:choose>
+                                            
+                                      
+                                      
+                                       <c:choose>
+										   <c:when test="${issuesDone.flagged == 1}">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesDone.flagged == 0}">
+										   <div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   		<i class="fa fa-flag-o mark-flag" aria-hidden="true" data-card-id="${issuesDone.id}"></i>
+										   	 </div>
+										   </c:when>
+									</c:choose>
+                                             
+                                        
+                                          
+                                        </div>
+                                      </div>
+                                      
+                                     </c:forEach>           
                                 </div>
                             </div> 
                              <div class="fixed-action-btn">
@@ -332,9 +518,7 @@
 
             </html>
             <script type="text/javascript">   
-            $(document).on('dblclick','.view-info',function(e){
-           	 $('#modal-view-info').modal('open');
-           });
+           
                 $(document).ready(function(){
                     $('.modal').modal();
                     $(".button-collapse").sideNav();
@@ -345,10 +529,35 @@
               
             </script>
           <script>
+          var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
           $( function() {
-        	
+        	  position_updated = false; //flag bit
             $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
               connectWith: ".connectedSortable",
+              update: function(event, ui) {
+                  position_updated = !ui.sender; //if no sender, set sortWithin flag to true
+              },
+
+              stop: function(event, ui) {
+                  if (position_updated) {
+                      position_updated = false;
+                  }   
+              },
+              receive: function(event, ui) {
+            	var id = ui.item.attr('data-card-id');      	
+              	var type = $(this).data('column-type');
+              	$.ajax({
+              		url: ROOT_URL + 'api/updateIssueType',
+              		type: 'POST',
+              		data:{
+              			'id': id,
+              			'type': type,
+              			
+              		}
+              	});
+             	
+              }
+              
             }).disableSelection();
           } );
         </script> 

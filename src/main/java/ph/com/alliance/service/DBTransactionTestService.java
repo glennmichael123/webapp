@@ -3,6 +3,7 @@ package ph.com.alliance.service;
 import java.util.List;
 
 import ph.com.alliance.entity.Admin;
+import ph.com.alliance.entity.Issue;
 import ph.com.alliance.entity.Product;
 import ph.com.alliance.entity.User;
 
@@ -15,6 +16,10 @@ public interface DBTransactionTestService {
 	 * 
 	 * @return
 	 */
+	public boolean createIssue(Issue pIssues);
+	
+	public Issue updateIssue(Issue pIssues);
+	
 	public boolean createUser(User pUser);
 	
 	/**
@@ -67,9 +72,17 @@ public interface DBTransactionTestService {
 	 */
 	public List<User> selectAllUsers();
 	
+	public List<Issue> getIssueList();
+	public List<Issue> getIssueListDev();
+	public List<Issue> getIssueListProgress();
+	public List<Issue> getIssuesDone();
+	
+	
 	public User selectUser(String username, String password);
 	
 	public Admin selectAdmin(String username, String password);
+	
+
 	
 	/**
 	 * 
@@ -80,6 +93,8 @@ public interface DBTransactionTestService {
 	/*-------------------- MULTI TABLE TRANSASCTION TESTS -----------------------*/
 	public boolean createUserAndProduct(User pUser, Product pProd, boolean pRollbackFlag);
 	public boolean createUserAndUpdateProduct(User pUser, Product pProd, boolean pRollbackFlag);
+
+	public Issue viewIssueDetails(Long id);
 	
 	
 	

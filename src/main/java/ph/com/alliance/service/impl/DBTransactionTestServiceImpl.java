@@ -10,17 +10,19 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Service;
 
 import ph.com.alliance.dao.AdminDao;
+import ph.com.alliance.dao.IssueDao;
 import ph.com.alliance.dao.ProductDao;
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.dao.impl.UserDaoImpl;
 import ph.com.alliance.entity.Admin;
+import ph.com.alliance.entity.Issue;
 import ph.com.alliance.entity.Product;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.service.DBTransactionTestService;
 
 
 /**
- * Example service implementation that hadles database transaction.
+ * Example service implementation that handles database transaction.
  * Database transaction starts in this layer of the application, and it also ends here. 
  *
  */
@@ -35,6 +37,9 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 	
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private IssueDao issuesDao;
 
 	@Autowired
 	private JpaTransactionManager transactionManager;
@@ -51,6 +56,29 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		em.getTransaction().begin();
 		try {
 			result = userDao.createUser(em, pUser);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return result;
+	}
+	
+	public boolean createIssue(Issue pIssues){
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		boolean result = false;
+		
+		em.getTransaction().begin();
+		try {
+			result = issuesDao.createIssues(em, pIssues);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -291,5 +319,116 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 			}
 		}
 		return admin;
+	}
+
+	@Override
+	public List<Issue> getIssueList() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Issue> issueList = null;
+		
+		try {
+			issueList = issuesDao.getIssueList(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issueList;
+	}
+
+	@Override
+	public List<Issue> getIssueListDev() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Issue> issueList = null;
+		try {
+			issueList = issuesDao.getIssueListDev(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issueList;
+	}
+	
+	@Override
+	public List<Issue> getIssueListProgress() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Issue> issueList = null;
+		try {
+			issueList = issuesDao.getIssueListProgress(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issueList;
+	}
+
+	@Override
+	public Issue updateIssue(Issue pIssues) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		Issue issue = null;
+		
+		em.getTransaction().begin();
+		
+		try {
+			issue = issuesDao.updateIssue(em, pIssues);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.getMessage();
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issue;
+	}
+
+	@Override
+	public List<Issue> getIssuesDone() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Issue> issueList = null;
+		try {
+			issueList = issuesDao.getIssueListDone(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issueList;
+	}
+
+	@Override
+	public Issue viewIssueDetails(Long id) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		Issue issue = null;
+		
+		try {
+			issue = issuesDao.viewIssueDetails(em, id);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issue;
 	}
 }

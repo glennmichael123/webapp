@@ -97,3 +97,6 @@
 .hide{
 	display: none;
 }
+.flagged-not:hover{
+	color: red;
+}

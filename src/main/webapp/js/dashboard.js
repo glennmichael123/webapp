@@ -55,14 +55,104 @@
 		 location.href = ROOT_URL + 'dashboard/releases';
 	});
 	
-	/*$(document).ready(function(e){
+	$(document).on('click','#submit-backlog',function(e){
+		e.preventDefault();
+		
+		var title = $('#title-backlog').val();
+		var description = $('#description-backlog').val();
+		var priority = $('#priority-backlog').val();
+		var type = 'backlog';
+		
 		$.ajax({
-			url: ROOT_URL + 'headerdashboard',
-			type: 'GET',
-			dataType: 'text',
-			success:function(data){
-				$('#header').html(data);
+			url: ROOT_URL + 'api/saveIssues',
+			type: 'POST',
+			data:{
+				'title': title,
+				'description': description,
+				'priority': priority,
+				'type': type,
+			},
+			success: function(data){
+				location.reload();
 			}
 		});
-	})*/
+	});
+	
+	$(document).on('click','#submit-development',function(e){
+		e.preventDefault();
+		
+		var title = $('#title-development').val();
+		var description = $('#description-development').val();
+		var priority = $('#priority-development').val();
+		var type = 'development';
+		
+		$.ajax({
+			url: ROOT_URL + 'api/saveIssues',
+			type: 'POST',
+			data:{
+				'title': title,
+				'description': description,
+				'priority': priority,
+				'type': type,
+			},
+			success: function(data){
+				location.reload();
+			}
+		});
+	});
+	
+	$(document).on('click','#submit-progress',function(e){
+		e.preventDefault();
+		
+		var title = $('#title-progress').val();
+		var description = $('#description-progress').val();
+		var priority = $('#priority-progress').val();
+		var type = 'progress';
+		
+		$.ajax({
+			url: ROOT_URL + 'api/saveIssues',
+			type: 'POST',
+			data:{
+				'title': title,
+				'description': description,
+				'priority': priority,
+				'type': type,
+			},
+			success: function(data){
+				location.reload();
+			}
+		});
+	});
+	
+	 $(document).on('dblclick','.view-info',function(e){
+       	 $('#modal-view-info').modal('open');
+       	 var id = $(this).data('card-id');
+       	 $.ajax({
+       		 url: ROOT_URL + 'api/viewIssueDetails',
+       		 type: 'POST',
+       		 data:{
+       			 'id':id,
+       		 },
+       		 success: function(data){
+       			 $('#issue-detail-title').text(data.title);
+       			 $('#issue-detail-desc').text(data.description);
+       			 $('#issue-detail-priority').text(data.priority);
+       			 
+       		 }
+       	 });
+      });
+	 
+	 $("body").on({
+		    mouseenter: function () {
+		    	$(this).find('.flagged-not').show();
+		    },
+		    mouseleave:function () {
+		    	$(this).find('.flagged-not').hide();
+		    }
+		},'.card');
+	
+	$(document).on('click', '.mark-flag',function(e){
+		var id = $(this).data('card-id');
+		console.log(id);
+	});
  });

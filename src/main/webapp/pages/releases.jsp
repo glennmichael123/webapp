@@ -249,7 +249,7 @@
                           </div>
                              <div style="margin-top:50px;">Filter Issues</div>
                         </div></li>
-                        <li><a href="#!">Backlogs</a></li>
+                        <li><a href="<%out.print(ROOT_URL);%>dashboard">Backlogs</a></li>
                         <li><a href="#!" class="view-releases">Releases</a></li>
                         <li class="divider"></li>
                         <li><a href="#modalAddUser" class="modal-trigger">Add user</a></li>
