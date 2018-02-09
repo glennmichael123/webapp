@@ -1,7 +1,7 @@
- $(document).ready(function(){
-	 var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
+$(document).ready(function(){
 
-	$(document).on('click','.add-subtask',function(e){
+
+		$(document).on('click','.add-subtask',function(e){
 		e.preventDefault();
          var html = '<div class="input-field">'+
                     '<input type="text" style="width:94%;" name="subtask_progress" placeholder="Subtask" class="validate subtasks">'+
@@ -11,7 +11,8 @@
         	 
     });
 
-	$(document).on('click','.remove-subtask',function(e){
+
+		$(document).on('click','.remove-subtask',function(e){
         $(this).closest('.input-field').remove();
 	});
 
@@ -129,7 +130,7 @@
 	        		 $('#modal2').modal('close');
 	        		 Materialize.toast('Saving..', 4000);
 	        	}
-	        	
+
 
 	        	 $.ajax({
 		       			url: ROOT_URL + 'api/saveIssues',
@@ -216,89 +217,60 @@
 			        		  $('#repeat-progress').prop('checked',false);
 			        		   $('#content').load(location.href + " #content");
 			        		   $('select').material_select();
-			        		   
-			        		   
-			        		   
 		       			}
 		       		});
 	        }
 	});
-	
+
+
+$(document).on('dblclick','.view-info',function(e){
+	 $('#nav-right').sideNav('show');
+	 var id = $(this).data('card-id');
+	 $.ajax({
+	 	url: ROOT_URL + 'api/viewSubtaskDetails',
+	 	type: "POST",
+	 	data:{
+	 		'id':id,
+	 	},
+	 	success: function(data){
+	 		$('#issue-detail-title').val(data.title);
+			 $('#issue-detail-desc').text(data.description);
+			 $('#issue-detail-priority').val(data.priority == '' ? "None" : data.priority);
+			 $('#assigned-to').text(data.assigned == '' ? "No one" : data.assigned);
+	 	}
+	 });
+
 	 
-	 
-	 $("body").on({
-		    mouseenter: function () {
-		    	$(this).find('.flagged-not').show();
-		    },
-		    mouseleave:function () {
-		    	$(this).find('.flagged-not').hide();
-		    }
-		},'.card');
-	
-	$(document).on('click', '.mark-flag',function(e){
-		var id = $(this).data('card-id');
-		console.log(id);
-	});
+});
 
-	$(document).on('keydown','#issue-detail-title',function(){
-		$('#save-edit').removeAttr("disabled");
-	});
-	$(document).on('keydown','#issue-detail-desc',function(){
-		$('#save-edit').removeAttr("disabled");
-	});
+$("body").on({
+    mouseenter: function () {
+    	$(this).find('.flagged-not').show();
+    },
+    mouseleave:function () {
+    	$(this).find('.flagged-not').hide();
+    }
+},'.card');
 
-	$(document).on('keydown','#issue-detail-priority',function(){
-		$('#save-edit').removeAttr("disabled");
-		
-		
-	});
-	
-	
-	$(document).on('dblclick','.view-info',function(e){
-		$('#nav-right').sideNav('show');
-      	 var id = $(this).data('card-id');
-      	 $.ajax({
-      		 url: ROOT_URL + 'api/viewIssueDetails',
-      		 type: 'POST',
-      		 data:{
-      			 'id':id,
-      		 },
-      		 success: function(data){
-      			 $('#issue-detail-title').val(data.title);
-      			 $('#issue-detail-desc').text(data.description);
-      			 $('#issue-detail-priority').val(data.priority == '' ? "None" : data.priority);
-      			 $('#assigned-to').text(data.assigned == '' ? "No one" : data.assigned);	 
-      		 }
-      	 });
-var subtaskContent = $('#subtask-content');
-      	 $.ajax({
-      		 url: ROOT_URL + 'api/viewSubtaskDetails',
-      		 type: 'POST',
-      		 data:{
-      			 'id':id,
-      		 },
-      		 success: function(data){
-      			 if(data == ''){
-      				 subtaskContent.html('');
-      			 }else{
-      				$.each(data, function(i, item) {
-      					var html = '<div class="input-field">'+
-                        '<input type="text" style="width:94%; border-bottom:none;" value="'+item.description+'" data-subtask-id="'+item.id+'" name="subtask_progress" placeholder="Subtask" class="validate subtasks">'+
-                        '<a href="#" class="remove-subtask"><i class="fa fa-times"></i></a>'+
-                        '</div>';
-      					
-      					$('#subtask-content').append(html);
-    		      	});   
-      			 }
-  				
-      		 }
-      	 });
+$(document).on('click', '.mark-flag',function(e){
+var id = $(this).data('card-id');
+console.log(id);
+});
+
+$(document).on('keydown','#issue-detail-title',function(){
+$('#save-edit').removeAttr("disabled");
+});
+$(document).on('keydown','#issue-detail-desc',function(){
+$('#save-edit').removeAttr("disabled");
+});
+
+$(document).on('keydown','#issue-detail-priority',function(){
+$('#save-edit').removeAttr("disabled");
 
 
-         	 
- });
-	
-	
-	
-	
- });
+});
+
+
+
+});
+

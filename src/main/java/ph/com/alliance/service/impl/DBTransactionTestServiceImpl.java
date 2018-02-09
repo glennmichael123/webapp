@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 import ph.com.alliance.dao.AdminDao;
 import ph.com.alliance.dao.IssueDao;
 import ph.com.alliance.dao.ProductDao;
+import ph.com.alliance.dao.SubtaskDao;
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.dao.impl.UserDaoImpl;
 import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.Issue;
 import ph.com.alliance.entity.Product;
+import ph.com.alliance.entity.Subtask;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.service.DBTransactionTestService;
 
@@ -40,6 +42,9 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 	
 	@Autowired
 	private IssueDao issuesDao;
+	
+	@Autowired
+	private SubtaskDao subtaskDao;
 
 	@Autowired
 	private JpaTransactionManager transactionManager;
@@ -430,5 +435,57 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		}
 		
 		return issue;
+	}
+
+	@Override
+	public List<User> getEmployeeList() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<User> employeeList = null;
+		try {
+			employeeList = userDao.getEmployeeList(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return employeeList;
+	}
+
+	@Override
+	public List<Issue> getIssuesReleased() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Issue> issueList = null;
+		try {
+			issueList = issuesDao.getIssueReleased(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issueList;
+	}
+
+	@Override
+	public List<Subtask> viewSubtaskDetails(Long id) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Subtask> subtask = null;
+		
+		try {
+			subtask = subtaskDao.viewSubtaskDetails(em, id);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return subtask;
 	}
 }

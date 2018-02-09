@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import ph.com.alliance.dao.UserDao;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.entity.Admin;
+import ph.com.alliance.entity.Issue;
 
 /**
  * Sample data access object implementation using Java Persistence API.
@@ -150,6 +152,22 @@ public class UserDaoImpl implements UserDao {
 		// generates equivalent "SELECT u FROM User u"
 		try {
 			return pEM.createQuery(cq).getResultList();
+		} catch (Exception e) {
+			System.err.println("ERROR ----------------- ");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<User> getEmployeeList(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> userRoot = cq.from(User.class);
+		cq.select(userRoot);
+	
+		try {
+			return em.createQuery(cq).getResultList();
 		} catch (Exception e) {
 			System.err.println("ERROR ----------------- ");
 			e.printStackTrace();

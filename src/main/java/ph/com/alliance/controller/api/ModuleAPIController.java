@@ -25,7 +25,7 @@ import com.mysql.jdbc.Statement;
 
 import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.Issue;
-
+import ph.com.alliance.entity.Subtask;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.model.IssueModel;
 
@@ -63,11 +63,7 @@ public class ModuleAPIController {
     	u.setAge(age);
     	u.setUid(request.getParameter("uid"));
     	u.setGender(request.getParameter("gender"));
-    	
-    	/*if(!dbSvc.createUser(this.convertToEntity(u))) {
-    		u = null;
-    	}*/
-    	
+
     	System.out.println("MAPPED USER --- " + this.convertToEntity(u));
     	    	
     	return u;
@@ -96,6 +92,7 @@ public class ModuleAPIController {
     	String description = request.getParameter("description");
     	String priority = request.getParameter("priority");
     	String type = request.getParameter("type");
+    	String assigned = request.getParameter("assigned");
     	int deleted = 0;
     	issues.setDeleted(deleted);
     	issues.setTitle(title);
@@ -104,6 +101,7 @@ public class ModuleAPIController {
     	issues.setType(type);
     	issues.setFlagged(0);
     	issues.setReleased(0);
+    	issues.setAssigned(assigned == null ? "" : assigned);
     	if(!dbSvc.createIssue(this.convertToEntityIssues(issues))) {
     		issues = null;
     	}
@@ -136,11 +134,22 @@ public class ModuleAPIController {
     	String id = request.getParameter("id");
     	
     	Long idd = Long.parseLong(id);
-    	
     	issue = dbSvc.viewIssueDetails(idd);
-    	
-    	
     	return issue;
+    	
+    }
+    
+    @RequestMapping(value = "/viewSubtaskDetails", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Subtask> viewSubtaskDetails(HttpServletRequest request){
+    	String id = request.getParameter("id");
+    	
+    	List<Subtask> subtask = null;
+    	
+    	Long idd = Long.parseLong(id);
+    	subtask = dbSvc.viewSubtaskDetails(idd);
+    
+		return subtask;
     	
     }
     

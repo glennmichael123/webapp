@@ -61,6 +61,8 @@ public interface UserDao {
 	 */
 	public List<User> selectAllUsers(EntityManager pEM);
 
+	public List<User> getEmployeeList(EntityManager em);
+
 	/**
 	 * 
 	 * @param pEM

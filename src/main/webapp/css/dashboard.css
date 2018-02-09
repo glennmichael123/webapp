@@ -100,3 +100,9 @@
 .flagged-not:hover{
 	color: red;
 }
+.fa-user-times{
+	font-size: 13px !important; 
+}
+#issue-detail-desc{
+	margin:  0px !important;
+}

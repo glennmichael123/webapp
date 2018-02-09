@@ -1,14 +1,9 @@
 package ph.com.alliance.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.*;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,15 +11,12 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 
-import org.springframework.asm.Handle;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import ph.com.alliance.dao.IssueDao;
-import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.Issue;
-import ph.com.alliance.entity.User;
 
 @Component
 @Repository("issuesDao")
@@ -179,15 +171,37 @@ JdbcTemplate template;
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 		Root<Issue> userRoot = cq.from(Issue.class);
 		cq.select(userRoot);
+		
+		 Predicate predicate = cb.conjunction();
+		 predicate = cb.and(predicate, 
+		 cb.equal(userRoot.get("id"), id));
+		 cq.where(predicate);
+		try {
+			return em.createQuery(cq).getSingleResult();
+		} catch (Exception e) {
+			System.err.println("ERROR ----------------- ");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<Issue> getIssueReleased(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
+		Root<Issue> userRoot = cq.from(Issue.class);
+		cq.select(userRoot);
 		Predicate predicate = cb.conjunction();
 		 Predicate predicate1 = cb.conjunction();
 		 predicate = cb.and(predicate, 
-		 cb.equal(userRoot.get("id"), id));
+		 cb.equal(userRoot.get("released"), 1));
+		 predicate1 = cb.and(predicate1, 
+				 cb.notEqual(userRoot.get("deleted"), 1));
 		 cq.where(
 				 cb.and(predicate, predicate1)
         );
 		try {
-			return em.createQuery(cq).getSingleResult();
+			return em.createQuery(cq).getResultList();
 		} catch (Exception e) {
 			System.err.println("ERROR ----------------- ");
 			e.printStackTrace();

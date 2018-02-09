@@ -50,7 +50,7 @@
                      </ul>
                       <!-- Dropdown Structure -->
                         <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
-                            <li><a href="#modal1" class="modal-trigger to-user">Change Password</a></li>
+                            <li><a href="#modal1" class="modal-trigger">Change Password</a></li>
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
             <!-- modal for changing password -->
@@ -119,6 +119,7 @@
                 $(document).ready(function(){
                     $(".button-collapse").sideNav();
                     $('select').material_select();
+                    $('.modal').modal();
                 });
               
             </script>

@@ -29,9 +29,24 @@
             </head>
 
             <body  class="teal lighten-3">
+            
+            <div id="change-password" class="modal modal-fixed-footer">
+						    <div class="modal-content">
+						      <h4>Change Password</h4>
+						       <input class='validate' type='password' placeholder="New Password" name='password' id='new_password' />
+						       <input class='validate' type='password' placeholder="Confirm Password" name='password' id='c_password' />
+								
+						    </div>
+						    <div class="modal-footer">
+						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+						    </div>
+						  </div>  
+
+
              
-              <div id="modal-view-info" class="modal bottom-sheet modal-fixed-footer more-info">
+            <!-- <div id="modal-view-info" class="modal bottom-sheet modal-fixed-footer more-info">
 					    <div class="modal-content">
+
 					      <h5 id="issue-detail-title">Failed to fetch data</h5>
 					      <div class="row">
 						       <span>Description:</span>
@@ -53,11 +68,54 @@
 					     </div>
 					    </div>
 					    
-			<div class="modal-footer">
-     			 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close	</a>
-   			 </div>
-					   
-		</div>
+    			<div class="modal-footer">
+         			 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close	</a>
+       			 </div>
+    					   
+    		</div>
+ -->
+
+
+ <ul id="view-more-info" class="side-nav">
+
+
+   <a class="waves-effect waves-light btn" id="save-edit" style="position: absolute; right: 20px; top: 10px;" disabled>Save</a>
+    <div class="user-view">
+       <span><b>Title</b></span>
+      <input type="text" id="issue-detail-title" style="border-bottom: none;"></input>
+
+            <div class="row">
+             <span><b>Description</b></span>
+            <textarea class="materialize-textarea" id="issue-detail-desc" val="" style="border-bottom: none;">Failed to fetch data</textarea>
+      </div>
+
+      <div class="row">
+         <span><b>Priority:</b> </span>
+         <input type="text" id="issue-detail-priority" val="" style="border-bottom: none;" class="autocomplete">
+
+         </div>
+                
+               <div class="row">
+                 <span><b>Assigned to:</b> </span>
+                
+                  <div class="chip" id="assigned-to">
+                   Jane Doe
+                </div>
+              
+            </div>
+            <div class="row">
+              <span><b>Subtasks</b></span>
+              <div id="subtask-content">
+                
+              </div>
+              <p><a href="#" class="add-subtask">Add subtask</a></p>
+            </div>
+
+    
+  </ul>
+  <a href="#" data-activates="view-more-info" id="nav-right" style="display: none;" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
    <div id="modalAddUser" class="modal modal-fixed-footer" >
     <div class="modal-content" >
       <h4>Add user</h4>
@@ -99,14 +157,14 @@
                         <div class="row">
                             <div class="input-field">
                                 <label for="title-progress">Title</label>
-                                <input type="text" name="title_progress" id="title-progress" maxlength="50" class="validate" data-length="50">
+                                <input type="text" name="title_progress" id="title-progress" maxlength="50" class="validate" data-length="50" required>
                             </div>    
                         </div>
 
                         <div class="row">
                             <div class="input-field">
                                 <label for="description-progress">Description</label>
-                               <textarea name="description_progress" id="description-progress" class="materialize-textarea"></textarea>
+                               <textarea name="description_progress" id="description-progress" class="materialize-textarea" required></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -121,10 +179,23 @@
                             </div>
                         </div>
 
-                        <button class="btn" id="progress-subtask">+ subtask</button>
+                       <!-- <button class="btn" id="progress-subtask">+ subtask</button> --> 
                         <div class="row subtask-prog">
                             
                         </div>
+
+                           <div class="row">
+                              <div class="input-field col s12">
+                                <select id="progress-assign">
+                                  <option value="" disabled selected>Choose employee</option>
+                                  <c:forEach items="${employees}" var="employees">
+		                                  <option value="${employees.uid}"> ${employees.fname} ${employees.lname}</option>
+	                                 </c:forEach> 
+                                </select>
+                                <label>Assign to</label>
+                              </div>
+                            </div>    
+
                          <div class="row">
                             <p>
                                <input type="checkbox" id="repeat-progress" >
@@ -133,7 +204,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <a href="#!" id="submit-progress" class="modal-action modal-close waves-effect waves-green btn-flat white-text progress-modal">ADD</a>
+                      <a href="#!" id="submit-progress" class="modal-action waves-effect waves-green btn-flat white-text progress-modal">ADD</a>
                     </div>
                   </div>
 
@@ -143,12 +214,12 @@
                       <div class="row">
                             <div class="input-field">
                                 <label for="title-backlog">Title</label>
-                                <input type="text" name="title_backlog" id="title-backlog" class="validate" data-length="50" maxlength="50">
+                                <input type="text" name="title_backlog" id="title-backlog" class="validate" data-length="50" maxlength="50" required>
                             </div>
                             <div class="row">
                             <div class="input-field">
                                 <label for="description-backlog">Description</label>
-                               <textarea name="description_backlog" id="description-backlog" class="materialize-textarea"></textarea>
+                               <textarea name="description_backlog" id="description-backlog" class="materialize-textarea" required></textarea>
                             </div>    
                             </div>
                             <div class="row">
@@ -163,10 +234,22 @@
                                 </div>
                             </div>
 
-                            <button class="btn" id="backlog-subtask">+ subtask</button>
+                             <!-- <button class="btn" id="progress-subtask">+ subtask</button> --> 
                             <div class="row subtask-back">
                                 
                             </div>
+                          
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <select id="backlog-assign">
+                                  <option value="" disabled selected>Choose employee</option>
+	                                   <c:forEach items="${employees}" var="employees">
+		                                  <option value="${employees.uid}"> ${employees.fname} ${employees.lname}</option>
+	                                  </c:forEach> 
+                                </select>
+                                <label>Assign to</label>
+                              </div>
+                            </div>    
 
                             <div class="row">
                                 <p>
@@ -183,16 +266,16 @@
 
                   <div id="modal2" class="modal modal-fixed-footer">
 				    <div class="modal-content">
-				      <p class="modal-title">CREATE ISSUE SELECTED FOR DEVELOPEMENT</p>
+				      <p class="modal-title">CREATE ISSUE SELECTED FOR DEVELOPMENT</p>
                       <div class="row">
                             <div class="input-field">
                                 <label for="title-development">Title</label>
-                                <input type="text" name="title_development" id="title-development" class="validate" data-length="50" maxlength="50">
+                                <input type="text" name="title_development" id="title-development" class="validate" data-length="50" maxlength="50" required>
                             </div>
                             <div class="row">
                             <div class="input-field">
                                 <label for="description-development">Description</label>
-                               <textarea name="description_development" id="description-development" class="materialize-textarea"></textarea>
+                               <textarea name="description_development" id="description-development" class="materialize-textarea" required></textarea>
                             </div>    
                             </div>
                             <div class="row">
@@ -207,10 +290,24 @@
                                 </div>
                             </div>
 
-                            <button class="btn" id="development-subtask">+ subtask</button>
+                            <!-- <button class="btn" id="progress-subtask">+ subtask</button> --> 
                             <div class="row subtask-dev">
                                 
                             </div>
+
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <select id="development-assign">
+                                  <option value="" disabled selected>Choose employee</option>
+                                  
+                                <c:forEach items="${employees}" var="employees">
+		                                  <option value="${employees.uid}"> ${employees.fname} ${employees.lname}</option>
+	                                  </c:forEach> 
+                                </select>
+                                <label>Assign to</label>
+                              </div>
+                            </div>    
+
 
                             <div class="row">
                                 <p>
@@ -221,13 +318,13 @@
                         </div>
 				    </div>
 				    <div class="modal-footer">
-				      <a href="#!" id="submit-development" class="modal-action modal-close waves-effect waves-green btn-flat white-text development-modal">ADD</a>
+				      <a href="#!" id="submit-development" class="modal-action waves-effect waves-green btn-flat white-text development-modal">ADD</a>
 				    </div>
 				  </div>
                
 
                     <div class="nav-wrapper teal darken-1 header">
-                    <a href="#" data-activates="slide-out" class="button-collapse brand-logo"><i class="fa fa-bars" style="font-size: 20px;"></i></a>
+                    <a href="#" data-activates="slide-out" id="nav-left" class="button-collapse brand-logo"><i class="fa fa-bars" style="font-size: 20px;"></i></a>
                         <img src="<% out.print(ROOT_URL);%>images/Kanban-logo2.png" class="kanban-logo"/>
                             <ul class="right hide-on-med-and-down settings">
                                 <li><a class="dropdown-button" href="#!" data-activates="settings-dropdown">Settings</a></li>
@@ -252,7 +349,7 @@
                      </ul>
                       <!-- Dropdown Structure -->
                         <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
-                            <li><a href="#" class="to-user">Change Password</a></li>
+                            <li><a href="#change-password" class="modal-trigger">Change Password</a></li>
 
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
@@ -263,7 +360,7 @@
                         <div id="content"> 
                             <div class="row white-text" style="position: relative;top:10px;">
                                     <div class="col l3 heading">Backlog</div>
-                                    <div class="col l3 heading">Selected for Development</div>
+                                    <div class="col l3 heading">For Development</div>
                                     <div class="col l3 heading">In Progress</div>
                                     <div class="col l3 heading">Done</div>
                             </div>
@@ -277,7 +374,7 @@
                                                 <ul id='dropdown-options${issues.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
-                                                       
+                                                       <li style="display:none" class="show-release"><a href="#!" class="release-task" >Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issues.title}</p>
 
@@ -300,24 +397,38 @@
 		                                            </div>
 										   </c:when> 
 									</c:choose>
-                                            
-                                      
+									<c:choose>
+										   <c:when test="${issues.assigned == null or issues.assigned == ''}">
+											    <div class="priority-task" style="position: absolute;top: 50px; right: 0px;">
+		                                           	  <i class="fa fa-user-times"></i>
+		                                        </div>
+										   </c:when> 
+										   
+										   <c:when test="${issues.assigned != null}">
+										 
+										   </c:when> 
+										   
+										
+									</c:choose>
+									
+                                          
+                                    
                                       
                                        <c:choose>
 										   <c:when test="${issues.flagged == 1}">
-											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
                                            	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issues.flagged == 0}">
-										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; display:none;">
 										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issues.id}" aria-hidden="true"></i>
 										   	 	</div>
 										   </c:when>
 									</c:choose>
                                              
-                                        
+                                       
                                           
                                         </div>
                                       </div>
@@ -334,7 +445,7 @@
                                                 <ul id='dropdown-options${issuesDev.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
-                                                      
+                                                      	<li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesDev.title}</p>
                                           
@@ -359,16 +470,29 @@
 									</c:choose>
                                             
                                       
-                                      
+                                      <c:choose>
+										   <c:when test="${issuesDev.assigned == null or issuesDev.assigned == ''}">
+											    <div class="priority-task" style="position: absolute;top: 50px; right: 0px;">
+		                                           	  <i class="fa fa-user-times"></i>
+		                                        </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesDev.assigned != null}">
+										 
+										   </c:when> 
+										   
+										
+									</c:choose>
+									
                                        <c:choose>
 										   <c:when test="${issuesDev.flagged == 1}">
-											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
                                            	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issuesDev.flagged == 0}">
-										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; display:none;">
 										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issuesDev.id}" aria-hidden="true"></i>
 										   	 	</div>
 										   </c:when>
@@ -390,7 +514,7 @@
                                                 <ul id='dropdown-options${issuesProgress.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
-                                                        
+                                                        <li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesProgress.title}</p>
                                           
@@ -414,17 +538,29 @@
 										   </c:when> 
 									</c:choose>
                                             
-                                      
+                                       <c:choose>
+										   <c:when test="${issuesProgress.assigned == null or issuesProgress.assigned == ''}">
+											    <div class="priority-task" style="position: absolute;top: 50px; right: 0px;">
+		                                           	  <i class="fa fa-user-times"></i>
+		                                        </div>
+										   </c:when> 
+										   
+										   <c:when test="${issuesProgress.assigned != null}">
+										 
+										   </c:when> 
+										   
+										
+									</c:choose>
                                       
                                        <c:choose>
 										   <c:when test="${issuesProgress.flagged == 1}">
-											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
+											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
                                            	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issuesProgress.flagged == 0}">
-										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; display:none;">
 										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issuesProgress.id}" aria-hidden="true"></i>
 										   	 	</div>
 										   </c:when>
@@ -446,7 +582,7 @@
                                                 <ul id='dropdown-options${issuesDone.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
-                                                       
+                                                       <li><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesDone.title}</p>
                                           
@@ -487,25 +623,27 @@
 									</c:choose>
                                              
                                         
-                                          
-                                        </div>
-                                      </div>
-                                      
-                                     </c:forEach>           
-                                </div>
-                            </div> 
-                             <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large teal darken-3">
-                             <i class="material-icons">add</i>
-                            </a>
-                            <ul>
-                              <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="In Progress" data-subitem="1"><a href="#modal1" class="btn-floating red modal-trigger"><i class="fa fa-spinner"></i></a></li>
-                              <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="For Development" data-subitem="1"><a href="#modal2" class="btn-floating yellow darken-3 modal-trigger"><i class="fa fa-tasks"></i></a></li>
-                              <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="Backlog" data-subitem="1"><a href="#modal3" class="btn-floating green darken-3 modal-trigger"><i class="fa fa-file-text"></i></a></li>
-                              
-                            </ul>
-                       	 </div>	
-                        </div>
+                    
+                  </div>
+                </div>
+                
+               </c:forEach>           
+
+               
+               </div>
+                </div> 
+                 <div class="fixed-action-btn">
+                <a class="btn-floating btn-large teal darken-3">
+                 <i class="material-icons">add</i>
+                </a>
+                <ul>
+                  <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="In Progress" data-subitem="1"><a href="#modal1" class="btn-floating red modal-trigger"><i class="fa fa-spinner"></i></a></li>
+                  <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="For Development" data-subitem="1"><a href="#modal2" class="btn-floating yellow darken-3 modal-trigger"><i class="fa fa-tasks"></i></a></li>
+                  <li class="tooltipped fab child" data-position="left" data-delay="50" data-tooltip="Backlog" data-subitem="1"><a href="#modal3" class="btn-floating green darken-3 modal-trigger"><i class="fa fa-file-text"></i></a></li>
+                  
+                </ul>
+           	 </div>	
+            </div>
                        
                       
    
@@ -524,14 +662,42 @@
                     $(".button-collapse").sideNav();
                     $('select').material_select();
                     $('.chips').material_chip();
-                 
+                    $('#nav-right').sideNav({
+                          menuWidth: 400, 
+                          edge: 'right',
+                          closeOnClick: false,
+                          draggable: true, 
+                          onClose: function(el) { 
+                             $('#subtask-content').html('');
+                          }
+                          
+                        } 
+                      );
+
+                    $("#nav-left").sideNav({edge: 'left'});
+
+
+                    $('input.autocomplete').autocomplete({
+                        data: {
+                          "high": null,
+                          "medium": null,
+                          "low": null
+                        },
+                        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                        onAutocomplete: function(val) {
+                          // Callback function when value is autcompleted.
+                        },
+                        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+                      });
                 });
               
             </script>
           <script>
           var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
-          $( function() {
-        	  position_updated = false; //flag bit
+
+         
+            $( function() {
+            position_updated = false; //flag bit
             $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
               connectWith: ".connectedSortable",
               update: function(event, ui) {
@@ -544,21 +710,31 @@
                   }   
               },
               receive: function(event, ui) {
-            	var id = ui.item.attr('data-card-id');      	
-              	var type = $(this).data('column-type');
-              	$.ajax({
-              		url: ROOT_URL + 'api/updateIssueType',
-              		type: 'POST',
-              		data:{
-              			'id': id,
-              			'type': type,
-              			
-              		}
-              	});
-             	
+              var id = ui.item.attr('data-card-id');        
+                var type = $(this).data('column-type');
+               
+                if(type == 'done'){
+                	 ui.item.find('.show-release').show();
+                }else{
+                	ui.item.find('.show-release').hide();
+                }
+               
+                $.ajax({
+                  url: ROOT_URL + 'api/updateIssueType',
+                  type: 'POST',
+                  data:{
+                    'id': id,
+                    'type': type,
+                    
+                  }
+                });
+              
               }
               
             }).disableSelection();
-          } );
+
+          });
+        
+          
         </script> 
 

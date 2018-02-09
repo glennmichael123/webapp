@@ -26,7 +26,7 @@ public class User implements Serializable {
 	private String gender;
 	private int age;
 	private String password;
-	
+//	private int id;
 	public int getAge() {
 		return age;
 	}
@@ -65,6 +65,13 @@ public class User implements Serializable {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+//	public void setId(int id){
+//		this.id = id;
+//	}
+//	
+//	public int getId(){
+//		return id;
+//	}
 	
 	@Override
     public String toString() {

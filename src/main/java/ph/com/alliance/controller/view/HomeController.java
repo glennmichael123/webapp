@@ -16,6 +16,7 @@ import ph.com.alliance.dao.IssueDao;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ph.com.alliance.entity.Issue;
+import ph.com.alliance.entity.User;
 import ph.com.alliance.service.DBTransactionTestService;
 
 /**
@@ -60,15 +61,18 @@ public class HomeController {
     
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("dashboard");
-    	
+    	System.out.print(request.getSession(false).getAttribute("username"));
     	 List<Issue> issues= dbSvc.getIssueList();
     	 List<Issue> issuesDev= dbSvc.getIssueListDev();
     	 List<Issue> issuesProgress= dbSvc.getIssueListProgress();
     	 List<Issue> issuesDone= dbSvc.getIssuesDone();
+    	 List<User> employees= dbSvc.getEmployeeList();
+    	
     	 mav.addObject("issues",issues);
     	 mav.addObject("issuesDev",issuesDev);
     	 mav.addObject("issuesProgress",issuesProgress);
     	 mav.addObject("issuesDone",issuesDone);
+    	 mav.addObject("employees",employees);
     	 return mav;
     	
     	
@@ -97,9 +101,13 @@ public class HomeController {
         return "headerdashboard";
     }
     @RequestMapping(value= "/dashboard/releases", method = RequestMethod.GET)
-    public String viewReleases(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+    public ModelAndView viewReleases(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
     	session = request.getSession();
-    	return "releases";	
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("releases");
+    	 List<Issue> issuesReleased= dbSvc.getIssuesReleased();
+    	 mav.addObject("issuesReleased",issuesReleased);
+    	 return mav;
     }
         
 }

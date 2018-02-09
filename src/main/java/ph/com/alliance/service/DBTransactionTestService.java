@@ -5,6 +5,7 @@ import java.util.List;
 import ph.com.alliance.entity.Admin;
 import ph.com.alliance.entity.Issue;
 import ph.com.alliance.entity.Product;
+import ph.com.alliance.entity.Subtask;
 import ph.com.alliance.entity.User;
 
 /**
@@ -95,6 +96,11 @@ public interface DBTransactionTestService {
 	public boolean createUserAndUpdateProduct(User pUser, Product pProd, boolean pRollbackFlag);
 
 	public Issue viewIssueDetails(Long id);
+	public List<User> getEmployeeList();
+
+	public List<Issue> getIssuesReleased();
+
+	public List<Subtask> viewSubtaskDetails(Long id);
 	
 	
 	

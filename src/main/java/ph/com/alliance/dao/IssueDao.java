@@ -22,6 +22,7 @@ public interface IssueDao {
 	public List<Issue> getIssueListProgress(EntityManager em);
 	public List<Issue> getIssueListDone(EntityManager em);
 	public Issue viewIssueDetails(EntityManager em, Long id);
+	public List<Issue> getIssueReleased(EntityManager em);
 	
 	
 }

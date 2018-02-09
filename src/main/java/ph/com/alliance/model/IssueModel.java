@@ -10,6 +10,7 @@ public class IssueModel{
 	private int deleted;
 	private int flagged;
 	private int released;
+	private String assigned;
 
 	public void setTitle(String title){
 		this.title = title;
@@ -73,9 +74,17 @@ public class IssueModel{
 		return released;
 	}
 	
+	public void setAssigned(String assigned){
+		this.assigned = assigned;
+	}
+	
+	public String getAssigned(){
+		return assigned;
+	}
+	
 	@Override
     public String toString() {
-		return "Issues {" + "title=" + title + ", description=" + description + ", type=" + type + ", priority=" + priority + ", deleted = "+deleted+", id =" +id+ ", flagged="+flagged+ ", released= " +released+'}';
+        return "Issues {" + "title=" + title + ", description=" + description + ", type=" + type + ", priority=" + priority + ", deleted = "+deleted+", id =" +id+ ", flagged="+flagged+ ", released= " +released+", assigned="+assigned+'}';
 
     } 
 	
