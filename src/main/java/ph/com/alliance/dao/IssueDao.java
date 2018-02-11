@@ -23,6 +23,7 @@ public interface IssueDao {
 	public List<Issue> getIssueListDone(EntityManager em);
 	public Issue viewIssueDetails(EntityManager em, Long id);
 	public List<Issue> getIssueReleased(EntityManager em);
+	public Issue editIssue(EntityManager em, Issue pIssue);
 	
 	
 }

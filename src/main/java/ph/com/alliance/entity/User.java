@@ -39,7 +39,7 @@ public class User implements Serializable {
 	}
 	
 	public String getPassword(){
-		return this.password;
+		return password;
 	}
 	public String getGender() {
 		return gender;
@@ -75,7 +75,7 @@ public class User implements Serializable {
 	
 	@Override
     public String toString() {
-        return "User {" + "userID=" + uid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
+        return "User {" + "userID=" + uid + ", pass=" + password +", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
 
     }
 

@@ -89,9 +89,24 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/dashboarduser", method = RequestMethod.GET)
-    public String viewUserDashboard(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+    public ModelAndView viewUserDashboard(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
     	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
-        return "dashboarduser";
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("dashboarduser");
+    	System.out.print(request.getSession(false).getAttribute("username"));
+    	 List<Issue> issues= dbSvc.getIssueList();
+    	 List<Issue> issuesDev= dbSvc.getIssueListDev();
+    	 List<Issue> issuesProgress= dbSvc.getIssueListProgress();
+    	 List<Issue> issuesDone= dbSvc.getIssuesDone();
+    	 List<User> employees= dbSvc.getEmployeeList();
+    	
+    	 mav.addObject("issues",issues);
+    	 mav.addObject("issuesDev",issuesDev);
+    	 mav.addObject("issuesProgress",issuesProgress);
+    	 mav.addObject("issuesDone",issuesDone);
+    	 mav.addObject("employees",employees);
+    	 return mav;
+    	
     }
     
     

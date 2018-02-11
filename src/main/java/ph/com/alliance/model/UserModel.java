@@ -3,6 +3,7 @@ package ph.com.alliance.model;
 public class UserModel {
 	
 	private String uid;
+	private String password;
 	private String fname;
 	private String lname;
 	private String gender;
@@ -38,9 +39,15 @@ public class UserModel {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-
+	public String getPassword(){
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
     public String toString() {
-		return "User {" + "userID=" + uid + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
-    } 
+		return "User {" + "userID=" + uid + ", password=" + password + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
+    }
+	 
 }

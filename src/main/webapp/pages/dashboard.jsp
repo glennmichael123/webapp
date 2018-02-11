@@ -82,6 +82,9 @@
    <a class="waves-effect waves-light btn" id="save-edit" style="position: absolute; right: 20px; top: 10px;" disabled>Save</a>
     <div class="user-view">
        <span><b>Title</b></span>
+       <input type="hidden" id="hiddenIssueID" value="">
+       <input type="hidden" id="hiddenIssueFlag" value="">
+       <input type="hidden" id="hiddenType" value="">
       <input type="text" id="issue-detail-title" style="border-bottom: none;"></input>
 
             <div class="row">
@@ -124,31 +127,42 @@
         <form class="col s12">
           <div class="row modal-form-row">
             <div class="input-field col s12">
-              <input id="users_firstname" type="text" class="validate">
+              <input id="users_username" type="text" class="validate" required>
+              <label for="users_username">Username</label>
+            </div>
+          </div>
+          <div class="row modal-form-row">
+            <div class="input-field col s12">
+              <input id="users_password" type="text" class="validate" required>
+              <label for="users_password">Password</label>
+            </div>
+          </div>
+          <div class="row modal-form-row">
+            <div class="input-field col s12">
+              <input id="users_firstname" type="text" class="validate" required>
               <label for="users_firstname">First Name</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="users_lastname" type="text" class="validate">
+              <input id="users_lastname" type="text" class="validate" required>
               <label for="users_lastname">Last Name</label>
             </div>
           </div>       
           <div class="row">
             <div class="input-field col s12">
-              <input id="users_age" type="text" class="validate">
+              <input id="users_age" type="text" class="validate" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
               <label for="users_age">Age</label>
             </div>
           
-            	<input type="radio" name="gender" value="Male" id="m"><label for="m">Male</label>
+            <input type="radio" name="gender" value="Male" id="m" checked><label for="m">Male</label>
          		<input type="radio" name="gender" value="Female" id="f"><label for="f">Female</label>
-          </div>
-                            
+          </div>         
         </form>
       </div>
     </div>
     <div class="modal-footer">
-      <a class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+      <a class=" modal-action waves-effect waves-green btn-flat add-user">Submit</a>
     </div>
   </div>
              	<div id="modal1" class="modal modal-fixed-footer">
@@ -373,7 +387,7 @@
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issues.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                        <li><a href="#!" class="delete-task" data-id="${issues.id}" >Delete</a></li>
                                                        <li style="display:none" class="show-release"><a href="#!" class="release-task" >Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issues.title}</p>
@@ -444,7 +458,7 @@
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issuesDev.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                        <li><a href="#!" class="delete-task" data-id="${issuesDev.id}">Delete</a></li>
                                                       	<li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesDev.title}</p>
@@ -513,7 +527,7 @@
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issuesProgress.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task">Delete</a></li>
+                                                        <li><a href="#!" class="delete-task" data-id="${issuesDev.id}">Delete</a></li>
                                                         <li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesProgress.title}</p>
@@ -581,8 +595,8 @@
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issuesDone.id}' class="dropdown-content dropdown-task" >
                                                         <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task">Delete</a></li>
-                                                       <li><a href="#!" class="release-task">Release</a></li>
+                                                        <li><a href="#!" class="delete-task" data-id="${issuesDone.id}">Delete</a></li>
+                                                       <li><a href="#!" class="release-task" data-id="${issuesDone.id}" >Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesDone.title}</p>
                                           

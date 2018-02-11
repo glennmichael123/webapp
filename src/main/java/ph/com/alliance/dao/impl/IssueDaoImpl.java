@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import ph.com.alliance.dao.IssueDao;
 import ph.com.alliance.entity.Issue;
+import ph.com.alliance.entity.User;
 
 @Component
 @Repository("issuesDao")
@@ -207,6 +208,20 @@ JdbcTemplate template;
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public Issue editIssue(EntityManager em, Issue pIssue) {
+		Issue issue = null;
+		try {
+			issue = em.merge(pIssue);
+		} catch (IllegalArgumentException iae) {
+			iae.getMessage();
+		} catch (TransactionRequiredException trxe) {
+			trxe.getMessage();
+		}
+
+		return issue;
 	}
 
 }

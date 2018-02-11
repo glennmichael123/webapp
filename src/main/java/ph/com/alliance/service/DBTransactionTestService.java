@@ -101,6 +101,13 @@ public interface DBTransactionTestService {
 	public List<Issue> getIssuesReleased();
 
 	public List<Subtask> viewSubtaskDetails(Long id);
+
+	public Issue editIssue(Issue issue);
+
+	
+	
+	
+
 	
 	
 	

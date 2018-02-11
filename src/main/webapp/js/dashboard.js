@@ -1,6 +1,86 @@
  $(document).ready(function(){
 	 var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
 
+
+ $(document).on('click','#save-edit',function(e){
+	 var title = $('#issue-detail-title').val();
+	 var issue_detail = $('#issue-detail-desc').text();
+	 var issue_prio = $('#issue-detail-priority').val();
+	 var assigned_to = ($('#assigned-to').text()== 'No one' ? "" : $('#assigned-to').text());
+	 var issudeID = $('#hiddenIssueID').val();
+	 var flag = $('#hiddenIssueFlag').val();
+	 var type = $('#hiddenType').val();
+  	 $.ajax({
+  		 url: ROOT_URL + 'api/editIssue',
+  		 type: 'POST',
+  		 data:{
+  			 'issudeID':issudeID,
+  			 'title':title,
+  			 'issue_prio':issue_prio,
+  			 'issue_detail':issue_detail,
+ 			 'assigned_to':assigned_to,
+ 			 'flag':flag,
+ 			 'type':type,
+  		 },
+  		 success: function(data){
+  			console.log(data);
+  		 }
+  	 });
+  	});
+
+	$(document).on('click','.add-user',function(e){
+		e.preventDefault();
+		var username = $('#users_username').val();
+		var password = $('#users_password').val();
+		var fname = $('#users_firstname').val();
+		var lname = $('#users_lastname').val();
+		var age = $('#users_age').val();
+		var gender;
+		if($('#m').is(':checked')){
+			gender = $('#m').val();
+		}else if($('#f').is(':checked')){
+			gender = $('#f').val();
+		}
+
+		var fail = false;
+	       var fail_log = '';
+	        $( '#modalAddUser' ).find( 'input' ).each(function(){
+	            if( ! $( this ).prop( 'required' )){
+	            } else {
+	                if ( ! $( this ).val() ) {
+	                    fail = true;
+	                    name = $( this ).attr( 'style', 'border-bottom: 1px solid red' );
+	                    fail_log += name + " is required \n";
+	                }else{
+	                    
+	                }
+
+	            } 
+	        });
+	        if ( ! fail ) {
+	        	$('#modalAddUser').modal('close');
+	        	Materialize.toast('Saving..', 4000);
+	        	 $.ajax({
+		       			url: ROOT_URL + 'api/saveUser',
+		       			type: 'POST',
+		       			data:{
+		       				'uid': username,
+		       				'pass': password,
+		       				'fname': fname,
+		       				'lname': lname,
+		       				'age': age,
+		       				'gender': gender,
+		       			},
+		       			success: function(data){
+		       				var toastElement = $('.toast').first()[0];
+							var toastInstance = toastElement.M_Toast;
+							toastInstance.remove();
+			        		Materialize.toast('USER ADDED', 4000);
+		       			}
+		       		});
+	        }
+	});
+
 	$(document).on('click','.add-subtask',function(e){
 		e.preventDefault();
          var html = '<div class="input-field">'+
@@ -12,14 +92,37 @@
     });
 
 	$(document).on('click','.remove-subtask',function(e){
-        $(this).closest('.input-field').remove();
+		var id = $(this).data('subtask-id');
+		$.ajax({
+			url: ROOT_URL + 'api/deleteSubTask',
+			type:'POST',
+			data:{
+				'id':id
+			},
+			success:function(){
+				$(this).closest('.input-field').remove();
+			}
+		});
 	});
 
 	$(document).on('click','.delete-task',function(e){
 		$(this).closest('.card').remove();
 		 var $toastContent = $('<span>You deleted an issue</span>').add($('<button class="btn-flat toast-action">Undo</button>'));
 		  Materialize.toast($toastContent, 10000);
+		  var id = $(this).data('id');
+		  
+		  $.ajax({
+				url: ROOT_URL + 'api/deleteTask',
+				type:'POST',
+				data:{
+					'id':id
+				},
+				success:function(){
+					$(this).closest('.input-field').remove();
+				}
+			});
 	});
+	
 	
 	$(document).on('click', '.view-releases',function(e){
 		
@@ -34,8 +137,8 @@
 		var priority = $('#priority-backlog').val();
 		var type = 'backlog';
 		var assignedTo = $('#backlog-assign').val();
-		  var fail = false;
-	       var fail_log = '';
+		var fail = false;
+	    var fail_log = '';
 	       
 	        $( '#modal3' ).find( 'select, textarea, input' ).each(function(){
 	            if( ! $( this ).prop( 'required' )){
@@ -84,7 +187,6 @@
 			        		   $('#content').load(location.href + " #content");
 			        		   $('select').material_select();
 			        		   $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable( "refresh" );
-
 		       			}
 		       		});
 	        }
@@ -117,9 +219,7 @@
 	                    
 	                }
 
-	            }
-	            
-	       
+	            } 
 	        });
 
 	        if ( ! fail ) {
@@ -236,8 +336,30 @@
 		},'.card');
 	
 	$(document).on('click', '.mark-flag',function(e){
-		var id = $(this).data('card-id');
-		console.log(id);
+		var flagged = $(this).data('card-id');
+		 $.ajax({
+				url: ROOT_URL + 'api/markFlag',
+				type:'POST',
+				data:{
+					'flagged':flagged
+				},
+				success:function(){
+					$(this).closest('.input-field').remove();
+				}
+			});
+	});
+	$(document).on('click', '.release-task',function(e){
+		var released = $(this).data('id');
+		 $.ajax({
+				url: ROOT_URL + 'api/releaseTask',
+				type:'POST',
+				data:{
+					'released':released
+				},
+				success:function(){
+					$(this).closest('.input-field').remove();
+				}
+			});
 	});
 
 	$(document).on('keydown','#issue-detail-title',function(){
@@ -264,6 +386,9 @@
       			 'id':id,
       		 },
       		 success: function(data){
+      			 $('#hiddenIssueID').val(data.id);
+      			 $('#hiddenIssueFlag').val(data.flagged);
+      			 $('#hiddenType').val(data.type);
       			 $('#issue-detail-title').val(data.title);
       			 $('#issue-detail-desc').text(data.description);
       			 $('#issue-detail-priority').val(data.priority == '' ? "None" : data.priority);
@@ -283,8 +408,8 @@ var subtaskContent = $('#subtask-content');
       			 }else{
       				$.each(data, function(i, item) {
       					var html = '<div class="input-field">'+
-                        '<input type="text" style="width:94%; border-bottom:none;" value="'+item.description+'" data-subtask-id="'+item.id+'" name="subtask_progress" placeholder="Subtask" class="validate subtasks">'+
-                        '<a href="#" class="remove-subtask"><i class="fa fa-times"></i></a>'+
+                        '<input type="text" style="width:94%; border-bottom:none;" value="'+item.description+'" name="subtask_progress" placeholder="Subtask" class="validate subtasks">'+
+                        '<a href="#" class="remove-subtask" data-subtask-id="'+item.id+'"><i class="fa fa-times"></i></a>'+
                         '</div>';
       					
       					$('#subtask-content').append(html);
