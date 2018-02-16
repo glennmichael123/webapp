@@ -378,15 +378,9 @@
                             <div class="row">
                                 <div id="sortable1" data-column-type="backlog" class="col l3 connectedSortable grey lighten-3">
                                   <c:forEach items="${issues}" var="issues">  
-                                    <div class="card white view-info" data-card-id="${issues.id}" style="cursor:pointer">
+                                    <div class="card ${sessionScope.username } white view-info" data-card-id="${issues.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issues.id}' class="dropdown-button">
-                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
-                                                <ul id='dropdown-options${issues.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task">Delete</a></li>
-                                                       <li style="display:none" class="show-release"><a href="#!" class="release-task" >Release</a></li>
-                                                 </ul>
+                                           
                                           <p class="card-description">${issues.title}</p>
 
                                        <c:choose>
@@ -451,13 +445,7 @@
                                  <c:forEach items="${issuesDev}" var="issuesDev">  
                                     <div class="card white view-info" data-card-id="${issuesDev.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDev.id}' class="dropdown-button">
-                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
-                                                <ul id='dropdown-options${issuesDev.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task">Delete</a></li>
-                                                      	<li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
-                                                 </ul>
+                                          
                                           <p class="card-description">${issuesDev.title}</p>
                                           
                                        <c:choose>
@@ -520,10 +508,9 @@
                                     <c:forEach items="${issuesProgress}" var="issuesProgress">  
                                     <div class="card white view-info" data-card-id="${issuesProgress.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesProgress.id}' class="dropdown-button">
-                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
+                                           
                                                 <ul id='dropdown-options${issuesProgress.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
                                                         <li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
@@ -588,10 +575,9 @@
                                 	<c:forEach items="${issuesDone}" var="issuesDone">  
                                     <div class="card white view-info" data-card-id="${issuesDone.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDone.id}' class="dropdown-button">
-                                            <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
+                                           
                                                 <ul id='dropdown-options${issuesDone.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        
                                                         <li><a href="#!" class="delete-task">Delete</a></li>
                                                        <li><a href="#!" class="release-task">Release</a></li>
                                                  </ul>

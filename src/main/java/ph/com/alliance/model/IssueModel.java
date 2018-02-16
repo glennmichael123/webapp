@@ -11,13 +11,22 @@ public class IssueModel{
 	private int flagged;
 	private int released;
 	private String assigned;
-
+	private int orders;
+	
 	public void setTitle(String title){
 		this.title = title;
 	}
 	
 	public void setFlagged(int flagged){
 		this.flagged = flagged;
+	}
+	
+	public void setOrders(int orders){
+		this.orders = orders;
+	}
+	
+	public int getOrders(){
+		return orders;
 	}
 	
 	public int getFlagged(){
@@ -84,9 +93,9 @@ public class IssueModel{
 	
 	@Override
     public String toString() {
-        return "Issues {" + "title=" + title + ", description=" + description + ", type=" + type + ", priority=" + priority + ", deleted = "+deleted+", id =" +id+ ", flagged="+flagged+ ", released= " +released+", assigned="+assigned+'}';
+        return "Issues {" + "title=" + title + ", description=" + description + ", type=" + type + ", priority=" + priority + ", deleted = "+deleted+", id =" +id+ ", flagged="+flagged+ ", released= " +released+", assigned="+assigned+", orders="+orders+'}';
 
-    } 
+    }
 	
 
 }

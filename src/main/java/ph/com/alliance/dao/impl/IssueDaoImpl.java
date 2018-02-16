@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import ph.com.alliance.dao.IssueDao;
 import ph.com.alliance.entity.Issue;
+import ph.com.alliance.entity.Subtask;
 import ph.com.alliance.entity.User;
 
 @Component
@@ -57,6 +58,7 @@ JdbcTemplate template;
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 		Root<Issue> userRoot = cq.from(Issue.class);
 		cq.select(userRoot);
+		cq.orderBy(cb.asc(userRoot.get("orders")));
 		 Predicate predicate = cb.conjunction();
 		 Predicate predicate1 = cb.conjunction();
 		 predicate = cb.and(predicate, 
@@ -83,6 +85,7 @@ JdbcTemplate template;
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 		Root<Issue> userRoot = cq.from(Issue.class);
 		cq.select(userRoot);
+		cq.orderBy(cb.asc(userRoot.get("orders")));
 		Predicate predicate = cb.conjunction();
 		 Predicate predicate1 = cb.conjunction();
 		 predicate = cb.and(predicate, 
@@ -107,6 +110,7 @@ JdbcTemplate template;
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 		Root<Issue> userRoot = cq.from(Issue.class);
 		cq.select(userRoot);
+		cq.orderBy(cb.asc(userRoot.get("orders")));
 		Predicate predicate = cb.conjunction();
 		 Predicate predicate1 = cb.conjunction();
 		 predicate = cb.and(predicate, 
@@ -149,13 +153,17 @@ JdbcTemplate template;
 		Root<Issue> userRoot = cq.from(Issue.class);
 		cq.select(userRoot);
 		Predicate predicate = cb.conjunction();
+		cq.orderBy(cb.asc(userRoot.get("orders")));
 		 Predicate predicate1 = cb.conjunction();
+		 Predicate predicate2 = cb.conjunction();
 		 predicate = cb.and(predicate, 
 		 cb.equal(userRoot.get("type"), "done"));
 		 predicate1 = cb.and(predicate1, 
 				 cb.notEqual(userRoot.get("deleted"), 1));
+		 predicate2 = cb.and(predicate2, 
+				 cb.notEqual(userRoot.get("released"), 1));
 		 cq.where(
-				 cb.and(predicate, predicate1)
+				 cb.and(predicate, predicate1,predicate2)
         );
 		try {
 			return em.createQuery(cq).getResultList();
@@ -170,6 +178,7 @@ JdbcTemplate template;
 	public Issue viewIssueDetails(EntityManager em, Long id) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
+		
 		Root<Issue> userRoot = cq.from(Issue.class);
 		cq.select(userRoot);
 		

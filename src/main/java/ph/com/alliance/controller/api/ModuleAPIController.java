@@ -84,11 +84,45 @@ public class ModuleAPIController {
     	ps.executeUpdate();
     	return issues;
     }
+	
+	
+	@RequestMapping(value = "/unmarkFlag", method = RequestMethod.POST)
+    @ResponseBody
+    public IssueModel unmarkFlag(HttpServletRequest request) throws SQLException {
+    	IssueModel issues = new IssueModel();
+    	
+    	Long idd = Long.parseLong(request.getParameter("flagged"));
+    	int flagged = 0;
+    	String driver = "com.mysql.jdbc.Driver";
+    	String connectionUrl = "jdbc:mysql://localhost:3306/";
+    	String database = "mytestdb3";
+    	String userid = "root";
+    	String password = "";
+   
+    	try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	java.sql.Connection con = null;
+    	PreparedStatement ps = null;
+    	con = DriverManager.getConnection(connectionUrl+database, userid, password);
+    	String sql="Update issues set flagged=? where id=?";
+    	ps = con.prepareStatement(sql);
+    	ps.setInt(1, flagged);
+    	ps.setLong(2, idd);
+    	System.out.print(ps);
+    	ps.executeUpdate();
+    	return issues;
+    }
+	
+	
 	@RequestMapping(value = "/releaseTask", method = RequestMethod.POST)
     @ResponseBody
     public IssueModel releaseTask(HttpServletRequest request) throws SQLException {
     	IssueModel issues = new IssueModel();
-    	Issue issue = null;
+    	//Issue issue = null;
     	Long idd = Long.parseLong(request.getParameter("released"));
     	int released = 1;
     	String driver = "com.mysql.jdbc.Driver";
@@ -119,7 +153,7 @@ public class ModuleAPIController {
     @ResponseBody
     public IssueModel deleteTask(HttpServletRequest request) throws SQLException {
     	IssueModel issues = new IssueModel();
-    	Issue issue = null;
+    //	Issue issue = null;
     	Long idd = Long.parseLong(request.getParameter("id"));
     	int deleted = 1;
     	String driver = "com.mysql.jdbc.Driver";
@@ -141,7 +175,7 @@ public class ModuleAPIController {
     	ps = con.prepareStatement(sql);
     	ps.setInt(1, deleted);
     	ps.setLong(2, idd);
-    	System.out.print(ps);
+    	//System.out.print(ps);
     	ps.executeUpdate();
     	return issues;
     }
@@ -224,6 +258,7 @@ public class ModuleAPIController {
     	issues.setType(type);
     	issues.setFlagged(0);
     	issues.setReleased(0);
+    	issues.setOrders(0);
     	issues.setAssigned(assigned == null ? "" : assigned);
     	if(!dbSvc.createIssue(this.convertToEntityIssues(issues))) {
     		issues = null;
@@ -302,6 +337,7 @@ public class ModuleAPIController {
     	String password = request.getParameter("password");
     	HttpSession session = request.getSession();
     	Admin admin = dbSvc.selectAdmin(username, password);
+    	System.out.print(admin);
     	boolean exist = admin != null ? true : false;
     	if(exist){
     		session.setAttribute("username", username);
@@ -427,6 +463,59 @@ public class ModuleAPIController {
     	
     	return issues;
     }
+    
+    @RequestMapping(value = "/updateOrder", method = RequestMethod.POST)
+    @ResponseBody
+    public IssueModel updateOrder(HttpServletRequest request) throws SQLException {
+    	IssueModel issues = new IssueModel();
+    	String driver = "com.mysql.jdbc.Driver";
+    	String connectionUrl = "jdbc:mysql://localhost:3306/";
+    	String database = "mytestdb3";
+    	String userid = "root";
+    	String password = "";
+   
+    	try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	java.sql.Connection con = null;
+    	PreparedStatement ps = null;
+    	con = DriverManager.getConnection(connectionUrl+database, userid, password);
+    	
+//    	String sql="delete from subtask where id = '"+id+"' ";
+//    	ps = con.prepareStatement(sql);
+//   
+//    	ps.setLong(1,id);
+//    	System.out.print(ps);
+//    	ps.execute(sql);
+    	
+//    	String sql="Update issues set type=? where id=?";
+//    	ps = con.prepareStatement(sql);
+//    	ps.setString(1, type);
+//    	ps.setLong(2, id);
+//    	System.out.print(ps);
+//    	ps.executeUpdate();
+    	
+    	String order[] = request.getParameterValues("order[]");
+    	String id[] = request.getParameterValues("id[]");
+    	for(int i = 0; i < order.length; i++){
+    	 	String sql="Update issues set orders=? where id=?";
+        	ps = con.prepareStatement(sql);
+        	ps.setInt(1, i+1);
+        	ps.setLong(2, Long.parseLong(id[i]));
+        	
+        	System.out.print(ps);
+        	ps.executeUpdate();
+    	}
+    	
+    	
+    
+    	
+    	return issues;
+    }
+    
     
     
 }

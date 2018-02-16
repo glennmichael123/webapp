@@ -89,7 +89,7 @@
 
             <div class="row">
              <span><b>Description</b></span>
-            <textarea class="materialize-textarea" id="issue-detail-desc" val="" style="border-bottom: none;">Failed to fetch data</textarea>
+            <textarea class="materialize-textarea" id="issue-detail-desc" style="border-bottom: none;">Failed to fetch data</textarea>
       </div>
 
       <div class="row">
@@ -354,7 +354,7 @@
                           <div class="background" style="text-align:center!important;">
                             <img src="<% out.print(ROOT_URL);%>images/Kanban-colorbg.jpg" style="background-color:#00695c;">
                           </div>
-                             <div style="margin-top:50px;">Filter Issues</div>
+                             <div style="margin-top:50px;"><b>Filter Issues</b></div>
                         </div></li>
                         <li><a href="<%out.print(ROOT_URL);%>dashboard">Backlogs</a></li>
                         <li><a href="#!" class="view-releases">Releases</a></li>
@@ -380,13 +380,14 @@
                             </div>
                             <div class="row">
                                 <div id="sortable1" data-column-type="backlog" class="col l3 connectedSortable grey lighten-3">
+                                <%int bCounter = 1; %>
                                   <c:forEach items="${issues}" var="issues">  
-                                    <div class="card white view-info" data-card-id="${issues.id}" style="cursor:pointer">
+                                    <div class="card white view-info" data-order-item="<%out.print(bCounter); %>" data-card-id="${issues.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
                                             <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issues.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issues.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                     
                                                         <li><a href="#!" class="delete-task" data-id="${issues.id}" >Delete</a></li>
                                                        <li style="display:none" class="show-release"><a href="#!" class="release-task" >Release</a></li>
                                                  </ul>
@@ -431,13 +432,13 @@
                                        <c:choose>
 										   <c:when test="${issues.flagged == 1}">
 											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
-                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 	<i class="fa fa-flag unmark-flag" data-card-id="${issues.id}"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issues.flagged == 0}">
-										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; display:none;">
-										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issues.id}" aria-hidden="true"></i>
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px;">
+										   			<i class="fa fa-flag-o mark-flag" style="display:none;" data-card-id="${issues.id}" aria-hidden="true"></i>
 										   	 	</div>
 										   </c:when>
 									</c:choose>
@@ -446,18 +447,18 @@
                                           
                                         </div>
                                       </div>
-                                      
+                                      <%bCounter++; %>
                                      </c:forEach>                                       
                                 </div>
                                 <div id="sortable2" data-column-type="development" class="col l3 connectedSortable grey lighten-3">
-                                
+                                <%int dCounter = 1; %>
                                  <c:forEach items="${issuesDev}" var="issuesDev">  
-                                    <div class="card white view-info" data-card-id="${issuesDev.id}" style="cursor:pointer">
+                                    <div class="card white view-info" data-order-item="<% out.print(dCounter);%>" data-card-id="${issuesDev.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
                                             <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDev.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issuesDev.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                     
                                                         <li><a href="#!" class="delete-task" data-id="${issuesDev.id}">Delete</a></li>
                                                       	<li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
@@ -501,13 +502,13 @@
                                        <c:choose>
 										   <c:when test="${issuesDev.flagged == 1}">
 											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
-                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 	<i class="fa fa-flag unmark-flag" data-card-id="${issuesDev.id}"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issuesDev.flagged == 0}">
-										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; display:none;">
-										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issuesDev.id}" aria-hidden="true"></i>
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px;">
+										   			<i class="fa fa-flag-o mark-flag" style="display:none;" data-card-id="${issuesDev.id}" aria-hidden="true"></i>
 										   	 	</div>
 										   </c:when>
 									</c:choose>
@@ -516,18 +517,20 @@
                                           
                                         </div>
                                       </div>
-                                      
+                                      <%dCounter++; %>
                                      </c:forEach>  
                                 </div>
                                 <div id="sortable3" data-column-type="progress" class="col l3 connectedSortable grey lighten-3">
+                                  
+                                  	 <%int pCounter = 1; %>
                                     <c:forEach items="${issuesProgress}" var="issuesProgress">  
-                                    <div class="card white view-info" data-card-id="${issuesProgress.id}" style="cursor:pointer">
+                                    <div class="card white view-info" data-order-item="<%out.print(pCounter); %>"  data-card-id="${issuesProgress.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
                                             <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesProgress.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issuesProgress.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
-                                                        <li><a href="#!" class="delete-task" data-id="${issuesDev.id}">Delete</a></li>
+                                                     
+                                                        <li><a href="#!" class="delete-task" data-id="${issuesProgress.id}">Delete</a></li>
                                                         <li class="show-release" style="display:none"><a href="#!" class="release-task">Release</a></li>
                                                  </ul>
                                           <p class="card-description">${issuesProgress.title}</p>
@@ -569,13 +572,13 @@
                                        <c:choose>
 										   <c:when test="${issuesProgress.flagged == 1}">
 											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
-                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 	<i class="fa fa-flag unmark-flag" data-card-id="${issuesProgress.id}"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issuesProgress.flagged == 0}">
-										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; display:none;">
-										   			<i class="fa fa-flag-o mark-flag" data-card-id="${issuesProgress.id}" aria-hidden="true"></i>
+										   		<div class="flagged-not" style="position: absolute; top: 50px; right: 20px; ">
+										   			<i class="fa fa-flag-o mark-flag" style="display:none;" data-card-id="${issuesProgress.id}" aria-hidden="true"></i>
 										   	 	</div>
 										   </c:when>
 									</c:choose>
@@ -584,7 +587,7 @@
                                           
                                         </div>
                                       </div>
-                                      
+                                      <%pCounter++; %>
                                      </c:forEach>           
                                 </div>
                                 <div id="sortable4" data-column-type="done" class="col l3 connectedSortable grey lighten-3">
@@ -594,7 +597,7 @@
                                             <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDone.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
                                                 <ul id='dropdown-options${issuesDone.id}' class="dropdown-content dropdown-task" >
-                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                     
                                                         <li><a href="#!" class="delete-task" data-id="${issuesDone.id}">Delete</a></li>
                                                        <li><a href="#!" class="release-task" data-id="${issuesDone.id}" >Release</a></li>
                                                  </ul>
@@ -625,13 +628,13 @@
                                        <c:choose>
 										   <c:when test="${issuesDone.flagged == 1}">
 											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
-                                           	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
+                                           	 	<i class="fa fa-flag unmark-flag" data-card-id="${issuesDone.id}"></i>
                                            	 </div>
 										   </c:when> 
 										   
 										   <c:when test="${issuesDone.flagged == 0}">
-										   <div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
-										   		<i class="fa fa-flag-o mark-flag" aria-hidden="true" data-card-id="${issuesDone.id}"></i>
+										   <div class="flagged-not" style="position: absolute; top: 50px; right: 10px;">
+										   		<i class="fa fa-flag-o mark-flag" style="display:none;" aria-hidden="true" data-card-id="${issuesDone.id}"></i>
 										   	 </div>
 										   </c:when>
 									</c:choose>
@@ -707,16 +710,41 @@
               
             </script>
           <script>
-          var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
-
-         
+        	  var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
+			  var orderArray = [];
+         	  var orderArrayId = [];
             $( function() {
             position_updated = false; //flag bit
             $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
               connectWith: ".connectedSortable",
               update: function(event, ui) {
                   position_updated = !ui.sender; //if no sender, set sortWithin flag to true
+                 
+                  $(this).find('.card').each(function(){
+                		 
+                		 
+                		 orderArray.push($(this).data('order-item'));
+                		 orderArrayId.push($(this).data('card-id'));
+                  });
+                  
+                 console.log(orderArray);
+                 console.log(orderArrayId);
+                  $.ajax({
+                	 url: ROOT_URL + 'api/updateOrder',
+                	 type: 'POST',
+                	 data: {
+                		 'order':orderArray, 
+                		 'id': orderArrayId,
+                	 },
+                	 success:function(data){
+                		console.log(data);
+                		orderArray = [];
+                		orderArrayId = [];
+                	 }
+                  });
+                  
               },
+              cancel: '.cancel',
 
               stop: function(event, ui) {
                   if (position_updated) {

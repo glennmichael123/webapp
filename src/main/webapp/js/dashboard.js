@@ -4,12 +4,14 @@
 
  $(document).on('click','#save-edit',function(e){
 	 var title = $('#issue-detail-title').val();
-	 var issue_detail = $('#issue-detail-desc').text();
+	 var issue_detail = $('#issue-detail-desc').val();
 	 var issue_prio = $('#issue-detail-priority').val();
 	 var assigned_to = ($('#assigned-to').text()== 'No one' ? "" : $('#assigned-to').text());
 	 var issudeID = $('#hiddenIssueID').val();
 	 var flag = $('#hiddenIssueFlag').val();
 	 var type = $('#hiddenType').val();
+	 console.log(issue_detail);
+	 var d = $(this);
   	 $.ajax({
   		 url: ROOT_URL + 'api/editIssue',
   		 type: 'POST',
@@ -23,7 +25,8 @@
  			 'type':type,
   		 },
   		 success: function(data){
-  			console.log(data);
+  			d.prop('disabled',true);
+  			Materialize.toast('Saved!', 4000);
   		 }
   	 });
   	});
@@ -93,21 +96,29 @@
 
 	$(document).on('click','.remove-subtask',function(e){
 		var id = $(this).data('subtask-id');
-		$.ajax({
-			url: ROOT_URL + 'api/deleteSubTask',
-			type:'POST',
-			data:{
-				'id':id
-			},
-			success:function(){
-				$(this).closest('.input-field').remove();
-			}
-		});
+		var element = $(this).closest('.input-field');
+		console.log(id);
+		if(id == undefined){
+			element.remove();
+		}else{
+			$.ajax({
+				url: ROOT_URL + 'api/deleteSubTask',
+				type:'POST',
+				data:{
+					'id':id
+				},
+				success:function(){
+					element.remove();
+				}
+			});
+		}
+		
+		
 	});
 
 	$(document).on('click','.delete-task',function(e){
 		$(this).closest('.card').remove();
-		 var $toastContent = $('<span>You deleted an issue</span>').add($('<button class="btn-flat toast-action">Undo</button>'));
+		 var $toastContent = $('<span>You deleted an issue</span>');
 		  Materialize.toast($toastContent, 10000);
 		  var id = $(this).data('id');
 		  
@@ -328,15 +339,16 @@
 	 
 	 $("body").on({
 		    mouseenter: function () {
-		    	$(this).find('.flagged-not').show();
+		    	$(this).find('.fa-flag-o').show();
 		    },
 		    mouseleave:function () {
-		    	$(this).find('.flagged-not').hide();
+		    	$(this).find('.fa-flag-o').hide();
 		    }
 		},'.card');
 	
 	$(document).on('click', '.mark-flag',function(e){
 		var flagged = $(this).data('card-id');
+		var element = $(this);
 		 $.ajax({
 				url: ROOT_URL + 'api/markFlag',
 				type:'POST',
@@ -344,12 +356,40 @@
 					'flagged':flagged
 				},
 				success:function(){
-					$(this).closest('.input-field').remove();
+					
+					element.removeClass('fa-flag-o');
+					element.addClass('fa-flag');
+					element.removeClass('mark-flag');
+					element.addClass('unmark-flag');
+					Materialize.toast('Marked as flag', 4000);
 				}
 			});
 	});
+	
+	$(document).on('click', '.unmark-flag',function(e){
+		var flagged = $(this).data('card-id');
+		var element = $(this);
+		 $.ajax({
+				url: ROOT_URL + 'api/unmarkFlag',
+				type:'POST',
+				data:{
+					'flagged':flagged
+				},
+				success:function(){
+					$(this).closest('.input-field').remove();
+					element.removeClass('fa-flag');
+					element.addClass('fa-flag-o');
+					element.removeClass('unmark-flag');
+					element.addClass('mark-flag');
+					Materialize.toast('Removed flag', 4000);
+				}
+			});
+	});
+	
 	$(document).on('click', '.release-task',function(e){
+		e.preventDefault();
 		var released = $(this).data('id');
+		var parent = $(this).closest('.card');
 		 $.ajax({
 				url: ROOT_URL + 'api/releaseTask',
 				type:'POST',
@@ -357,7 +397,8 @@
 					'released':released
 				},
 				success:function(){
-					$(this).closest('.input-field').remove();
+					parent.remove();
+					Materialize.toast('Released', 4000);
 				}
 			});
 	});
