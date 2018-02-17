@@ -1,3 +1,4 @@
+
 package ph.com.alliance.dao;
 
 import java.util.List;
@@ -62,6 +63,10 @@ public interface UserDao {
 	public List<User> selectAllUsers(EntityManager pEM);
 
 	public List<User> getEmployeeList(EntityManager em);
+
+	public User getProfile(EntityManager em, String username);
+
+	public User updateProfile(EntityManager em, User user);
 
 	/**
 	 * 

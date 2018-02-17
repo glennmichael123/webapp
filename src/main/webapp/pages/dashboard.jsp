@@ -85,6 +85,7 @@
        <input type="hidden" id="hiddenIssueID" value="">
        <input type="hidden" id="hiddenIssueFlag" value="">
        <input type="hidden" id="hiddenType" value="">
+        <input type="hidden" id="hiddenOrder" value="">
       <input type="text" id="issue-detail-title" style="border-bottom: none;"></input>
 
             <div class="row">
@@ -358,6 +359,7 @@
                         </div></li>
                         <li><a href="<%out.print(ROOT_URL);%>dashboard">Backlogs</a></li>
                         <li><a href="#!" class="view-releases">Releases</a></li>
+                        <li><a href="#!" class="view-trash">Trash</a></li>
                         <li class="divider"></li>
                         <li><a href="#modalAddUser" class="modal-trigger">Add user</a></li>
                      </ul>
@@ -425,10 +427,6 @@
 										   
 										
 									</c:choose>
-									
-                                          
-                                    
-                                      
                                        <c:choose>
 										   <c:when test="${issues.flagged == 1}">
 											  <div class="flagged" style="position: absolute; top: 50px; right: 20px;">
@@ -442,9 +440,6 @@
 										   	 	</div>
 										   </c:when>
 									</c:choose>
-                                             
-                                       
-                                          
                                         </div>
                                       </div>
                                       <%bCounter++; %>
@@ -591,8 +586,9 @@
                                      </c:forEach>           
                                 </div>
                                 <div id="sortable4" data-column-type="done" class="col l3 connectedSortable grey lighten-3">
+                                <%int d1Counter = 1; %>
                                 	<c:forEach items="${issuesDone}" var="issuesDone">  
-                                    <div class="card white view-info" data-card-id="${issuesDone.id}" style="cursor:pointer">
+                                    <div class="card white view-info" data-order-item="<%out.print(d1Counter); %>" data-card-id="${issuesDone.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
                                             <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesDone.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
@@ -643,7 +639,7 @@
                     
                   </div>
                 </div>
-                
+                 <%d1Counter++; %>
                </c:forEach>           
 
                

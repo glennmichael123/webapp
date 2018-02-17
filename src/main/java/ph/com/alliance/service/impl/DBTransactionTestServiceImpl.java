@@ -417,7 +417,6 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 				em.close();
 			}
 		}
-		
 		return issueList;
 	}
 
@@ -555,5 +554,63 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		}
 		
 		return subtask;
+	}
+
+	@Override
+	public User getUser(String username) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		User user = null;
+		
+		try {
+			user = userDao.getProfile(em, username);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return user;
+	}
+
+	@Override
+	public User updateProfile(User user) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		User users = null;
+		
+		em.getTransaction().begin();
+		
+		try {
+			users = userDao.updateProfile(em, user);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.getMessage();
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		return users;
+	}
+
+	@Override
+	public List<Issue> getTrash() {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Issue> issueList = null;
+		try {
+			issueList = issuesDao.getTrashes(em);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return issueList;
 	}
 }

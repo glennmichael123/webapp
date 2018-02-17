@@ -175,26 +175,44 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
-	
-	/*
-	 * (non-Javadoc)
-	 * @see ph.com.alliance.dao.UserDao#selectAllUsers(javax.persistence.EntityManager)
-	 */
-	/*@Override
-	public User selectUser(EntityManager pEM, String username) {
-		CriteriaBuilder cb = pEM.getCriteriaBuilder();
+	@Override
+	public User getProfile(EntityManager em, String username) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> userRoot = cq.from(User.class);
+		
+		 Predicate predicate = cb.conjunction();
+		 predicate = cb.and(predicate, 
+		 cb.equal(userRoot.get("uid"), username));
 		cq.select(userRoot);
 		
-		// generates equivalent "SELECT u FROM User u"
+		 cq.where(
+				 cb.and(predicate)
+         );
 		try {
-			//return pEM.createQuery(cq).getResultList();
-			return pEM.createQuery("SELECT * FROM user WHERE uid LIKE '" +username+ "'", User.class);
-		} catch (Exception e) {
+			return em.createQuery(cq).getSingleResult();
+		} catch (Exception e) { 
 			System.err.println("ERROR ----------------- ");
 			e.printStackTrace();
 			return null;
 		}
-	}*/
+	}
+
+	@Override
+	public User updateProfile(EntityManager em, User user) {
+		User users = null;
+		
+		try {
+			users = em.merge(user);
+		} catch (IllegalArgumentException iae) {
+			iae.getMessage();
+		} catch (TransactionRequiredException trxe) {
+			trxe.getMessage();
+		}
+		
+		return users;
+	}
+
+	
+
 }

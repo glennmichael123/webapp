@@ -8,6 +8,7 @@ public class UserModel {
 	private String lname;
 	private String gender;
 	private int age;
+	private Long id;
 	
 	public int getAge() {
 		return age;
@@ -45,9 +46,18 @@ public class UserModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Override
     public String toString() {
-		return "User {" + "userID=" + uid + ", password=" + password + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
+        return "User {" + "userID=" + uid + ", pass=" + password +", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age +", ID="+id+'}';
+
     }
+	
 	 
 }

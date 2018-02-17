@@ -269,33 +269,33 @@
                				<div class="row">
                					<div class="col l12 grey lighten-3" style="min-height: 170px !important;border:1px solid #bdbdbd; height: auto !important;margin-right: 10px !important;border-radius: 5px;">
                					
-               					<c:forEach items="${issuesReleased}" var="issuesReleased">  
+               					<c:forEach items="${trashIssues}" var="trashIssues">  
                					<div class="col l3" style="margin-right: 20px !important;width: 23% !important;">
-                                    <div class="card white view-info" data-card-id="${issuesReleased.id}" style="cursor:pointer">
+                                    <div class="card white view-info" data-card-id="${trashIssues.id}" style="cursor:pointer">
                                         <div class="card-content black-text">
-                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${issuesReleased.id}' class="dropdown-button">
+                                            <div class="task-options" style="float: right;"><a href="#" data-activates='dropdown-options${trashIssues.id}' class="dropdown-button">
                                             <i class="fa fa-ellipsis-h" style="font-size: 15px; color: #9e9e9e"></i></a></div>
-                                                <ul id='dropdown-options${issuesReleased.id}' class="dropdown-content dropdown-task" >
-                                                      
-                                                        <li><a href="#!" class="delete-task" data-id="${issuesReleased.id}">Delete</a></li>
+                                                <ul id='dropdown-options${trashIssues.id}' class="dropdown-content dropdown-task" >
+                                                        <li><a href="#!" class="edit-task">Edit</a></li>
+                                                        <li><a href="#!" class="delete-task">Delete</a></li>
                                                        
                                                  </ul>
-                                          <p class="card-description">${issuesReleased.title}</p>
+                                          <p class="card-description">${trashIssues.title}</p>
                                           
                                        <c:choose>
-										   <c:when test="${issuesReleased.priority == 'low'}">
+										   <c:when test="${trashIssues.priority == 'low'}">
 											   <div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
 		                                           	 <span class="badge green white-text">Low</span>
 		                                            </div>
 										   </c:when> 
 										   
-										   <c:when test="${issuesReleased.priority == 'high'}">
+										   <c:when test="${trashIssues.priority == 'high'}">
 										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
 		                                           	 <span class="badge red white-text">High</span>
 		                                            </div>
 										   </c:when> 
 										   
-										 	<c:when test="${issuesReleased.priority == 'medium'}">
+										 	<c:when test="${trashIssues.priority == 'medium'}">
 										   		<div class="priority-task" style="position: absolute;top: 50px; left: 0px;">
 		                                           	 <span class="badge orange white-text">Medium</span>
 		                                            </div>
@@ -305,15 +305,15 @@
                                       
                                       
                                        <c:choose>
-										   <c:when test="${issuesReleased.flagged == 1}">
+										   <c:when test="${trashIssues.flagged == 1}">
 											  <div class="flagged" style="position: absolute; top: 50px; right: 10px;">
                                            	 	<i class="fa fa-flag" style="color: #b71c1c"></i>
                                            	 </div>
 										   </c:when> 
 										   
-										   <c:when test="${issuesReleased.flagged == 0}">
+										   <c:when test="${trashIssues.flagged == 0}">
 										   <div class="flagged-not" style="position: absolute; top: 50px; right: 10px; display:none;">
-										   		<i class="fa fa-flag-o mark-flag" aria-hidden="true" data-card-id="${issuesReleased.id}"></i>
+										   		<i class="fa fa-flag-o mark-flag" aria-hidden="true" data-card-id="${trashIssues.id}"></i>
 										   	 </div>
 										   </c:when>
 									</c:choose>
