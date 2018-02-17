@@ -104,7 +104,9 @@ public interface DBTransactionTestService {
 
 	public Issue editIssue(Issue issue);
 
-	public User getUser();
+//	public User getUser();
+
+	public Subtask editSubtask(Subtask subtask);
 
 	
 	

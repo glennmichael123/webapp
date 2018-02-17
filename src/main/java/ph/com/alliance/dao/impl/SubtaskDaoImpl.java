@@ -3,6 +3,7 @@ package ph.com.alliance.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -40,5 +41,19 @@ public class SubtaskDaoImpl implements SubtaskDao{
 	
 	
 }
+
+	@Override
+	public Subtask editSubtask(EntityManager em, Subtask pSubtask) {
+		Subtask subtask= null;
+		try {
+			subtask = em.merge(pSubtask);
+		} catch (IllegalArgumentException iae) {
+			iae.getMessage();
+		} catch (TransactionRequiredException trxe) {
+			trxe.getMessage();
+		}
+
+		return subtask;
+	}
 	
 }

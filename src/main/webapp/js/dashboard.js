@@ -98,7 +98,24 @@
          $('#subtask-content').append(html);
         	 
     });
-
+	$(document).on('keyup','.subtasks',function(){
+		var data = $('.subtasks').val();
+		var id 	  = $(this).data('subtask-id');
+		var taskID=$(this).closest('.right-aligned').find('#hiddenIssueID').val();
+		console.log(taskID);
+		$.ajax({
+			url : ROOT_URL + 'api/updateSubTask',
+			type: 'POST',
+			data:{
+				'data': data,
+				'id'  :id,
+				'taskID': taskID
+			},
+			success:function(){
+				
+			}
+		});
+	});
 	$(document).on('click','.remove-subtask',function(e){
 		var id = $(this).data('subtask-id');
 		var element = $(this).closest('.input-field');
@@ -454,7 +471,7 @@ var subtaskContent = $('#subtask-content');
       			 }else{
       				$.each(data, function(i, item) {
       					var html = '<div class="input-field">'+
-                        '<input type="text" style="width:94%; border-bottom:none;" value="'+item.description+'" name="subtask_progress" placeholder="Subtask" class="validate subtasks">'+
+                        '<input type="text" style="width:94%; border-bottom:none;" value="'+item.description+'" name="subtask_progress" placeholder="Subtask" class="validate subtasks" data-subtask-id="'+item.id+'">'+
                         '<a href="#" class="remove-subtask" data-subtask-id="'+item.id+'"><i class="fa fa-times"></i></a>'+
                         '</div>';
       					

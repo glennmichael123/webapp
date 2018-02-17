@@ -49,6 +49,8 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 	@Autowired
 	private JpaTransactionManager transactionManager;
 	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * @see ph.com.alliance.service.DBTransactionTestService#createUser(ph.com.alliance.entity.User)
@@ -513,15 +515,39 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		return issue;
 	}
 
+//	@Override
+//	public User getUser(String username) {
+//		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+//		List<Subtask> subtask = null;
+//		
+//		try {
+//			subtask = subtaskDao.viewSubtaskDetails(em, id);
+//		} catch (Exception e) {
+//			System.out.print(e.getMessage());
+//		} finally {
+//			if (em.isOpen()) {
+//				em.close();
+//			}
+//		}
+//		
+//		return subtask;
+//	}
+
 	@Override
-	public User getUser(String username) {
+	public Subtask editSubtask(Subtask pSubtask) {
 		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
-		List<Subtask> subtask = null;
+		Subtask subtask = null;
+		
+		em.getTransaction().begin();
 		
 		try {
-			subtask = subtaskDao.viewSubtaskDetails(em, id);
+			subtask = subtaskDao.editSubtask(em, pSubtask);
+			em.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print(e.getMessage());
+			e.getMessage();
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
 		} finally {
 			if (em.isOpen()) {
 				em.close();
@@ -530,6 +556,4 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		
 		return subtask;
 	}
-
-	
 }

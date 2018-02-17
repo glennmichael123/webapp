@@ -28,7 +28,7 @@ import ph.com.alliance.entity.Issue;
 import ph.com.alliance.entity.Subtask;
 import ph.com.alliance.entity.User;
 import ph.com.alliance.model.IssueModel;
-
+import ph.com.alliance.model.SubtaskModel;
 import ph.com.alliance.model.UserModel;
 import ph.com.alliance.service.DBTransactionTestService;
 
@@ -515,7 +515,27 @@ public class ModuleAPIController {
     	
     	return issues;
     }
+    @RequestMapping(value = "/updateSubTask", method = RequestMethod.POST)
+    @ResponseBody
+    public SubtaskModel updateSubTask(HttpServletRequest request) {
+		SubtaskModel subtask = new SubtaskModel();
+		Subtask sb = null;
+		String data = request.getParameter("data");
+		String subtaskID = request.getParameter("id");
+		String taskID    = request.getParameter("taskID");
+		subtask.setDescription(data);
+		subtask.setIssueId(Long.parseLong(taskID));
+		subtask.setId(Long.parseLong(subtaskID));
+		sb=dbSvc.editSubtask(this.convertToEntitySubtask(subtask));
+    	return null;
+    }
     
-    
+    private Subtask convertToEntitySubtask(SubtaskModel pSubTask) {
+    	Subtask sb = null;
+    	if (pSubTask != null) {
+    		sb = dozerBeanMapper.map(pSubTask, Subtask.class);
+    	}
+    	return sb;
+    }
     
 }

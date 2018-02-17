@@ -10,4 +10,6 @@ public interface SubtaskDao {
 
 	List<Subtask> viewSubtaskDetails(EntityManager em, Long id);
 
+	Subtask editSubtask(EntityManager em, Subtask pSubtask);
+
 }
