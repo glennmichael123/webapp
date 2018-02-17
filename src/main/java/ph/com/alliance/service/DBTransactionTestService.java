@@ -104,6 +104,8 @@ public interface DBTransactionTestService {
 
 	public Issue editIssue(Issue issue);
 
+	public User getUser();
+
 	
 	
 	

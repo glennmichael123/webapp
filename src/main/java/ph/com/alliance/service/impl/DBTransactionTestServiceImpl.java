@@ -513,5 +513,23 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		return issue;
 	}
 
+	@Override
+	public User getUser(String username) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		List<Subtask> subtask = null;
+		
+		try {
+			subtask = subtaskDao.viewSubtaskDetails(em, id);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return subtask;
+	}
+
 	
 }

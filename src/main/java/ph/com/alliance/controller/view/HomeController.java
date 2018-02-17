@@ -124,5 +124,14 @@ public class HomeController {
     	 mav.addObject("issuesReleased",issuesReleased);
     	 return mav;
     }
+    
+//    @RequestMapping(value= "/dashboard/userprofile", method = RequestMethod.GET)
+//    public String userprofile(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+//    	User getProfile = dbSvc.getUser();
+//    	session = request.getSession();
+//    	String username = session.getParameter("username").toString();
+//    	System.out.print(request.getSession(false).getAttribute("username"));
+//    	return "userprofile";
+//    }
         
 }

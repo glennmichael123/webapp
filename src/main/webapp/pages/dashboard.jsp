@@ -156,7 +156,7 @@
             </div>
           
             <input type="radio" name="gender" value="Male" id="m" checked><label for="m">Male</label>
-         		<input type="radio" name="gender" value="Female" id="f"><label for="f">Female</label>
+         	<input type="radio" name="gender" value="Female" id="f"><label for="f">Female</label>
           </div>         
         </form>
       </div>

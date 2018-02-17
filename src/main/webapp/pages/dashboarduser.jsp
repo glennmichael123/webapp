@@ -46,7 +46,6 @@
              
             <!-- <div id="modal-view-info" class="modal bottom-sheet modal-fixed-footer more-info">
 					    <div class="modal-content">
-
 					      <h5 id="issue-detail-title">Failed to fetch data</h5>
 					      <div class="row">
 						       <span>Description:</span>
@@ -360,7 +359,7 @@
                      </ul>
                       <!-- Dropdown Structure -->
                         <ul id="settings-dropdown" class="dropdown-content dropdown-settings">
-                            <li><a href="#change-password" class="modal-trigger">Change Password</a></li>
+                            <li><a class="userprofile">Profile</a></li>
 
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
@@ -660,10 +659,7 @@
                           
                         } 
                       );
-
                     $("#nav-left").sideNav({edge: 'left'});
-
-
                     $('input.autocomplete').autocomplete({
                         data: {
                           "high": null,
@@ -681,7 +677,6 @@
             </script>
           <script>
           var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
-
          
             $( function() {
             position_updated = false; //flag bit
@@ -690,7 +685,6 @@
               update: function(event, ui) {
                   position_updated = !ui.sender; //if no sender, set sortWithin flag to true
               },
-
               stop: function(event, ui) {
                   if (position_updated) {
                       position_updated = false;
@@ -719,9 +713,7 @@
               }
               
             }).disableSelection();
-
           });
         
           
         </script> 
-

@@ -2,6 +2,11 @@
 	 var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
 
 
+
+ $(document).on('click', '.userprofile',function(e){
+	 location.href = ROOT_URL + 'dashboard/userprofile';
+});
+ 
  $(document).on('click','#save-edit',function(e){
 	 var title = $('#issue-detail-title').val();
 	 var issue_detail = $('#issue-detail-desc').val();
@@ -463,7 +468,10 @@ var subtaskContent = $('#subtask-content');
 
          	 
  });
-	
+	$(document).on('click','.userprofile',function(e){
+		
+		
+	});
 	
 	
 	
