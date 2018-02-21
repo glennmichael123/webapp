@@ -152,6 +152,7 @@ $(document).on('click', '.userprofile',function(e){
 		var data = $(this).closest('.input-field').find('.subtasks-added').val();
 		var taskID=$(this).closest('.right-aligned').find('#hiddenIssueID').val();
 		var element = $(this);
+		
 		element.html('Saving');
 		$.ajax({
 			url:ROOT_URL + 'api/addSubtask',
@@ -161,7 +162,7 @@ $(document).on('click', '.userprofile',function(e){
 				'taskID':taskID
 			},
 			success:function(){
-//				location.reload();
+
 				element.remove();
 				Materialize.toast('Successfully Saved.', 4000);
 			}

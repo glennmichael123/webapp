@@ -131,64 +131,9 @@
 	            </div>
             	</div>
              </div>
-            </head>
+         
 
-            <body  class="teal lighten-3">
-             
-             <div class="container" style="width:50%;padding:10px">
-             	<div class="row card" style="padding:10px;">
-             	<div class="col s8 offset-s2">
-		             <div class='row'>
-		              <div class='input-field col s12'>
-		              <label for="fname">First name</label>
-		                <input class='validate' type='text' name='fname' id='fname' value="Qweee"/>
-		              </div>
-		         	 </div>
-
-		              <div class='row'>
-		              <div class='input-field col s12'>
-		              <label for="lname">Last name</label>
-		                <input class='validate' type='text' name='lname' id='lname' value="Qweee"/>
-		              </div>
-		          	 </div>
-
-		              <div class='row'>
-		              <div class='input-field col s12'>
-		              <label for="gender">Gender</label>
-		                <input class='validate' type='text' name='gender' id='gender' value="Qweee"/>
-		              </div>
-		          	  </div>
-
-		              <div class='row'>
-		              <div class='input-field col s12'>
-		              <label for="age">Age</label>
-		                <input class='validate' type='text' name='age' id='age' value="Qweee"/>
-		              </div>
-		          	  </div>
-
-		              <div class='row'>
-		              <div class='input-field col s12'>
-		              <label for="uname">Username</label>
-		                <input class='validate' type='text' name='"uname"' id='"uname"' value="Qweee"/>
-		              </div>
-		              </div>
-		             
-		              <div class='row'>
-		              <div class='input-field col s12'>
-		              <label for="pass">Password</label>
-		                <input class='validate' type='text' name='pass' id='pass' value="Qweee"/>
-		              </div>
-	            	 </div>
-	            	 
-	            	 <div class='row'>
-		              <div class='col s12'>
-		                <input type="radio" name="gender" value="Male" id="m" checked><label for="m">Male</label>
-	         			<input type="radio" name="gender" value="Female" id="f"><label for="f">Female</label>
-		              </div>
-	            	 </div>
-	            </div>
-            	</div>
-             </div>
+            
                    
                       
    
