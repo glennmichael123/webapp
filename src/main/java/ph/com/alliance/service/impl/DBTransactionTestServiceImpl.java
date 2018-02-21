@@ -513,6 +513,8 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		
 		return issue;
 	}
+	
+	
 
 //	@Override
 //	public User getUser(String username) {
@@ -636,4 +638,9 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		
 		return subtask;
 	}
+
+
+
+	
 }
+

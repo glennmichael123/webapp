@@ -41,6 +41,7 @@ $(document).on('click', '#toUserDashboard',function(e){
 	 location.href = ROOT_URL + 'dashboarduser';
 });
 
+
 $(document).on('click', '.cancel',function(e){
 	for (var i = 0; i <= 5; i++) {
 		$('.collapsible').collapsible('close', i);
@@ -48,6 +49,7 @@ $(document).on('click', '.cancel',function(e){
 });
 
 $(document).on('click', '.userprofile',function(e){
+
 	 location.href = ROOT_URL + 'dashboard/userprofile';
 });
  

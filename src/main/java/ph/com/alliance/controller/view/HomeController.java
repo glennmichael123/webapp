@@ -125,7 +125,7 @@ public class HomeController {
     	 mav.addObject("issuesReleased",issuesReleased);
     	 return mav;
     }
-    
+
    @RequestMapping(value= "/dashboard/userprofile", method = RequestMethod.GET)
    public ModelAndView userprofile(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
 	   ModelAndView mav = new ModelAndView();
@@ -147,5 +147,5 @@ public class HomeController {
    	 return mav;
    }
    
-        
+
 }
