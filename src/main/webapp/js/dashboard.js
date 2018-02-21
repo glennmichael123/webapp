@@ -92,14 +92,30 @@
 	$(document).on('click','.add-subtask',function(e){
 		e.preventDefault();
          var html = '<div class="input-field">'+
-                    '<input type="text" style="width:94%;" name="subtask_progress" placeholder="Subtask" class="validate subtasks">'+
-                    '<a href="#" class="remove-subtask"><i class="fa fa-times"></i></a>'+
+                    '<input type="text" style="width:94%;" name="subtask_progress" placeholder="Subtask" class="validate subtasks" autofocus>'+
+                    '<a href="#" class="remove-subtask"><i class="fa fa-times"></i></a>'+'<input type="button" class="btn submit-subtask" value="SUBMIT SUBTASK">'+
                     '</div>';
          $('#subtask-content').append(html);
         	 
     });
+	$(document).on("click",'.submit-subtask', function(e){
+		e.preventDefault();
+		var data = $(this).closest('.input-field').find('.subtasks').val();
+		var taskID=$(this).closest('.right-aligned').find('#hiddenIssueID').val();
+		$.ajax({
+			url:ROOT_URL + 'api/addSubtask',
+			type:'POST',
+			data:{
+				'data':data,
+				'taskID':taskID
+			},
+			success:function(){
+				location.reload();
+			}
+		});
+	});
 	$(document).on('keyup','.subtasks',function(){
-		var data = $('.subtasks').val();
+		var data  = $('.subtasks').val();
 		var id 	  = $(this).data('subtask-id');
 		var taskID=$(this).closest('.right-aligned').find('#hiddenIssueID').val();
 		console.log(taskID);

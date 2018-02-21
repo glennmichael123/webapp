@@ -2,6 +2,7 @@ package ph.com.alliance.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -54,6 +55,32 @@ public class SubtaskDaoImpl implements SubtaskDao{
 		}
 
 		return subtask;
+	}
+	@Override
+	public Subtask addSubtask(EntityManager em, Subtask pSubtask) {
+		boolean success = true;			
+		try {
+			em.persist(pSubtask);
+			
+		} catch (EntityExistsException ee) {
+			// instantiate MyException class here and set custom error codes common to all
+			// ie. throw new MyException(<ERROR CODE HERE>, <ERROR MESSAGE HERE>)
+			ee.getMessage();
+			success = false;
+		} catch (IllegalArgumentException iae) {
+			// instantiate MyException class here and set custom error codes common to all
+			// ie. throw new MyException(<ERROR CODE HERE>, <ERROR MESSAGE HERE>)
+			iae.getMessage();
+			success = false;
+		} catch (TransactionRequiredException trxe) {
+			// instantiate MyException class here and set custom error codes common to all
+			// ie. throw new MyException(<ERROR CODE HERE>, <ERROR MESSAGE HERE>)
+			trxe.getMessage();
+			success = false;
+		}
+		
+		return null;
+
 	}
 	
 }

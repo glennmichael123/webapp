@@ -107,7 +107,7 @@ public interface DBTransactionTestService {
 //	public User getUser();
 
 	public Subtask editSubtask(Subtask subtask);
-
+	public Subtask addSubtask(Subtask subtask);
 	
 	
 	

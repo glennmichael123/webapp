@@ -12,4 +12,6 @@ public interface SubtaskDao {
 
 	Subtask editSubtask(EntityManager em, Subtask pSubtask);
 
+	Subtask addSubtask(EntityManager em, Subtask pSubtask);
+
 }

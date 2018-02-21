@@ -556,4 +556,28 @@ public class DBTransactionTestServiceImpl implements DBTransactionTestService {
 		
 		return subtask;
 	}
+
+	@Override
+	public Subtask addSubtask(Subtask pSubtask) {
+		EntityManager em = transactionManager.getEntityManagerFactory().createEntityManager();
+		Subtask subtask = null;
+		
+		em.getTransaction().begin();
+		
+		try {
+			subtask = subtaskDao.addSubtask(em,pSubtask);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.getMessage();
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
+		return subtask;
+	}
 }

@@ -530,6 +530,21 @@ public class ModuleAPIController {
     	return null;
     }
     
+    @RequestMapping(value = "/addSubtask", method = RequestMethod.POST)
+    @ResponseBody
+    public SubtaskModel addSubtask(HttpServletRequest request) {
+    	SubtaskModel subtask = new SubtaskModel();
+    	Subtask sb = null;
+    	String data = request.getParameter("data");
+    	String id = request.getParameter("taskID");
+    	
+    	subtask.setDescription(data);
+    	subtask.setIssueId(Long.parseLong(id));
+    	sb=dbSvc.addSubtask(this.convertToEntitySubtask(subtask));
+   
+    	return null;
+    }
+    
     private Subtask convertToEntitySubtask(SubtaskModel pSubTask) {
     	Subtask sb = null;
     	if (pSubTask != null) {
@@ -537,5 +552,6 @@ public class ModuleAPIController {
     	}
     	return sb;
     }
+    
     
 }
