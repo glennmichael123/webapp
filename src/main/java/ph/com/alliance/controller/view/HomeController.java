@@ -48,6 +48,9 @@ public class HomeController {
 
 		
     }
+    
+    
+    
     @RequestMapping(value= "/admin", method = RequestMethod.GET)
     public String loaAdminLogin(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
     	session = request.getSession();
@@ -74,9 +77,6 @@ public class HomeController {
     	 mav.addObject("issuesDone",issuesDone);
     	 mav.addObject("employees",employees);
     	 return mav;
-    	
-    	
-        
     }
     
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -93,7 +93,7 @@ public class HomeController {
     	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("dashboarduser");
-    	System.out.print(request.getSession(false).getAttribute("username"));
+//    	System.out.print(request.getSession(false).getAttribute("username"));
     	 List<Issue> issues= dbSvc.getIssueList();
     	 List<Issue> issuesDev= dbSvc.getIssueListDev();
     	 List<Issue> issuesProgress= dbSvc.getIssueListProgress();
@@ -115,6 +115,7 @@ public class HomeController {
     	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
         return "headerdashboard";
     }
+    
     @RequestMapping(value= "/dashboard/releases", method = RequestMethod.GET)
     public ModelAndView viewReleases(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
     	session = request.getSession();
@@ -125,13 +126,26 @@ public class HomeController {
     	 return mav;
     }
     
-//    @RequestMapping(value= "/dashboard/userprofile", method = RequestMethod.GET)
-//    public String userprofile(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
-//    	User getProfile = dbSvc.getUser();
-//    	session = request.getSession();
-//    	String username = session.getParameter("username").toString();
-//    	System.out.print(request.getSession(false).getAttribute("username"));
-//    	return "userprofile";
-//    }
+   @RequestMapping(value= "/dashboard/userprofile", method = RequestMethod.GET)
+   public ModelAndView userprofile(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+	   ModelAndView mav = new ModelAndView();
+	  
+   	   String username = request.getSession(true).getAttribute("username").toString();
+   	   User getProfile = dbSvc.getUser(username);
+   	   mav.addObject("getProfile",getProfile);
+	   mav.setViewName("userprofile");
+   	   return mav;
+   }
+   
+   @RequestMapping(value= "/dashboard/trash", method = RequestMethod.GET)
+   public ModelAndView viewTrash(HttpServletRequest request, HttpServletResponse response, ModelMap map, HttpSession session) throws IOException{
+    	session = request.getSession();
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("Trash");
+   	 List<Issue> trashIssues= dbSvc.getTrash();
+   	 mav.addObject("trashIssues",trashIssues);
+   	 return mav;
+   }
+   
         
 }

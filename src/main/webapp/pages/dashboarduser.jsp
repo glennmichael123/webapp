@@ -363,10 +363,7 @@
 
                             <li><a href="<%out.print(ROOT_URL); %>logout">Logout</a></li>
                         </ul>   
-                        
-                        
-                        
-            			
+                      
                         <div id="content"> 
                             <div class="row white-text" style="position: relative;top:10px;">
                                     <div class="col l3 heading">Backlog</div>

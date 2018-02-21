@@ -46,8 +46,9 @@ public class SubtaskDaoImpl implements SubtaskDao{
 	@Override
 	public Subtask editSubtask(EntityManager em, Subtask pSubtask) {
 		Subtask subtask= null;
+		System.out.print(pSubtask.getDescription());
 		try {
-			subtask = em.merge(pSubtask);
+			subtask = em.merge(subtask);
 		} catch (IllegalArgumentException iae) {
 			iae.getMessage();
 		} catch (TransactionRequiredException trxe) {

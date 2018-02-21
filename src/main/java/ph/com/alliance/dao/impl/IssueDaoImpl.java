@@ -233,4 +233,25 @@ JdbcTemplate template;
 		return issue;
 	}
 
+	@Override
+	public List<Issue> getTrashes(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
+		Root<Issue> userRoot = cq.from(Issue.class);
+		cq.select(userRoot);
+		 Predicate predicate1 = cb.conjunction();
+		 predicate1 = cb.and(predicate1, 
+				 cb.equal(userRoot.get("deleted"), 1));
+		 cq.where(
+				 cb.and(predicate1)
+        );
+		try {
+			return em.createQuery(cq).getResultList();
+		} catch (Exception e) {
+			System.err.println("ERROR ----------------- ");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

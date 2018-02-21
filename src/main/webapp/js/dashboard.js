@@ -1,9 +1,53 @@
  $(document).ready(function(){
 	 var ROOT_URL = "http://localhost:8081/SoaBaseCode/";
 
+$(document).on('click', '.save',function(e){
+	if($('#new-pass').val().trim() != $('#conf-pass').val().trim()){
+		$('#error').removeClass('error');
+		$('#new-pass').addClass('misMatch');
+        $('#conf-pass').addClass('misMatch');
+        return false;
+	}
+	if(!$('#new-pass').val() ){
+		$('#new-pass').val($('#hiddenPassword').val());
+	}
+	var data = $( "form" ).serialize();
+	$.ajax({
+		url: ROOT_URL + 'api/updateProfile',
+		type: "POST",
+		data: data,
+		success:function(data){
+			$('#lblFname').html(data.fname);
+			$('#lblLname').html(data.lname);
+			$('#lblAge').html(data.age);
+			$('#lblGender').html(data.gender);
+			$('#lblUsername').html(data.uid);
+			$('#lblPassword').html(data.password);
+			$('#new-pass').val("");
+			$('#conf-pass').val("");
+			$('#error').addClass('error');
+			$('#new-pass').removeClass('misMatch');
+	        $('#conf-pass').removeClass('misMatch');
+			Materialize.toast('Saved', 4000);
+			for (var i = 0; i <= 5; i++) {
+				$('.collapsible').collapsible('close', i);
+			}
 
+		}
+	});
+});
 
- $(document).on('click', '.userprofile',function(e){
+$(document).on('click', '#toUserDashboard',function(e){
+	 location.href = ROOT_URL + 'dashboarduser';
+});
+
+$(document).on('click', '.cancel',function(e){
+	for (var i = 0; i <= 5; i++) {
+		$('.collapsible').collapsible('close', i);
+	}
+});
+
+$(document).on('click', '.userprofile',function(e){
 	 location.href = ROOT_URL + 'dashboard/userprofile';
 });
  
@@ -15,6 +59,8 @@
 	 var issudeID = $('#hiddenIssueID').val();
 	 var flag = $('#hiddenIssueFlag').val();
 	 var type = $('#hiddenType').val();
+	 var order = $('#hiddenOrder').val();
+	 
 	 console.log(issue_detail);
 	 var d = $(this);
   	 $.ajax({
@@ -28,6 +74,7 @@
  			 'assigned_to':assigned_to,
  			 'flag':flag,
  			 'type':type,
+ 			 'order':order,
   		 },
   		 success: function(data){
   			d.prop('disabled',true);
@@ -92,7 +139,7 @@
 	$(document).on('click','.add-subtask',function(e){
 		e.preventDefault();
          var html = '<div class="input-field">'+
-                    '<input type="text" style="width:94%;" name="subtask_progress" placeholder="Subtask" class="validate subtasks" autofocus>'+
+                    '<input type="text" style="width:94%;" name="subtask_progress" placeholder="Subtask" class="validate subtasks-added" autofocus>'+
                     '<a href="#" class="remove-subtask"><i class="fa fa-times"></i></a>'+'<input type="button" class="btn submit-subtask" value="SUBMIT SUBTASK">'+
                     '</div>';
          $('#subtask-content').append(html);
@@ -100,8 +147,10 @@
     });
 	$(document).on("click",'.submit-subtask', function(e){
 		e.preventDefault();
-		var data = $(this).closest('.input-field').find('.subtasks').val();
+		var data = $(this).closest('.input-field').find('.subtasks-added').val();
 		var taskID=$(this).closest('.right-aligned').find('#hiddenIssueID').val();
+		var element = $(this);
+		element.html('Saving');
 		$.ajax({
 			url:ROOT_URL + 'api/addSubtask',
 			type:'POST',
@@ -110,15 +159,18 @@
 				'taskID':taskID
 			},
 			success:function(){
-				location.reload();
+//				location.reload();
+				element.remove();
+				Materialize.toast('Successfully Saved.', 4000);
 			}
 		});
 	});
 	$(document).on('keyup','.subtasks',function(){
-		var data  = $('.subtasks').val();
+		var data  = $(this).val();
 		var id 	  = $(this).data('subtask-id');
 		var taskID=$(this).closest('.right-aligned').find('#hiddenIssueID').val();
-		console.log(taskID);
+	
+		
 		$.ajax({
 			url : ROOT_URL + 'api/updateSubTask',
 			type: 'POST',
@@ -155,11 +207,10 @@
 	});
 
 	$(document).on('click','.delete-task',function(e){
-		$(this).closest('.card').remove();
-		 var $toastContent = $('<span>You deleted an issue</span>');
-		  Materialize.toast($toastContent, 10000);
+		
+		
 		  var id = $(this).data('id');
-		  
+		  var element = $(this);
 		  $.ajax({
 				url: ROOT_URL + 'api/deleteTask',
 				type:'POST',
@@ -167,7 +218,9 @@
 					'id':id
 				},
 				success:function(){
-					$(this).closest('.input-field').remove();
+					element.closest('.card').remove();
+					 var $toastContent = $('<span>You deleted an issue</span>');
+					  Materialize.toast($toastContent, 10000);
 				}
 			});
 	});
@@ -176,6 +229,10 @@
 	$(document).on('click', '.view-releases',function(e){
 		
 		 location.href = ROOT_URL + 'dashboard/releases';
+	});
+	$(document).on('click', '.view-trash',function(e){
+		
+		 location.href = ROOT_URL + 'dashboard/trash';
 	});
 	
 	$(document).on('click','#submit-backlog',function(e){
@@ -470,6 +527,7 @@
       			 $('#hiddenType').val(data.type);
       			 $('#issue-detail-title').val(data.title);
       			 $('#issue-detail-desc').text(data.description);
+      			 $('#hiddenOrder').val(data.orders);
       			 $('#issue-detail-priority').val(data.priority == '' ? "None" : data.priority);
       			 $('#assigned-to').text(data.assigned == '' ? "No one" : data.assigned);	 
       		 }

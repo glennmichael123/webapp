@@ -3,7 +3,7 @@ package ph.com.alliance.model;
 
 public class SubtaskModel{
 	private Long id;
-	private Long issueId;
+	private int issueId;
 	private String description;
 	
 	public void setId(Long id){
@@ -14,11 +14,11 @@ public class SubtaskModel{
 		return id;
 	}
 	
-	public void setIssueId(Long issueId){
+	public void setIssueId(int issueId){
 		this.issueId = issueId;
 	}
 	
-	public Long getissueId(){
+	public int getissueId(){
 		return issueId;
 	}
 
@@ -31,15 +31,15 @@ public class SubtaskModel{
 	public String getDescription(){
 		return this.description;
 	}
-	
-	
 
-	
 	@Override
-    public String toString() {
-        return "Issues {" + "description=" + description + ", id =" +id+ '}';
+	public String toString() {
+		return "SubtaskModel [id=" + id + ", issueId=" + issueId + ", description=" + description + "]";
+	}
+	
+	
 
-    } 
+
 	
 
 }

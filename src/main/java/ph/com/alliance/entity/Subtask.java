@@ -15,11 +15,11 @@ public class Subtask implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
 	
-	private Long issueId;
+	private int issueId;
 	private String description;
 	
 	public void setId(Long id){
@@ -30,11 +30,11 @@ public class Subtask implements Serializable{
 		return id;
 	}
 	
-	public void setIssueId(Long issueId){
+	public void setIssueId(int issueId){
 		this.issueId = issueId;
 	}
 	
-	public Long getissueId(){
+	public int getissueId(){
 		return issueId;
 	}
 

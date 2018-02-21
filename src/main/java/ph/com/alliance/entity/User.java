@@ -28,6 +28,7 @@ public class User implements Serializable {
 	private String gender;
 	private int age;
 	private String password;
+	private Long id;
 	
 
 	
@@ -70,6 +71,14 @@ public class User implements Serializable {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 //	public void setId(int id){
 //		this.id = id;
 //	}
@@ -80,9 +89,11 @@ public class User implements Serializable {
 	
 	@Override
     public String toString() {
-        return "User {" + "userID=" + uid + ", pass=" + password +", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age + '}';
+        return "User {" + "userID=" + uid + ", pass=" + password +", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", age=" + age +", ID="+id+'}';
 
     }
+
+	
 
 
 }

@@ -130,7 +130,7 @@ public class ModuleAPIController {
     	String database = "mytestdb3";
     	String userid = "root";
     	String password = "";
-   
+    		
     	try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
@@ -192,6 +192,7 @@ public class ModuleAPIController {
     	String priority = request.getParameter("issue_prio");
     	String type = request.getParameter("type");
     	String assigned = request.getParameter("assigned_to");
+    	String orders = request.getParameter("order");
     	int deleted = 0;
     	issues.setDeleted(deleted);
     	issues.setId(Long.parseLong(idd));
@@ -201,6 +202,7 @@ public class ModuleAPIController {
     	issues.setType(type);
     	issues.setFlagged(Integer.parseInt(flagg));
     	issues.setReleased(0);
+    	issues.setOrders(Integer.parseInt(orders));
     	issues.setAssigned(assigned == null ? "" : assigned);
     	issue=dbSvc.editIssue(this.convertToEntityIssues(issues));
     	return issues;
@@ -372,12 +374,12 @@ public class ModuleAPIController {
     	java.sql.Connection con = null;
     	PreparedStatement ps = null;
     	con = DriverManager.getConnection(connectionUrl+database, userid, password);
-    	System.out.print(id + type);
+//    	System.out.print(id + type);
     	String sql="Update issues set type=? where id=?";
     	ps = con.prepareStatement(sql);
     	ps.setString(1, type);
     	ps.setLong(2, id);
-    	System.out.print(ps);
+//    	System.out.print(ps);
     	ps.executeUpdate();
     	
     	return issues;
@@ -458,7 +460,7 @@ public class ModuleAPIController {
     	ps = con.prepareStatement(sql);
    
 //    	ps.setLong(1,id);
-    	System.out.print(ps);
+//    	System.out.print(ps);
     	ps.execute(sql);
     	
     	return issues;
@@ -500,34 +502,59 @@ public class ModuleAPIController {
     	
     	String order[] = request.getParameterValues("order[]");
     	String id[] = request.getParameterValues("id[]");
+    	
     	for(int i = 0; i < order.length; i++){
     	 	String sql="Update issues set orders=? where id=?";
         	ps = con.prepareStatement(sql);
         	ps.setInt(1, i+1);
         	ps.setLong(2, Long.parseLong(id[i]));
         	
-        	System.out.print(ps);
+//        	System.out.print(ps);
         	ps.executeUpdate();
     	}
-    	
-    	
-    
     	
     	return issues;
     }
     @RequestMapping(value = "/updateSubTask", method = RequestMethod.POST)
     @ResponseBody
-    public SubtaskModel updateSubTask(HttpServletRequest request) {
+    public void updateSubTask(HttpServletRequest request) throws SQLException {
 		SubtaskModel subtask = new SubtaskModel();
 		Subtask sb = null;
 		String data = request.getParameter("data");
 		String subtaskID = request.getParameter("id");
 		String taskID    = request.getParameter("taskID");
-		subtask.setDescription(data);
-		subtask.setIssueId(Long.parseLong(taskID));
-		subtask.setId(Long.parseLong(subtaskID));
-		sb=dbSvc.editSubtask(this.convertToEntitySubtask(subtask));
-    	return null;
+		
+		String driver = "com.mysql.jdbc.Driver";
+    	String connectionUrl = "jdbc:mysql://localhost:3306/";
+    	String database = "mytestdb3";
+    	String userid = "root";
+    	String password = "";
+   
+    	try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	java.sql.Connection con = null;
+    	PreparedStatement ps = null;
+    	con = DriverManager.getConnection(connectionUrl+database, userid, password);
+    	String sql="Update subtask set description=? where id=?";
+    	ps = con.prepareStatement(sql);
+    	ps.setString(1, data);
+    	ps.setLong(2, Long.parseLong(subtaskID));
+    	System.out.print(ps);
+    	ps.executeUpdate();
+    	
+    	
+    	
+		
+//		subtask.setDescription(data);
+//		subtask.setIssueId(Integer.parseInt(taskID));
+//		subtask.setId(Long.parseLong(subtaskID));
+//		
+//		sb=dbSvc.editSubtask(this.convertToEntitySubtask(subtask));
+//    	return null;
     }
     
     @RequestMapping(value = "/addSubtask", method = RequestMethod.POST)
@@ -537,12 +564,11 @@ public class ModuleAPIController {
     	Subtask sb = null;
     	String data = request.getParameter("data");
     	String id = request.getParameter("taskID");
-    	
     	subtask.setDescription(data);
-    	subtask.setIssueId(Long.parseLong(id));
+    	subtask.setIssueId(Integer.parseInt(id));
     	sb=dbSvc.addSubtask(this.convertToEntitySubtask(subtask));
    
-    	return null;
+    	return subtask;
     }
     
     private Subtask convertToEntitySubtask(SubtaskModel pSubTask) {
@@ -553,5 +579,27 @@ public class ModuleAPIController {
     	return sb;
     }
     
-    
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+    @ResponseBody
+    public UserModel updateProfile(HttpServletRequest request) {
+    	UserModel usermodel = new UserModel();
+    	User user = null;
+    	String id = request.getParameter("hiddenID");
+    	String fname = request.getParameter("fname");
+    	String lname = request.getParameter("lname");
+    	String age = request.getParameter("age");
+    	String gender = request.getParameter("gender");
+    	String username = request.getParameter("username");
+    	String new_pass= request.getParameter("new_password");
+    	
+    	usermodel.setId(Long.parseLong(id));
+    	usermodel.setFname(fname);
+    	usermodel.setLname(lname);
+    	usermodel.setAge(Integer.parseInt(age));
+    	usermodel.setGender(gender);
+    	usermodel.setUid(username);
+    	usermodel.setPassword(new_pass);
+    	user=dbSvc.updateProfile(this.convertToEntity(usermodel));
+    	return usermodel;
+    }
 }

@@ -24,6 +24,7 @@ public interface IssueDao {
 	public Issue viewIssueDetails(EntityManager em, Long id);
 	public List<Issue> getIssueReleased(EntityManager em);
 	public Issue editIssue(EntityManager em, Issue pIssue);
+	public List<Issue> getTrashes(EntityManager em);
 	
 	
 }

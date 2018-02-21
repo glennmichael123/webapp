@@ -104,13 +104,16 @@ public interface DBTransactionTestService {
 
 	public Issue editIssue(Issue issue);
 
-//	public User getUser();
-
 	public Subtask editSubtask(Subtask subtask);
+
 	public Subtask addSubtask(Subtask subtask);
-	
-	
-	
+
+	public User getUser(String username);
+
+	public User updateProfile(User user);
+
+	public List<Issue> getTrash();
+
 
 	
 	
