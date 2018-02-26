@@ -35,10 +35,10 @@
 						      <h4>Change Password</h4>
 						       <input class='validate' type='password' placeholder="New Password" name='password' id='new_password' />
 						       <input class='validate' type='password' placeholder="Confirm Password" name='password' id='c_password' />
-								
+								<div id="error-msg" style="color:red"></div>
 						    </div>
 						    <div class="modal-footer">
-						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+						      <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="confirm-changePass">Confirm</a>
 						    </div>
 						  </div>  
 

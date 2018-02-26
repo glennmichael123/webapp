@@ -566,7 +566,30 @@ var subtaskContent = $('#subtask-content');
 		
 		
 	});
-	
+	$(document).on('click','#confirm-changePass',function(e){
+		e.preventDefault();
+		var password = $('#new_password').val();
+		var confirm  = $('#c_password').val();
+
+		if(password != confirm){
+			$('#error-msg').html("PASSWORD NOT EQUAL");return false;
+		}
+		if(password == '' && confirm == ''){
+			$('#error-msg').html("Please fill all fields");return false;
+		}
+		$.ajax({
+			url:ROOT_URL + 'api/adminChangePass',
+			type:"POST",
+			data:{
+				"password":password,
+			},
+			success:function(data){
+				console.log(data);
+				location.reload();
+				Materialize.toast('Success!', 4000);
+			}
+		});
+	})
 	
 	
  });

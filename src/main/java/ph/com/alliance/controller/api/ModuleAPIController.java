@@ -545,16 +545,6 @@ public class ModuleAPIController {
     	ps.setLong(2, Long.parseLong(subtaskID));
     	System.out.print(ps);
     	ps.executeUpdate();
-    	
-    	
-    	
-		
-//		subtask.setDescription(data);
-//		subtask.setIssueId(Integer.parseInt(taskID));
-//		subtask.setId(Long.parseLong(subtaskID));
-//		
-//		sb=dbSvc.editSubtask(this.convertToEntitySubtask(subtask));
-//    	return null;
     }
     
     @RequestMapping(value = "/addSubtask", method = RequestMethod.POST)
@@ -601,5 +591,36 @@ public class ModuleAPIController {
     	usermodel.setPassword(new_pass);
     	user=dbSvc.updateProfile(this.convertToEntity(usermodel));
     	return usermodel;
+    }
+
+    @RequestMapping(value = "/adminChangePass", method = RequestMethod.POST)
+    @ResponseBody
+    public void adminChangePass(HttpServletRequest request) throws SQLException {
+
+		String data = request.getParameter("password");
+		String ses = request.getSession(true).getAttribute("username").toString();
+	
+		System.out.print(data);
+		String driver = "com.mysql.jdbc.Driver";
+    	String connectionUrl = "jdbc:mysql://localhost:3306/";
+    	String database = "mytestdb3";
+    	String userid = "root";
+    	String password = "";
+   
+    	try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	java.sql.Connection con = null;
+    	PreparedStatement ps = null;
+    	con = DriverManager.getConnection(connectionUrl+database, userid, password);
+    	String sql="Update admin set password=? where uid=?";
+    	ps = con.prepareStatement(sql);
+    	ps.setString(1,data);
+    	ps.setString(2,ses);
+    	System.out.print(ps);
+    	ps.executeUpdate();
     }
 }

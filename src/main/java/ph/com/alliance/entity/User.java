@@ -79,13 +79,6 @@ public class User implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public void setId(int id){
-//		this.id = id;
-//	}
-//	
-//	public int getId(){
-//		return id;
-//	}
 	
 	@Override
     public String toString() {
@@ -93,7 +86,6 @@ public class User implements Serializable {
 
     }
 
-	
 
 
 }

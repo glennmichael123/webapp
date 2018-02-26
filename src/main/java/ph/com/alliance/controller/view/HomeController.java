@@ -65,6 +65,7 @@ public class HomeController {
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("dashboard");
     	System.out.print(request.getSession(false).getAttribute("username"));
+
     	 List<Issue> issues= dbSvc.getIssueList();
     	 List<Issue> issuesDev= dbSvc.getIssueListDev();
     	 List<Issue> issuesProgress= dbSvc.getIssueListProgress();
@@ -93,7 +94,8 @@ public class HomeController {
     	System.out.println("@/modulename/user_dashboard MODULE VIEW CONTROLLER CALLED.");
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("dashboarduser");
-//    	System.out.print(request.getSession(false).getAttribute("username"));
+    	
+    	//    	System.out.print(request.getSession(false).getAttribute("username"));
     	 List<Issue> issues= dbSvc.getIssueList();
     	 List<Issue> issuesDev= dbSvc.getIssueListDev();
     	 List<Issue> issuesProgress= dbSvc.getIssueListProgress();
